@@ -1,0 +1,22 @@
+{
+	"name": "H.F.M.",
+	"short_name": "H.F.M.",
+	"description": "Web Application for Healthy Food Menu of Store Management Dev.by WRYNNME Development.",
+	"start_url": "/index.php",
+	"orientation": "landscape",
+	"display": "standalone",
+	"background_color": "#f5f5f1",
+	"theme_color": "#f5f5f1",
+	"prompt_message": "",
+	"icons": [
+		{
+			"src": "dist/img/HFM/instagram_profile_image.png",
+			"sizes": "1000x1000",
+			"type": "image/png"
+		}, {
+			"src": "dist/img/HFM/facebook_cover_photo_2.png",
+			"sizes": "1640x624",
+			"type": "image/png"
+		}],
+	"status": "ok"
+}

@@ -1,0 +1,79 @@
+html{
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+body{
+	background: #e9ecef;
+}
+.login-box{
+	background: #fff;
+	margin: 7% auto;
+	width: 490px;
+	padding: 15px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.20);
+}
+.login-logo{
+	font-size: 35px;
+	text-align: center;
+	margin-bottom: 25px;
+	font-weight: 300;
+
+	b{
+		color: green;
+	}
+}
+@media (max-width: 576px){
+	.login-box{
+		width: 90%;
+		margin-top: 20px;
+	}
+}
+.login-input{
+	border-right: 0;
+}
+.login-input-group-text{
+	background: transparent !important;
+	border-left: 0;
+}
+.small{
+	font-size: 80%;
+	font-weight: 400;
+}
+
+.card-user-cookie {
+	width: 99px;
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+}
+
+.card-user-choose{
+	width: 150px;
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+}
+
+.close {
+	position: absolute;
+	right: 14px;
+}
+
+::-webkit-input-placeholder {
+	font-size: 13px;
+}
+::-moz-placeholder {
+	font-size: 13px;
+}
+:-ms-input-placeholder {
+	font-size: 13px;
+}
+::placeholder {
+	font-size: 13px;
+}
+/* .login_btn:focus {
+	box-shadow: none !important;
+	outline: 0px !important;
+} */

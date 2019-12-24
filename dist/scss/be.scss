@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css?family=Kanit&display=swap');
+@import "login";
+@import "menu";
+
+$bg-default: #f5f5f1;
+$bg-w: rgba(255,255,255,1);
+$bg-w8: rgba(255,255,255,0.8);
+$bg-w6: rgba(255,255,255,0.6);
+$bg-b8: rgba(0,0,0,0.8);
+$bg-b6: rgba(0,0,0,0.6);
+$bg-b5: rgba(0,0,0,0.5);
+$bg-b3: rgba(0,0,0,0.3);
+$bg-b: rgba(0,0,0,1);
+$shadow: 20px 20px 8px 0px $bg-b5;
+$nav-shadow: 0px 10px 10px -5px $bg-b5;
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	// display: none;
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type=number] {
+	-moz-appearance:textfield;
+}
+
+
+*{
+	font-family: 'Kanit', sans-serif;
+	scroll-behavior: smooth;
+}
+
+body{
+	background: #F5F5F1;
+	// background: url('../img/bg.jpg') repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+@media only screen and (min-width: 1200px){
+	.container {
+		max-width: 1200px;
+	}
+}
+@media only screen and (max-width: 768px) {
+	/* For mobile phones: */
+	[class*="col-"] {
+		width: 100%;
+	}
+	.fix-width{
+		width: 30vw !important;
+	}
+	#allkcal{
+		margin: 20px;
+	}
+	.card{
+		// width: 250px !important;
+	}
+}
+
+.img-shadow{
+	box-shadow: 20px 20px 8px 0px $bg-b5;
+}
+
+
+.bg-nav{
+	background: #343A40;
+	color: white;
+	// border-radius: 0 0 15px 15px;
+}
+
+.g1{
+	border-radius: 25px;
+	overflow: hidden;
+	padding: 2% 0%;
+	color: black;
+}
+.g2{
+	background: $bg-b3;
+	border-radius: 7px;
+	overflow: hidden;
+	padding: 1% 1%;
+	color: black;
+}
+
+
+.table {
+	td{
+		border-top: none;
+	}
+}
+
+.b-navshadow{
+	box-shadow: $nav-shadow;
+}
+
+.card{
+	position: relative;
+	display: inline-block !important;
+	margin: 3px auto;
+	min-width: 16rem;
+	width: 16.5rem;
+	overflow: hidden;
+	img {
+		width: auto;
+		height: 260px;
+	}
+	p {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.card-title {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	&:hover{
+		white-space: unset;
+	}
+}
+
+.nav{
+	background: none;
+	margin-bottom: 2vw;
+}
+
+.nav-logo{
+	width: 30px;
+}
+
+.nav-logo-wide{
+	width: 150px;
+}
+
+
+//
+.loader {
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+}
+/* Safari */
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
