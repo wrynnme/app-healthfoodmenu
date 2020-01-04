@@ -17,6 +17,7 @@
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
 	
+	<link rel="manifest" href="manifest.json">
 	<link rel='icon' href='dist/img/HFM/favicon.ico' type='image/x-icon'/ >
 	
 	<title>Health Food Menu | Web Application for Healthy Food Menu of Store Management by WN Dev.</title>
@@ -26,6 +27,10 @@
 	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
 	<link rel="stylesheet" href="node_modules/@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
+	<link rel="stylesheet" href="node_modules/animate.css/animate.min.css">
+
+	<link rel="stylesheet" href="dist/css/pace.css">
+	<link rel="stylesheet" href="dist/css/be.css">
 	
 	<script src="node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
 
@@ -36,9 +41,7 @@
 	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
 	<script src="dist/js/pace.min.js"></script>
+	<!-- <script src="dist/js/be.js"></script> -->
 
-	<link rel="stylesheet" href="node_modules/animate.css/animate.min.css">
-	<link rel="stylesheet" href="dist/css/pace.css">
-	<link rel="stylesheet" href="dist/css/be.css">
-	<link rel="manifest" href="manifest.json">
+	
 </head>

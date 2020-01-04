@@ -12,6 +12,11 @@ class Dbh {
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_BOTH);
 		return $pdo;
 	}
+
+
+	public function __construct() {
+		@SESSION_START();
+	}
 }
 
 ?>

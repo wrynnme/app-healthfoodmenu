@@ -1,33 +1,13 @@
 <?php
 
-class usersview extends users {
+class foodview extends food {
 
 	public $total_data;
 	public $total_page;
 	public $start;
 
-	public function show($id) {
-		
-		$stmt = $this->getUser($id);
-		$result = $stmt->fetch();
-		return $result;
-
-	}
-
-	public function getTel($tel) {
-		$stmt = $this->SELECTTEL($tel);
-		$result = $stmt->fetch();
-		return $result;
-	}
-
-	public function checkId($id) {
-		$stmt = $this->getUser($id);
-		$result = $stmt->rowCount();
-		return $result;
-	}
-
-	public function myInfo() {
-		return $results = $this->getInfo($_SESSION['cus_id']);
+	public function getFoodInfo($id) {
+		return $results = $this->SELECT($id);
 	}
 
 	public function search($search) {
@@ -108,6 +88,9 @@ class usersview extends users {
 					$next = $this->total_page;
 				}
 				echo "<li class='page-item'><a class='page-link' href='?p=$next'> $next </a></li>";
+			}
+			if ($this->total_page >7) {
+				
 			}
 			echo "<li class='page-item disabled'><a class='page-link'>...</a></li>";
 			echo "<li class='page-item'><a class='page-link' href='?p=$this->total_page'> $this->total_page </a></li>";

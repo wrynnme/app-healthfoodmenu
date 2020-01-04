@@ -1,38 +1,48 @@
 <?php
 
-class usersview extends users {
+class ingredientsview extends ingredients {
 
 	public $total_data;
 	public $total_page;
 	public $start;
 
-	public function show($id) {
-		
-		$stmt = $this->getUser($id);
-		$result = $stmt->fetch();
-		return $result;
-
+	public function id($id) {
+		$results = $this->SELECT($id);
+		return $results;
 	}
 
-	public function getTel($tel) {
-		$stmt = $this->SELECTTEL($tel);
-		$result = $stmt->fetch();
-		return $result;
+	public function idType($id) {
+		$results = $this->SELECTT($id);
+		return $results;
 	}
 
-	public function checkId($id) {
-		$stmt = $this->getUser($id);
-		$result = $stmt->rowCount();
-		return $result;
+	public function type() {
+		$results = $this->ALLTYPE();
+		return $results;
 	}
 
-	public function myInfo() {
-		return $results = $this->getInfo($_SESSION['cus_id']);
+	public function wait($search) {
+		$results = $this->SELECTFORWAIT($search);
+		return $results;
 	}
 
 	public function search($search) {
 		$results = $this->SELECTNAME($search);
-		
+		return $results;
+	}
+
+	public function getAll($numberOfType) {
+		$results = $this->ALLOF($numberOfType);
+		return $results;
+	}
+
+	public function getType($status, $numberOfType) {
+		$results = $this->SELECTALLTYPE($status, $numberOfType);
+		return $results;
+	}
+
+	public function getTypeWithSearch($numberOfType, $search) {
+		$results = $this->SELECTWITHTEXT($numberOfType, $search);
 		return $results;
 	}
 
@@ -41,8 +51,7 @@ class usersview extends users {
 		$this->total_data = count($foods);
 		$this->total_page = ceil($this->total_data / $row);
 		$this->start = ($currentPage - 1) * $row;
-		$data = $this->SELECTLIMIT($search, $this->start, $row);
-		return $data;
+		return $data = $this->SELECTLIMIT($search, $this->start, $row);
 	}
 
 	public function navPagination(int $currentPage) {

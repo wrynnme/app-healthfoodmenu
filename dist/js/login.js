@@ -1,5 +1,5 @@
 $('.account_info').on("click",function(){
-	var key = $(this).data("key"); // rname
+	var key = $(this).data("key"); // email
 	var email = $(this).data("email");
 	if($('.card-user-choose').hasClass("d-none")){
 		$('.card-user-choose').removeClass("d-none");
@@ -39,7 +39,7 @@ $('#deleteModal').on('show.bs.modal', function (event) {
 	var key = button.data('key');
 	$('.btn-delete').on("click",function(){
 		$.ajax({
-			url: "login.inc.php?obj=delete_account_cookie",
+			url: "includes/login.inc.php?obj=delete_account_cookie",
 			method: "POST",
 			data: {key: key},
 		}).done(function(result){
@@ -67,4 +67,51 @@ $('#deleteModal').on('show.bs.modal', function (event) {
 	var modal = $(this);
 	modal.find('.account_id').text('account ' + key);
 	// modal.find('.modal-body input').val(recipient);
+});
+
+$(document).ready(function() {
+
+	window.addEventListener('load', function() {
+		var forms = $('.needs-validation');
+		var validation = Array.prototype.filter.call(forms, function(form) {
+			form.addEventListener('submit', function(event) {
+				if (form.checkValidity() === false) {
+					event.preventDefault();
+					event.stopPropagation();
+				}else{
+					event.preventDefault();
+					var myForm = document.getElementById('loginForm');
+					var data = new FormData(myForm);
+					/*for(var pair of data.entries()) {
+						console.log(pair[0]+ ', '+ pair[1]); 
+					}*/
+					$.ajax({
+						url: 'includes/login.inc.php?obj=check_login',
+						type: 'POST',
+						data: data,
+						processData: false,
+						contentType: false,
+						beforeSend: function() {
+							$('.btn-login').css("display","none");
+							$('.btn-loading').removeClass("d-none");
+						},
+						success: function(data, textStatus, xhr) {
+							// console.log(textStatus);
+							if (data == 'success') {
+								Swal.fire("สำเร็จ !", "<b>เข้าสู่ระบบสำเร็จ !!</b>", "success").then(function(){
+									window.location.href='index.php';
+								})
+							}else{
+								Swal.fire("ไม่สำเร็จ !", "<b>กรุณาตรวจสอบข้อมูลที่กรอก !!</b>", "error").then(function(){
+									$('.btn-login').css("display","unset");
+									$('.btn-loading').addClass("d-none");
+								});
+							}
+						}
+					});
+				}
+				form.classList.add('was-validated');
+			}, false);
+		});
+	}, false);
 });

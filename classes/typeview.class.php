@@ -1,33 +1,20 @@
 <?php
 
-class usersview extends users {
+class typeview extends type {
 
 	public $total_data;
 	public $total_page;
 	public $start;
 
-	public function show($id) {
-		
-		$stmt = $this->getUser($id);
-		$result = $stmt->fetch();
-		return $result;
 
+	public function getAll(){
+		$results = $this->SELECTALL();
+		return $results;
 	}
 
-	public function getTel($tel) {
-		$stmt = $this->SELECTTEL($tel);
-		$result = $stmt->fetch();
-		return $result;
-	}
-
-	public function checkId($id) {
-		$stmt = $this->getUser($id);
-		$result = $stmt->rowCount();
-		return $result;
-	}
-
-	public function myInfo() {
-		return $results = $this->getInfo($_SESSION['cus_id']);
+	public function getId($id) {
+		$results = $this->SELECT($id);
+		return $results;
 	}
 
 	public function search($search) {
@@ -60,9 +47,6 @@ class usersview extends users {
 		if ($pre < 0) {
 			$pre = 0;
 		}
-
-		echo "<nav aria-label='Page navigation example'>";
-		echo "<ul class='pagination justify-content-center'>";
 
 		if ($currentPage != 1) {
 			if ($currentPage == 0) {
@@ -124,7 +108,7 @@ class usersview extends users {
 		echo '</ul>';
 		echo '</nav>';
 	}
-
+	
 }
 
 ?>

@@ -1,75 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Kanit&display=swap");
-html {
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0; }
-
-body {
-  background: #e9ecef; }
-
-.login-box {
-  background: #fff;
-  margin: 7% auto;
-  width: 490px;
-  padding: 15px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2); }
-
-.login-logo {
-  font-size: 35px;
-  text-align: center;
-  margin-bottom: 25px;
-  font-weight: 300; }
-  .login-logo b {
-    color: green; }
-
-@media (max-width: 576px) {
-  .login-box {
-    width: 90%;
-    margin-top: 20px; } }
-.login-input {
-  border-right: 0; }
-
-.login-input-group-text {
-  background: transparent !important;
-  border-left: 0; }
-
-.small {
-  font-size: 80%;
-  font-weight: 400; }
-
-.card-user-cookie {
-  width: 99px;
-  display: inline-block;
-  position: relative;
-  cursor: pointer; }
-
-.card-user-choose {
-  width: 150px;
-  display: inline-block;
-  position: relative;
-  cursor: pointer; }
-
-.close {
-  position: absolute;
-  right: 14px; }
-
-::-webkit-input-placeholder {
-  font-size: 13px; }
-
-::-moz-placeholder {
-  font-size: 13px; }
-
-:-ms-input-placeholder {
-  font-size: 13px; }
-
-::placeholder {
-  font-size: 13px; }
-
-/* .login_btn:focus {
-	box-shadow: none !important;
-	outline: 0px !important;
-} */
 .sideMenu {
   z-index: 1000;
   background: rgba(255, 255, 255, 0.75);
@@ -80,6 +9,20 @@ body {
   top: 25vh;
   left: 0;
   padding: 10px; }
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 25%;
+  padding: 10px 20px; }
 
 ::-webkit-scrollbar {
   display: none; }
@@ -103,6 +46,17 @@ body {
   -o-background-size: cover;
   background-size: cover; }
 
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg); } }
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
 @media only screen and (min-width: 1200px) {
   .container {
     max-width: 1200px; } }
@@ -136,8 +90,10 @@ body {
   padding: 1% 1%;
   color: black; }
 
-.table td {
-  border-top: none; }
+.table {
+  white-space: nowrap; }
+  .table td {
+    border-top: none; }
 
 .b-navshadow {
   box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.5); }
@@ -178,16 +134,18 @@ body {
   /* Safari */
   animation: spin 2s linear infinite; }
 
-/* Safari */
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(360deg); } }
-@keyframes spin {
-  0% {
-    transform: rotate(0deg); }
-  100% {
-    transform: rotate(360deg); } }
+#myTop {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 25%;
+  padding: 10px 20px; }
 
 /*# sourceMappingURL=be.css.map */

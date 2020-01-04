@@ -2,8 +2,9 @@ $(document).ready(function() {
 	$('.tr-dif').hide();
 	$('.tr-add').hide();
 	$('.tr-mod').hide();
-	$('label').on('click', function(){
+	$('.btn-event').on('click', function(){
 		var id = $(this).attr("id");
+		console.log(id);
 		$('#show').show();
 		$('.ee').hide();
 		$('#t'+id).show();
@@ -53,7 +54,7 @@ $(document).ready(function() {
 					var value = el.id;
 					$.ajax({
 						type:"POST",
-						url:"ajax_type.php",
+						url: 'includes/type_list.inc.php',
 						data:{type:type, value:value},
 						beforeSend: function() {
 							$('.tr-add').hide();
@@ -61,9 +62,9 @@ $(document).ready(function() {
 							$('.tr-mod').hide();
 						},
 						success: function(response){
-							if (response == 'success') {
+							if (response == '1') {
 								Swal.fire('สำเร็จ!', 'ลบประเภท เรียบร้อย!', 'success'	).then(function(){
-									window.location = "type.php";
+									window.location = "type_list.php";
 								})
 							}else{
 								Swal.fire({type: 'error', title: 'ไม่สำเร็จ', text: 'ไม่สามารถลบประเภทได้ กรุณาติดต่อผู้ดูแลระบบ !'})
@@ -82,7 +83,7 @@ $(document).ready(function() {
 		if (value != '') {
 			$.ajax({
 				type: "POST",
-				url: "ajax_type.php",
+				url: 'includes/type_list.inc.php',
 				data: {type:type, value:value},
 				beforeSend: function() {
 					$('.tr-add').hide();
@@ -90,9 +91,9 @@ $(document).ready(function() {
 					$('.tr-mod').hide();
 				},
 				success: function(response){
-					if (response == 'success') {
+					if (response == '1') {
 						Swal.fire('สำเร็จ!', 'เพิ่มประเภท เรียบร้อย!', 'success'	).then(function(){
-							window.location = "type.php";
+							window.location = "type_list.php";
 						})
 					}else{
 						Swal.fire({type: 'error', title: 'ไม่สำเร็จ', text: 'ไม่สามารถเพิ่มประเภทได้ กรุณาติดต่อผู้ดูแลระบบ !'})
@@ -115,7 +116,7 @@ $(document).ready(function() {
 		var value = $('#mod-input'+id).val();
 		var type = 'mod';
 		$.post(
-			'ajax_type.php',
+			'includes/type_list.inc.php',
 			{
 				id:id,
 				value:value,
@@ -123,7 +124,7 @@ $(document).ready(function() {
 			}
 		).done(function(){
 			Swal.fire('สำเร็จ!', 'แก้ไขประเภท เรียบร้อย!', 'success').then(function(){
-				window.location = "type.php";
+				window.location = "type_list.php";
 			})
 		});
 	});

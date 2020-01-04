@@ -1,34 +1,23 @@
 <?php require_once 'includes/class-autoload.inc.php'; ?>
+<?php require_once 'includes/check_login.inc.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="dist/css/login.css">
 	<?php require_once 'includes/head.inc.php'; ?>
-	<style>
-		.card{
-			display: flex !important;
-		}
-		.card img {
-			width: unset;
-			height: unset;
-		}
-		img {
-			width: 100%;
-		}
-	</style>
+	<link rel="stylesheet" href="dist/css/login.css">
 </head>
 <body>
 	<div class="login-box">
 		<div class="login-logo">
-			<img src="dist/img/HFM/facebook_cover_photo_1.png" alt="">
+			<img src="dist/img/HFM/facebook_cover_photo_1.png">
 		</div>
-		<div class="card" style="width: unset;">
+		<div class="card">
 			<div class="card-body">
-				<form action="<?PHP echo $_SERVER['PHP_SELF']?>" method="post" accept-charset="utf-8">
+				<form class="needs-validation" novalidate method="post" accept-charset="utf-8" id="loginForm">
 					<div class="alert alert-danger alert-incorrect d-none" role="alert"></div>
-					<?php if(isset($_COOKIE["cus_id"])){?>
-						<?php foreach($_COOKIE["cus_id"] as $k => $v){?>
+					<?php if(isset($_COOKIE["login"])){?>
+						<?php foreach($_COOKIE["login"] as $k => $v){?>
 							<div title="<?php echo $v;?>" class="text-center card-user-cookie card-user-<?php echo $k;?> formlogin" data-key="<?php echo $k;?>" data-email="<?php echo $v;?>">
 								<button type="button" class="close" aria-label="Close" data-toggle="modal" data-target="#deleteModal" data-key="<?php echo $k;?>" data-email="<?php echo $v;?>">
 									<span aria-hidden="true">&times;</span>
@@ -40,7 +29,7 @@
 							</div>
 						<?php } ?>
 					<?php } ?>
-					<div class="text-center  formlogin card-user-choose d-none mx-auto">
+					<div class="text-center formlogin card-user-choose d-none mx-auto">
 						<button type="button" class="close" aria-label="Close" style="position: absolute; right: 14px;" data-toggle="modal" data-target="#deleteModal">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -52,30 +41,35 @@
 					<!-- Email -->
 					<div class="form-group email">
 						<div class="input-group">
-							<input type="email" class="form-control login-input" id="email" name="email" placeholder="E-mail" autocomplete="off">
+							<input type="email" class="form-control login-input" id="email" name="email" placeholder="E-mail" autocomplete="off" required>
 							<div class="input-group-prepend">
-								<div class="input-group-text login-input-group-text" id="btnGroupAddon"><span class="fa fa-user"></span>
+								<div class="input-group-text login-input-group-text" id="btnGroupAddon">
+									<span class="fa fa-user"></span>
 								</div>
 							</div>
+							<div class="invalid-feedback">
+								กรุณากรอกอีเมล์
+							</div>
 						</div>
-						<span id="error-email" class="text-danger small"></span>
 					</div>
 					<!-- Password -->
 					<div class="form-group">
 						<div class="input-group">
-							<input type="password" class="form-control login-input" id="password" name="password" placeholder="Password" autocomplete="off">
+							<input type="password" class="form-control login-input" id="password" name="password" placeholder="Password" autocomplete="off" minlength="6" required>
 							<div class="input-group-prepend">
 								<div class="input-group-text login-input-group-text" id="btnGroupAddon"><span class="fa fa-lock"></span>
 								</div>
 							</div>
+							<div class="invalid-feedback">
+								กรุณากรอกรหัสผ่าน
+							</div>
 						</div>
-						<span id="error-password" class="text-danger small"></span>
 					</div>
 					<!-- Remember Me? -->
 					<div class="form-group">
 						<div class="custom-control custom-switch">
-							<input type="checkbox" class="custom-control-input" id="customSwitch1" name="remember" id="remember" value="1">
-							<label class="custom-control-label small" for="customSwitch1">จดจำการเข้าสู่ระบบ</label>
+							<input type="checkbox" class="custom-control-input" name="remember" id="remember">
+							<label class="custom-control-label font-weight-lighter text-muted small" for="remember">จดจำการเข้าสู่ระบบ</label>
 						</div>
 					</div>
 					<!-- Button Login -->
@@ -108,7 +102,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-					<a href="#" class="btn btn-danger btn-delete">ลบ</a>
+					<a href="login.php" class="btn btn-danger btn-delete">ลบ</a>
 				</div>
 			</div>
 		</div>
