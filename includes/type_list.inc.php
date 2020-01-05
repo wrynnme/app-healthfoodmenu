@@ -18,7 +18,7 @@ if ($type == 'add') {
 if ($type == 'mod') {
 	$type_id = $_POST['id'];
 	$value = $_POST['value'];
-	echo $types->mod($type_id, $value);
+	echo $types->edit($type_id, $value);
 	unset($types);
 	exit();
 }

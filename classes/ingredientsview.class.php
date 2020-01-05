@@ -7,42 +7,50 @@ class ingredientsview extends ingredients {
 	public $start;
 
 	public function id($id) {
-		$results = $this->SELECT($id);
-		return $results;
+		$stmt = $this->SELECT($id);
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $result;
 	}
 
 	public function idType($id) {
-		$results = $this->SELECTT($id);
-		return $results;
+		$stmt = $this->SELECT_TYPE($id);
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $result;
 	}
 
 	public function type() {
-		$results = $this->ALLTYPE();
+		$stmt = $this->SELECT_TYPEALL();
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
 	}
 
 	public function wait($search) {
-		$results = $this->SELECTFORWAIT($search);
+		$stmt = $this->SELECT_FORWAIT($search);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
 	}
 
 	public function search($search) {
-		$results = $this->SELECTNAME($search);
+		$stmt = $this->SELECT_NAME($search);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
 	}
 
 	public function getAll($numberOfType) {
-		$results = $this->ALLOF($numberOfType);
+		$stmt = $this->SELECT_ALLOF($numberOfType);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
 	}
 
 	public function getType($status, $numberOfType) {
-		$results = $this->SELECTALLTYPE($status, $numberOfType);
+		$stmt = $this->SELECT_ALLTYPE($status, $numberOfType);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
 	}
 
 	public function getTypeWithSearch($numberOfType, $search) {
-		$results = $this->SELECTWITHTEXT($numberOfType, $search);
+		$stmt = $this->SELECT_WITHTEXT($numberOfType, $search);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
 	}
 
@@ -51,7 +59,9 @@ class ingredientsview extends ingredients {
 		$this->total_data = count($foods);
 		$this->total_page = ceil($this->total_data / $row);
 		$this->start = ($currentPage - 1) * $row;
-		return $data = $this->SELECTLIMIT($search, $this->start, $row);
+		$stmt = $this->SELECT_LIMIT($search, $this->start, $row);
+		$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $data;
 	}
 
 	public function navPagination(int $currentPage) {
@@ -65,6 +75,12 @@ class ingredientsview extends ingredients {
 
 		$pre = $currentPage - 1;
 		$nex = $currentPage + 1;
+
+		$last = $this->total_page - 3;
+		$nexx = $currentPage + 3;
+		if ($nexx > $this->total_page) {
+			$nexx = $this->total_page;
+		}
 
 		if ($pre < 0) {
 			$pre = 0;
@@ -85,7 +101,7 @@ class ingredientsview extends ingredients {
 		}
 
 		if ($currentPage <= 4) {
-			for ($prev = 4; $prev > 0; $prev--) {
+			for ($prev = 3; $prev > 0; $prev--) {
 				$pre = $currentPage - $prev;
 				if ($pre > 0) {
 					echo "<li class='page-item'><a class='page-link' href='?p=$pre'> $pre </a></li>";
@@ -102,21 +118,24 @@ class ingredientsview extends ingredients {
 
 		echo "<li class='page-item active'><a class='page-link' href='?p=$currentPage'> $currentPage </a></li>";
 
-		$last = $this->total_page - 3;
+		
 
 		if ($currentPage >= $last) {
-			for ($next = $currentPage + 1; $next <= $this->total_page ; $next++) { 
+			for ($next = $currentPage + 1; $next <= $nexx ; $next++) { 
 				if ($next > $this->total_page) {
 					$next = $this->total_page;
 				}
 				echo "<li class='page-item'><a class='page-link' href='?p=$next'> $next </a></li>";
 			}
 		}else{
-			for ($next = $currentPage + 1; $next <= $this->total_page ; $next++) { 
+			for ($next = $currentPage + 1; $next <= $nexx ; $next++) { 
 				if ($next > $this->total_page) {
 					$next = $this->total_page;
 				}
 				echo "<li class='page-item'><a class='page-link' href='?p=$next'> $next </a></li>";
+			}
+			if ($this->total_page >7) {
+				
 			}
 			echo "<li class='page-item disabled'><a class='page-link'>...</a></li>";
 			echo "<li class='page-item'><a class='page-link' href='?p=$this->total_page'> $this->total_page </a></li>";

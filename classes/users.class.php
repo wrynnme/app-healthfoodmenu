@@ -2,14 +2,48 @@
 
 class users extends Dbh {
 
-	protected function getUser($id) {
+	protected function SELECT($id) {
 		$sql = "SELECT * FROM `customers` WHERE `cus_id` = ?";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$id]);
 
-		// $result = $stmt->fetchAll();
-		// return $result;
+		return $stmt;
+	}
 
+	protected function SELECT_TEL($tel) {
+		$sql = "SELECT * FROM `customers` WHERE `cus_tel` = ?";
+		if (!$stmt = $this->connect()->prepare($sql)) {
+			echo 'Can\'t prepare';
+			return false;
+		} else {
+			$stmt->execute([$tel]);
+			return $stmt;
+		}
+
+	}
+
+	protected function SELECT_ALL() {
+		$sql = "SELECT * FROM `customers` WHERE `cus_id` = ? AND `cus_status` = ?";
+		$stmt = $this->connect()->prepare($sql);
+		$stmt->execute([$_SESSION['cus_id'], '1']);
+		return $stmt;
+	}
+
+	protected function SELECT_NAME($search) {
+
+		$sql = "SELECT * FROM `customers` WHERE (`cus_fname` like ?) OR (`cus_lname` like ?) AND `cus_id` = ? AND `cus_status` = ?";
+		$stmt = $this->connect()->prepare($sql);
+		$newSearch = '%'.$search.'%';
+		$stmt->execute([$newSearch, $newSearch, $_SESSION['cus_id'], '1']);
+		return $stmt;
+	}
+
+	protected function SELECT_LIMIT($search, $start, $row) {
+		
+		$sql = "SELECT * FROM `customers` WHERE (`cus_fname` like ?) OR (`cus_lname` like ?) AND `cus_id` = ? AND `cus_status` = ? LIMIT $start, $row";
+		$stmt = $this->connect()->prepare($sql);
+		$newSearch = '%'.$search.'%';
+		$stmt->execute([$newSearch, $newSearch, $_SESSION['cus_id'], '1']);
 		return $stmt;
 	}
 
@@ -51,60 +85,6 @@ class users extends Dbh {
 				return $rows;
 			}
 		}
-	}
-
-	protected function SELECT($id) {
-		$sql = "SELECT * FROM `customers` WHERE `cus_id` = ?";
-		$stmt = $this->connect()->prepare($sql);
-		$stmt->execute([$id]);
-
-		// $result = $stmt->fetch();
-		// return $result;
-
-		return $stmt;
-	}
-
-	protected function SELECTTEL($tel) {
-		$sql = "SELECT * FROM `customers` WHERE `cus_tel` = ?";
-		if (!$stmt = $this->connect()->prepare($sql)) {
-			echo 'Can\'t prepare';
-			return false;
-		} else {
-			$stmt->execute([$tel]);
-			return $stmt;
-		}
-
-	}
-
-	protected function SELECTALL() {
-		$sql = "SELECT * FROM `customers` WHERE `cus_id` = ? AND `cus_status` = ?";
-		$stmt = $this->connect()->prepare($sql);
-		$stmt->execute([$_SESSION['cus_id'], '1']);
-
-		$result = $stmt->fetchAll();
-		return $result;
-	}
-
-	protected function SELECTNAME($search) {
-
-		$sql = "SELECT * FROM `customers` WHERE (`cus_fname` like ?) OR (`cus_lname` like ?) AND `cus_id` = ? AND `cus_status` = ?";
-		$stmt = $this->connect()->prepare($sql);
-		$newSearch = '%'.$search.'%';
-		$stmt->execute([$newSearch, $newSearch, $_SESSION['cus_id'], '1']);
-
-		$result = $stmt->fetchAll();
-		return $result;
-	}
-
-	protected function SELECTLIMIT($search, $start, $row) {
-		
-		$sql = "SELECT * FROM `customers` WHERE (`cus_fname` like ?) OR (`cus_lname` like ?) AND `cus_id` = ? AND `cus_status` = ? LIMIT $start, $row";
-		$stmt = $this->connect()->prepare($sql);
-		$newSearch = '%'.$search.'%';
-		$stmt->execute([$newSearch, $newSearch, $_SESSION['cus_id'], '1']);
-
-		$result = $stmt->fetchAll();
-		return $result;
 	}
 
 

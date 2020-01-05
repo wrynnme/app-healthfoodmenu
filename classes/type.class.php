@@ -6,12 +6,10 @@ abstract class type extends Dbh {
 		$sql = "SELECT * FROM `type_food` WHERE `type_id` = ? AND `cus_id` = ?";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$id, $_SESSION['cus_id']]);
-
-		$result = $stmt->fetch();
-		return $result;
+		return $stmt;
 	}
 
-	protected function S() {
+	protected function SELECT_SESSION() {
 		$sql = "SELECT * FROM `type_food` WHERE `cus_id` = ?";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$_SESSION['cus_id']]);
@@ -22,9 +20,7 @@ abstract class type extends Dbh {
 		$sql = "SELECT * FROM `type_food` WHERE `cus_id` = ? AND `type_status` = ?";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$_SESSION['cus_id'], '1']);
-
-		$result = $stmt->fetchAll();
-		return $result;
+		return $stmt;
 	}
 
 	protected function SELECTNAME($search) {
@@ -33,9 +29,7 @@ abstract class type extends Dbh {
 		$stmt = $this->connect()->prepare($sql);
 		$newSearch = '%'.$search.'%';
 		$stmt->execute([$newSearch, $_SESSION['cus_id'], '1']);
-
-		$result = $stmt->fetchAll();
-		return $result;
+		return $stmt;
 	}
 
 	protected function SELECTLIMIT($search, $start, $row) {
@@ -44,9 +38,7 @@ abstract class type extends Dbh {
 		$stmt = $this->connect()->prepare($sql);
 		$newSearch = '%'.$search.'%';
 		$stmt->execute([$newSearch, $_SESSION['cus_id'], '1']);
-
-		$result = $stmt->fetchAll();
-		return $result;
+		return $stmt;
 	}
 
 	protected function INSERT($id, $name) {

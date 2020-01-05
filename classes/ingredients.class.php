@@ -7,86 +7,91 @@ class ingredients extends Dbh {
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$id]);
 
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);
-		return $result;
+		return $stmt;
 	}
 
-	protected function SELECTT($id) {
+	protected function SELECT_TYPE($id) {
 		$sql = "SELECT * FROM `ingredients_type` WHERE `ingt_id` = ?";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$id]);
 
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);
-		return $result;
+		return $stmt;
 	}
 
-	protected function ALLOF($numberOfType) {
+	protected function SELECT_ALLOF($numberOfType) {
 		$sql = "SELECT * FROM `ingredients` WHERE `ing_type` = ?";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$numberOfType]);
 
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		return $result;
+		return $stmt;
 	}
 
-	protected function ALLTYPE() {
+	protected function SELECT_TYPEALL() {
 		$sql = "SELECT * FROM `ingredients_type`";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute();
 
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		return $result;
+		return $stmt;
 	}
 
-	public function SELECTFORWAIT($search) {
+	public function SELECT_FORWAIT($search) {
 		$sql = "SELECT * FROM `ingredients` WHERE `ing_status` = '1' AND (`ing_name` like ?) ORDER BY `ing_time` DESC";
 		$stmt = $this->connect()->prepare($sql);
 		$newSearch = '%'.$search.'%';
 		$stmt->execute([$newSearch]);
 
-		$result = $stmt->fetchAll();
-		return $result;
+		return $stmt;
 	}
 
-	protected function SELECTALLTYPE($status, $numberOfType) {
+	protected function SELECT_ALLTYPE($status, $numberOfType) {
 		$sql = "SELECT * FROM `ingredients` WHERE `ing_status` = ? AND `ing_type` = ? ORDER BY `ing_type` ASC";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$status, $numberOfType]);
 
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		return $result;
+		return $stmt;
 	}
 
-	protected function SELECTWITHTEXT($numberOfType, $search) {
+	protected function SELECT_WITHTEXT($numberOfType, $search) {
 		$sql = "SELECT * FROM `ingredients` WHERE (`ing_name` like ?) AND `ing_type` = ?";
 		$stmt = $this->connect()->prepare($sql);
 		$newSearch = '%'.$search.'%';
 		$stmt->execute([$newSearch, $numberOfType]);
 
-		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		return $result;
+		return $stmt;
 	}
 
-	protected function SELECTNAME($search) {
+	protected function SELECT_NAME($search) {
 
 		$sql = "SELECT * FROM `ingredients` WHERE (`ing_name` like ?) AND `ing_status` = ?";
 		$stmt = $this->connect()->prepare($sql);
 		$newSearch = '%'.$search.'%';
 		$stmt->execute([$newSearch, '2']);
 
-		$result = $stmt->fetchAll();
-		return $result;
+		return $stmt;
 	}
 
-	protected function SELECTLIMIT($search, $start, $row) {
+	protected function SELECT_LIMIT($search, $start, $row) {
 		
 		$sql = "SELECT * FROM `ingredients` WHERE (`ing_name` like ?) AND `ing_status` = ? LIMIT $start, $row";
 		$stmt = $this->connect()->prepare($sql);
 		$newSearch = '%'.$search.'%';
 		$stmt->execute([$newSearch, '2']);
 
-		$result = $stmt->fetchAll();
-		return $result;
+		return $stmt;
+	}
+
+	protected function INSERT($name, $kcal, $type) {
+		$sql = "INSERT INTO `ingredients` VALUES(NULL, ?, '100', ?, DEFAULT, ?, DEFAULT, ?, '1')";
+		$db = $this->connect();
+		$stmt = $db->prepare($sql);
+
+		try {
+			$stmt->execute([$name, $kcal, $type, $_SESSION['cus_id']]);
+			$result = $db->lastInsertId();
+			return $result;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
 	}
 
 	protected function UPDATE($attr, $value, $id) {

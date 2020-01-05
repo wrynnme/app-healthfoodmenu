@@ -7,13 +7,16 @@ class foodview extends food {
 	public $start;
 
 	public function getFoodInfo($id) {
-		return $results = $this->SELECT($id);
+		$stmt = $this->SELECT($id);
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $result;
+
 	}
 
 	public function search($search) {
-		$results = $this->SELECTNAME($search);
-		
-		return $results;
+		$stmt = $this->SELECTNAME($search);
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $result;
 	}
 
 	public function pagination($search, $row, $currentPage) {
@@ -21,7 +24,8 @@ class foodview extends food {
 		$this->total_data = count($foods);
 		$this->total_page = ceil($this->total_data / $row);
 		$this->start = ($currentPage - 1) * $row;
-		$data = $this->SELECTLIMIT($search, $this->start, $row);
+		$stmt = $this->SELECTLIMIT($search, $this->start, $row);
+		$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $data;
 	}
 
@@ -36,6 +40,12 @@ class foodview extends food {
 
 		$pre = $currentPage - 1;
 		$nex = $currentPage + 1;
+
+		$last = $this->total_page - 3;
+		$nexx = $currentPage + 3;
+		if ($nexx > $this->total_page) {
+			$nexx = $this->total_page;
+		}
 
 		if ($pre < 0) {
 			$pre = 0;
@@ -56,7 +66,7 @@ class foodview extends food {
 		}
 
 		if ($currentPage <= 4) {
-			for ($prev = 4; $prev > 0; $prev--) {
+			for ($prev = 3; $prev > 0; $prev--) {
 				$pre = $currentPage - $prev;
 				if ($pre > 0) {
 					echo "<li class='page-item'><a class='page-link' href='?p=$pre'> $pre </a></li>";
@@ -73,17 +83,17 @@ class foodview extends food {
 
 		echo "<li class='page-item active'><a class='page-link' href='?p=$currentPage'> $currentPage </a></li>";
 
-		$last = $this->total_page - 3;
+		
 
 		if ($currentPage >= $last) {
-			for ($next = $currentPage + 1; $next <= $this->total_page ; $next++) { 
+			for ($next = $currentPage + 1; $next <= $nexx ; $next++) { 
 				if ($next > $this->total_page) {
 					$next = $this->total_page;
 				}
 				echo "<li class='page-item'><a class='page-link' href='?p=$next'> $next </a></li>";
 			}
 		}else{
-			for ($next = $currentPage + 1; $next <= $this->total_page ; $next++) { 
+			for ($next = $currentPage + 1; $next <= $nexx ; $next++) { 
 				if ($next > $this->total_page) {
 					$next = $this->total_page;
 				}

@@ -8,11 +8,10 @@ abstract class food extends Dbh {
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$id]);
 
-		$result = $stmt->fetch();
-		return $result;
+		return $stmt;
 	}
 
-	protected function SELECTALL() {
+	/*protected function SELECTALL() {
 
 		$sql = "SELECT * FROM `menu_foods` WHERE `cus_id` = ? AND `mf_status` = ?";
 		$stmt = $this->connect()->prepare($sql);
@@ -20,7 +19,7 @@ abstract class food extends Dbh {
 
 		$result = $stmt->fetchAll();
 		return $result;
-	}
+	}*/
 
 	protected function SELECTNAME($search) {
 
@@ -29,17 +28,15 @@ abstract class food extends Dbh {
 		$newSearch = '%'.$search.'%';
 		$stmt->execute([$newSearch, $_SESSION['cus_id'], '1']);
 
-		$result = $stmt->fetchAll();
-		return $result;
+		return $stmt;
 	}
 
-	protected function SELECTINGRE($id) {
+	protected function SELECT_INGRET($id) {
 		$sql = "SELECT * FROM `ingredients` WHERE `ing_id` = ?";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$id]);
 
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);
-		return $result;
+		return $stmt;
 	}
 
 	protected function SELECTLIMIT($search, $start, $row) {
@@ -49,25 +46,21 @@ abstract class food extends Dbh {
 		$newSearch = '%'.$search.'%';
 		$stmt->execute([$newSearch, $_SESSION['cus_id'], '1']);
 
-		$result = $stmt->fetchAll();
-		return $result;
+		return $stmt;
 	}
 
-	protected function INSERTMF($fname, $fprice, $fkcal, $type) {
+	protected function INSERT_MF($fname, $fprice, $fkcal, $type) {
 
 		$sql = "INSERT INTO `menu_foods` VALUES(NULL, ?, ?, ?, DEFAULT, DEFAULT, ?, ?, ?)";
 		$db = $this->connect();
 		$stmt = $db->prepare($sql);
-		
-		if (is_null($type)) {
-			echo $type;
-			exit();
-		}
-		if ($stmt->execute([$fname, $fprice, $fkcal, $_SESSION['cus_id'], '1', $type])){
-			$result = $db->lastInsertId();
-			return $result;
-		} else {
+		if (empty($type)) {
 			if ($stmt->execute([$fname, $fprice, $fkcal, $_SESSION['cus_id'], '1', NULL])) {
+				$result = $db->lastInsertId();
+				return $result;
+			}
+		} else {
+			if ($stmt->execute([$fname, $fprice, $fkcal, $_SESSION['cus_id'], '1', $type])){
 				$result = $db->lastInsertId();
 				return $result;
 			} else {
@@ -75,9 +68,10 @@ abstract class food extends Dbh {
 				exit();
 			}
 		}
+		
 	}
 
-	protected function INSERTINGRET($dbt ,$lastid, $ing_id, $gram, $kcal) {
+	protected function INSERT_INGRET($dbt ,$lastid, $ing_id, $gram, $kcal) {
 
 		$sql = "INSERT INTO ".$dbt." VALUES(NULL, ?, ?, ?, ?)";
 		$db = $this->connect();

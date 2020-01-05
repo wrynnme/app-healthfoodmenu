@@ -5,6 +5,7 @@ $ings = new ingredientsview();
 
 $type = $ings->type();
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,8 +17,8 @@ $type = $ings->type();
 	<?php require_once 'includes/nav_defalut.inc.php'; ?>
 	<div class="container">
 		<div class="text-center">
-			<div class="h1">แก้ไขวัตถุดิบ</div>
-			<div class="h2 mb-5">Edit ingredients</div>
+			<div class="h1">เพิ่มวัตถุดิบ</div>
+			<div class="h2 mb-5">Add ingredients</div>
 		</div>
 		<form class="needs-validation" novalidate method="post" enctype="multipart/form-data" id="myForm">
 			<div class="form-row">
@@ -87,17 +88,17 @@ $type = $ings->type();
 							event.preventDefault();
 							var myForm = document.getElementById('myForm');
 							var data = new FormData(myForm);
-							/*for(var pair of data.entries()) {
+							for(var pair of data.entries()) {
 								console.log(pair[0]+ ', '+ pair[1]); 
-							}*/
+							}
 							$.ajax({
-								url: 'save_new_ingt.php',
+								url: 'includes/ingredients_add.inc.php',
 								type: 'POST',
 								data: data,
 								processData: false,
 								contentType: false,
 								success: function(response) {
-									if (response == 'success') {
+									if (response == '1') {
 										Swal.fire("สำเร็จ !", "<b>รอการตรวจสอบจากผู้ดูแล !!</b>", "success").then(function(){
 											window.location.href='index.php';
 										})

@@ -3,9 +3,10 @@
 class typecontr extends type {
 
 	public function add($name) {
-		$s = $this->S();
-		$id = $s->rowCount();
-		$newId = $id +1;
+		$stmt = $this->SELECT_SESSION();
+		$data = $stmt->fetch(PDO::FETCH_ASSOC);
+		$rowId = $data->rowCount();
+		$newId = $rowId +1;
 		$result = $this->INSERT($newId, $name);
 		return true;
 	}
@@ -22,7 +23,7 @@ class typecontr extends type {
 		}
 	}
 
-	public function mod($id, $value) {
+	public function edit($id, $value) {
 		
 		try {
 			$this->UPDATE($id, 'type_name', $value);

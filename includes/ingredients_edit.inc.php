@@ -23,7 +23,7 @@ if (isset($_POST['ing_id'])) {
 		$fileDestination = '../dist/img/ingredients/'.$fileNameNew;
 		move_uploaded_file($fileTmpName, $fileDestination);
 		if ($old_pic != '404-img.png') {
-			unlink('../dist/img/ingredients/'.$old_pic);
+			@unlink('../dist/img/ingredients/'.$old_pic);
 		}
 		echo ($ings->edit('ing_name', $ing_name, $ing_id))? NULL : 'error';
 		echo ($ings->edit('ing_kcal', $ing_kcal, $ing_id))? NULL : 'error';
