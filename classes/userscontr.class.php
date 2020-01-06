@@ -42,7 +42,7 @@ class userscontr extends users {
 	}
 
 	public function checkTel($tel) {
-		$stmt = $this->SELECTTEL($tel);
+		$stmt = $this->SELECT_TEL($tel);
 		$count = $stmt->rowCount();
 		return $count;
 	}
