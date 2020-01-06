@@ -1,6 +1,5 @@
 <?php require_once 'includes/class-autoload.inc.php'; ?>
 <?php require_once 'includes/check_unlogin.inc.php'; ?>
-<?php $uri_name = substr(stristr(strrchr($_SERVER['REQUEST_URI'] ,'/') ,'_', true), 1); ?>
 <?php (empty($_SESSION['currentSize']))?header('Location:foods_list.php'):NULL; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +52,6 @@
 								<td class="text-center"><?php echo $proType['ingt_name'];?></td>
 								<td class="text-center">
 									<input type="number" class="form-control fix-width" name="gram" id="gram" value="<?=$_SESSION['gram'][$i]?>" placeholder="จำนวนกรัม" onkeyup="return cal_kcal(this.value, <?php echo $pro['ing_unit'];?>, <?php echo $pro['ing_kcal'];?>, <?php echo $i;?>);" onfocusout="return cal_kcal(this.value, <?php echo $pro['ing_unit'];?>, <?php echo $pro['ing_kcal'];?>, <?php echo $i;?>);" min="0" maxlength="4" required>
-									<!-- <input type="number" class="form-control fix-width" name="gram" id="gram" value="<?=$_SESSION['gram'][$i]?>" placeholder="จำนวนกรัม" onkeyup="return cal_kcal(this.value, <?php echo $pro['ing_unit'];?>, <?php echo $pro['ing_kcal'];?>, <?php echo $i;?>);" onfocusout="return cal_kcal(this.value, <?php echo $pro['ing_unit'];?>, <?php echo $pro['ing_kcal'];?>, <?php echo $i;?>);" maxlength="4" i="<?=$i;?>" required> -->
 								</td>
 								<td class="text-center" id="allcal<?=$i?>"><?=number_format(@$_SESSION['allcal'][$i],2);?></td>
 								<td class="text-center"><button class="btn btn-outline-danger" onclick="del(<?=$i;?>, 'show');"><i class="fas fa-minus-circle"></i></button></td>
