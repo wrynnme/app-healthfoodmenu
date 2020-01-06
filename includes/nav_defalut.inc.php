@@ -45,7 +45,7 @@ if (isset($_SESSION['edit_food'])) {
 					</div>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="bill_list.php">รายการสั่งอาหาร</a>
+					<a class="nav-link" href="orders_list.php">รายการสั่งอาหาร</a>
 				</li>
 			</ul>
 		</div>

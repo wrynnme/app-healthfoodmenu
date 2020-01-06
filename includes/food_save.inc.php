@@ -4,7 +4,7 @@
 if (isset($_SESSION['food_name']) && isset($_SESSION['food_price'])) {
 	if ((isset($_SESSION['intLine']) && isset($_SESSION['pro_id']) && isset($_SESSION['allcal']))  ) {
 		if (sizeof($_SESSION['pro_id']) == sizeof($_SESSION['gram'])) {
-			$foods = new foodcontr();
+			$foods = new foodscontr();
 			$foods->food_name = $_SESSION['food_name'];
 			$foods->food_price = $_SESSION['food_price'];
 			$foods->food_kcal = array_sum($_SESSION['allcal']);

@@ -17,7 +17,7 @@ if (empty($_POST['page'])) {
 	$currentPage = $_POST['page'];
 }
 
-$foods = new foodview();
+$foods = new foodsview();
 $data = $foods->pagination($value, $row, $currentPage);
 $status = array('ปิดใช้งาน', 'เปิดใช้งาน');
 ?>
@@ -38,19 +38,19 @@ $status = array('ปิดใช้งาน', 'เปิดใช้งาน')
 			<?php for ($i = 0; $i < count($data); $i++) { ?>
 				<tr class="text-center">
 					<td>
-						<a href="food.php?id=<?php echo $data[$i]['mf_id'];?>"><?php echo $i+1;?></a>
+						<a href="foods.php?id=<?php echo $data[$i]['mf_id'];?>"><?php echo $i+1;?></a>
 					</td>
 					<td>
-						<a href="food.php?id=<?php echo $data[$i]['mf_id'];?>"><?php echo $data[$i]['mf_name'];?></a>
+						<a href="foods.php?id=<?php echo $data[$i]['mf_id'];?>"><?php echo $data[$i]['mf_name'];?></a>
 					</td>
 					<td align="center">
-						<a href="food.php?id=<?php echo $data[$i]['mf_id'];?>"><?php echo $data[$i]['mf_kcal'];?></a>
+						<a href="foods.php?id=<?php echo $data[$i]['mf_id'];?>"><?php echo $data[$i]['mf_kcal'];?></a>
 					</td>
 					<td align="center">
-						<a href="food.php?id=<?php echo $data[$i]['mf_id'];?>"><?php echo $data[$i]['mf_price'];?></a>
+						<a href="foods.php?id=<?php echo $data[$i]['mf_id'];?>"><?php echo $data[$i]['mf_price'];?></a>
 					</td>
 					<td align="center">
-						<a href="food.php?id=<?php echo $data[$i]['mf_id'];?>"><?php echo $status[$data[$i]['mf_status']];?></a>
+						<a href="foods.php?id=<?php echo $data[$i]['mf_id'];?>"><?php echo $status[$data[$i]['mf_status']];?></a>
 					</td>
 					<td align="center"><i class="fal fa-edit" data-id="<?php echo $data[$i]['cus_id'];?>" onclick="edit(this);"></i></td>
 					<td align="center"><i class="fal fa-edit" data-id="<?php echo $data[$i]['cus_id'];?>" onclick="edit(this);"></i></td>

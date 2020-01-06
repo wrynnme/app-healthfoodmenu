@@ -5,10 +5,6 @@ $type = $_POST['type'];
 
 $ings = new ingredientsview();
 $types[$type] = $ings->getTypeWithSearch($type, $value);
-// print_r($types[$type]);
-// echo '<br>';
-// echo $types[$type][0]['ing_id'];
-// echo sizeof($types[$type]);
 ?>
 <div class="text-center" id="ingtr<?=$type;?>">
 	<?php for ($i = 0;$i < sizeof($types[$type]); $i++) { ?>

@@ -43,6 +43,7 @@ if (isset($_POST['id'])) {
 
 
 if (isset($_FILES['file']['name'])) {
+	$foods = new foodscontr();
 	$mf_id = $_SESSION['thismenu']['id'];
 	$old_img = $_SESSION['thismenu']['old_img'];
 	$default_img = "404-img.png";
@@ -57,7 +58,7 @@ if (isset($_FILES['file']['name'])) {
 	$allowed = array('jpg', 'jpeg', 'png');
 	
 	$fileNameNew = uniqid('', true).".".$fileActualExt;
-	$fileDestination = 'dist/img/foods/'.$fileNameNew;
+	$fileDestination = '../dist/img/foods/'.$fileNameNew;
 
 	$uploadOk = 1;
 	$imageFileType = pathinfo($fileDestination,PATHINFO_EXTENSION);
@@ -69,19 +70,19 @@ if (isset($_FILES['file']['name'])) {
 		echo 0;
 	}else{
 		if(move_uploaded_file($fileTmpName, $fileDestination)){
-			if ($update = $con->query("UPDATE `menu_foods` SET `mf_img` = '$fileNameNew' WHERE `mf_id` = '$mf_id' AND `cus_id` = '$cus_id'")) {
+			if ($foods->changeImg($fileNameNew, $mf_id)) {
 				if ($default_img != $old_img) {
-					if (unlink("dist/img/foods/".$old_img)) {
-						echo $fileDestination;
+					if (unlink("../dist/img/foods/".$old_img)) {
+						echo 'dist/img/foods/'.$fileNameNew;
 						unset($_SESSION['thismenu']);
 					}
 				}else{
-					echo $fileDestination;
+					echo 'dist/img/foods/'.$fileNameNew;
 					unset($_SESSION['thismenu']);
 				}
 			}
 		}else{
-			echo 1;
+			echo 'error upload files';
 		}
 	}
 }

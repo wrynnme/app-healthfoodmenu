@@ -41,43 +41,7 @@ if (isset($_POST['id'])) {
 		echo ($users->change('cus_tel', $tel, $id))? NULL: 'error';
 		echo ($users->change('cus_rtable', $rtable, $id))? NULL: 'error';
 	}
-
-	/*$numberTel = $con->query("SELECT * FROM `customers` WHERE `cus_tel` = '$tel'");
-	if (nr($numberTel) != 0) {
-		$number_error = fa($numberTel);
-		if ((string)$number_error['cus_id'] == (string)$id) {
-			if (isset($_POST['permission'])) {
-				$permission = $_POST['permission'];
-				if ($con->query("UPDATE `customers` SET `cus_fname` = '$fname', `cus_lname` = '$lname', `cus_res_name` = '$rname', `cus_rtable` = '$rtable', `cus_permission` = '$permission' WHERE `cus_id` = '$id'")) {
-					echo 'success';
-					exit;
-				}
-				$_SESSION['cus_permission'] = $permission;
-
-			}else{
-				if ($con->query("UPDATE `customers` SET `cus_fname` = '$fname', `cus_lname` = '$lname', `cus_res_name` = '$rname', `cus_rtable` = '$rtable' WHERE `cus_id` = '$id'")) {
-					echo 'success';
-					exit;
-				}
-			}
-		}
-		echo 'error tel';
-		exit;
-	}else{
-		if (isset($_POST['permission'])) {
-			$permission = $_POST['permission'];
-			if ($con->query("UPDATE `customers` SET `cus_fname` = '$fname', `cus_lname` = '$lname', `cus_res_name` = '$rname', `cus_tel` = '$tel', `cus_rtable` = '$rtable', `cus_permission` = '$permission' WHERE `cus_id` = '$id'")) {
-				echo 'success';
-				exit;
-			}
-			$_SESSION['cus_permission'] = $permission;
-		}else{
-			if ($con->query("UPDATE `customers` SET `cus_fname` = '$fname', `cus_lname` = '$lname', `cus_res_name` = '$rname', `cus_tel` = '$tel', `cus_rtable` = '$rtable' WHERE `cus_id` = '$id'")) {
-				echo 'success';
-				exit;
-			}
-		}
-	}*/
+	
 	$_SESSION['cus_fname'] = $fname;
 	$_SESSION['cus_lname'] = $lname;
 	$_SESSION['cus_rname'] = $rname;

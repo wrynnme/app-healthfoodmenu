@@ -39,7 +39,7 @@ $status = array('ออกจากระบบ', 'กำลังใช้ง�
 			</tr>
 		</thead>
 		<tbody>
-			<?php for ($i = 0; $i < count($data); $i++) { ?>
+			<?php for ($i = 0; $i < sizeof($data); $i++) { ?>
 				<tr class="text-center <?php echo ((string)$data[$i]['cus_permission'] == '0')?'bg-primary text-light': NULL; ?>">
 					<td><?php echo $i+1;?></td>
 					<td><?php echo $data[$i]['cus_fname']." ".$data[$i]['cus_lname'];?></td>
