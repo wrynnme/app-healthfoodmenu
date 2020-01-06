@@ -1,10 +1,8 @@
 <?php require_once 'includes/class-autoload.inc.php'; ?>
 <?php require_once 'includes/check_unlogin.inc.php'; ?>
 <?php checkAdmin(); ?>
+<?php $uri_name = substr(stristr(strrchr($_SERVER['REQUEST_URI'] ,'/') ,'_', true), 1); ?>
 <?php
-
-$uri_name = substr(stristr(strrchr($_SERVER['REQUEST_URI'] ,'/') ,'_', true), 1);
-
 $page = @$_GET['p'];
 (@$page < 1)?$page = 1:NULL;
 ?>
