@@ -1,6 +1,6 @@
 <?php
 
-class foodview extends food {
+class foodsview extends foods {
 
 	public $total_data;
 	public $total_page;
@@ -11,6 +11,12 @@ class foodview extends food {
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $result;
 
+	}
+
+	public function getDetail($tb, $id) {
+		$stmt = $this->SELECT_TBN($tb, $id);
+		$results = $stmt->fetchAll(PDO::FETCH_NUM);
+		return $results;
 	}
 
 	public function search($search) {

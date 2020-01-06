@@ -1,6 +1,6 @@
 <?php
 
-abstract class food extends Dbh {
+abstract class foods extends Dbh {
 
 	protected function SELECT($id) {
 
@@ -11,8 +11,22 @@ abstract class food extends Dbh {
 		return $stmt;
 	}
 
-	/*protected function SELECTALL() {
+	protected function SELECT_TBN($tbName, $mf_id) {
+	
+		$sql = "SELECT * FROM ".$tbName." WHERE `mf_id` = ?";
+		$stmt = $this->connect()->prepare($sql);
 
+		try {
+			$stmt->execute([$mf_id]);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
+
+	}
+
+	/*protected function SELECTALL() {
+S
 		$sql = "SELECT * FROM `menu_foods` WHERE `cus_id` = ? AND `mf_status` = ?";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$_SESSION['cus_id'], '1']);
@@ -86,6 +100,19 @@ abstract class food extends Dbh {
 			echo $e->getMessage();
 		}
 		catch (InvalidArgumentException $e) {
+			echo $e->getMessage();
+		}
+	}
+
+	protected function UPDATE($attr, $value, $id) {
+
+		$sql = "UPDATE `menu_foods` SET `".$attr."` = ? WHERE `mf_id` = ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$value, $id]);
+			return true;
+		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
 	}

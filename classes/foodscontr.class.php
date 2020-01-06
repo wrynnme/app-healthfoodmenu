@@ -1,6 +1,6 @@
 <?php
 
-class foodcontr extends food {
+class foodscontr extends foods {
 
 	public $food_name;
 	public $food_price;
@@ -29,6 +29,11 @@ class foodcontr extends food {
 		unset($_SESSION['type_id']);
 		unset($_SESSION['new_menu']);
 		unset($_SESSION['edit_food']);
+	}
+
+	public function changeImg($value, $id) {
+		$result = $this->UPDATE('mf_img', $value, $id);
+		return $result;
 	}
 }
 
