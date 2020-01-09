@@ -106,7 +106,7 @@ if (isset($_SESSION['edit_food'])) {
 	</div>
 </div>
 
-<button onclick="topFunction()" class="btn btn-warning" id="myTop" title="Go to top"><i class="fad fa-angle-double-up animated fadeInUp delay-1s infinite slow"></i></button>
+<button onclick="topFunction()" class="btn btn-warning animated fadeInUp" id="myTop" title="Go to top"><i class="fad fa-angle-double-up animated fadeInUp delay-1s infinite slow"></i></button>
 <script>
 	//Get the button
 	var mybutton = document.getElementById("myTop");
