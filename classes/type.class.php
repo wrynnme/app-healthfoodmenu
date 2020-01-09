@@ -5,25 +5,67 @@ abstract class type extends Dbh {
 	protected function SELECT($id) {
 		$sql = "SELECT * FROM `type_food` WHERE `type_id` = ? AND `cus_id` = ?";
 		$stmt = $this->connect()->prepare($sql);
-		$stmt->execute([$id, $_SESSION['cus_id']]);
-		return $stmt;
+
+		try {
+			$stmt->execute([$id, $_SESSION['cus_id']]);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
 	}
 
 	protected function SELECT_SESSION() {
 		$sql = "SELECT * FROM `type_food` WHERE `cus_id` = ?";
 		$stmt = $this->connect()->prepare($sql);
-		$stmt->execute([$_SESSION['cus_id']]);
-		return $stmt;
+		
+		try {
+			$stmt->execute([$_SESSION['cus_id']]);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
 	}
 
-	protected function SELECTALL() {
+	protected function SELECT_ALL() {
 		$sql = "SELECT * FROM `type_food` WHERE `cus_id` = ? AND `type_status` = ?";
 		$stmt = $this->connect()->prepare($sql);
-		$stmt->execute([$_SESSION['cus_id'], '1']);
-		return $stmt;
+		
+		try {
+			$stmt->execute([$_SESSION['cus_id'], '1']);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
 	}
 
-	protected function SELECTNAME($search) {
+	protected function SELECT_ORDER($cus_id) {
+		
+		$sql = "SELECT * FROM `type_food` WHERE `cus_id` = ? AND `type_status` = ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$cus_id, '1']);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
+	}
+
+	protected function SELECT_ORDER_TYPE($cus_id, $type_id) {
+
+		$sql = "SELECT * FROM `type_food` WHERE `cus_id` = ? AND `type_status` = ? AND `type_id` = ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$cus_id, '1', $type_id]);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
+		
+	}
+
+	protected function SELECT_NAME($search) {
 
 		$sql = "SELECT * FROM `type_food` WHERE (`type_name` like ?) AND `cus_id` = ? AND `type_status` = ?";
 		$stmt = $this->connect()->prepare($sql);
@@ -32,7 +74,7 @@ abstract class type extends Dbh {
 		return $stmt;
 	}
 
-	protected function SELECTLIMIT($search, $start, $row) {
+	protected function SELECT_LIMIT($search, $start, $row) {
 		
 		$sql = "SELECT * FROM `type_food` WHERE (`type_name` like ?) AND `cus_id` = ? AND `type_status` = ? LIMIT $start, $row";
 		$stmt = $this->connect()->prepare($sql);
