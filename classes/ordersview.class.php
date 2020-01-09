@@ -5,13 +5,45 @@ class ordersview extends orders {
 
 	}
 
-	public function search($mode) {
-		$stmt = $this->SELECT_ATTR('or_pay_status', $mode);
+	public function getId($id, $cus_id) {
+		$stmt = $this->SELECT($id, $cus_id);
+		$results = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $results;
+	}
+
+	public function getId_detail($id) {
+		$stmt = $this->SELECT_DETAIL($id);
 		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
 	}
 
-	public function pagination($mode, $row, $currentPage) {
+	public function search($mode) {
+		if ($mode = 0) {
+			$stmt = $this->SELECT_ATTR('cus_id', $_SESSION['cus_id']);
+		} else {
+			$stmt = $this->SELECT_ATTR('or_pay_status', $mode);
+		}
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
+	}
+
+	public function ssid($ssid) {
+		$stmt = $this->SELECT_ATTR('or_phpsessid', $ssid);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
+	}
+
+	public function cli_pagination($ssid, int $row, int $currentPage) {
+		$result_search = self::ssid($ssid);
+		$this->total_data = count($result_search);
+		$this->total_page = ceil($this->total_data / $row);
+		$this->start = ($currentPage - 1) * $row;
+		$stmt = $this->SELECT_LIMIT('or_status', '1', $this->start, $row);
+		$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $data;
+	}
+
+	public function pagination($mode, int $row, int $currentPage) {
 		$result_search = self::search($mode);
 		$this->total_data = count($result_search);
 		$this->total_page = ceil($this->total_data / $row);
