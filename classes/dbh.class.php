@@ -9,6 +9,7 @@ class Dbh {
 	protected function connect() {
 		$dsn = 'mysql:host='.$this->host.';dbname='.$this->dbname;
 		$pdo = new pdo($dsn, $this->user, $this->pass);
+		$pdo->exec("set names utf8");
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_BOTH);
 		return $pdo;
 	}
