@@ -19,13 +19,20 @@ class users extends Dbh {
 			$stmt->execute([$tel]);
 			return $stmt;
 		}
-
 	}
 
 	protected function SELECT_ALL() {
 		$sql = "SELECT * FROM `customers` WHERE `cus_id` = ? AND `cus_status` = ?";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$_SESSION['cus_id'], '1']);
+		return $stmt;
+	}
+
+	protected function SELECT_EMAIL($email) {
+
+		$sql = "SELECT * FROM `customers` WHERE `cus_email` = ?";
+		$stmt = $this->connect()->prepare($sql);
+		$stmt->execute([$email]);
 		return $stmt;
 	}
 
@@ -68,6 +75,20 @@ class users extends Dbh {
 		} catch (InvalidArgumentException $e) {
 			echo $e->getMessage();
 		}
+	}
+
+	protected function UPDATE_EMAIL($attr, $value, $email) {
+		$sql = "UPDATE `customers` SET `".$attr."` = ? WHERE `cus_email` = ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$value, $email]);
+			return true;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		} catch (InvalidArgumentException $e) {
+			echo $e->getMessage();
+		}
 
 	}
 
@@ -85,6 +106,50 @@ class users extends Dbh {
 				return $rows;
 			}
 		}
+	}
+
+	protected function SELECT_PWD($selector, $expries) {
+
+		$sql = "SELECT * FROM `pwdreset` WHERE `pwd_selector` = ? AND `pwd_expires` >= ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$selector, $expries]);
+			return $stmt;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+	protected function INSERT_PWD($pwd_email, $pwd_selector, $pwd_token, $pwd_expires) {
+
+		$sql = "INSERT INTO `pwdreset` VALUES(NULL, ?, ?, ?, ?)";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$pwd_email, $pwd_selector, $pwd_token, $pwd_expires]);
+			return true;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		} catch (InvalidArgumentException $e) {
+			echo $e->getMessage();
+		}
+	}
+
+	protected function DELETE_PWD($email) {
+
+		$sql = "DELETE FROM `pwdreset` WHERE `pwd_email` = ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$email]);
+			return true;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		} catch (InvalidArgumentException $e) {
+			echo $e->getMessage();
+		}
+		
 	}
 
 
