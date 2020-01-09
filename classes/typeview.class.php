@@ -8,7 +8,7 @@ class typeview extends type {
 
 
 	public function getAll(){
-		$stmt = $this->SELECTALL();
+		$stmt = $this->SELECT_ALL();
 		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
 	}
@@ -19,8 +19,22 @@ class typeview extends type {
 		return $results;
 	}
 
+	public function getOrder($res_id, $type_id) {
+
+		if (empty($type_id)) {
+			$stmt = $this->SELECT_ORDER($res_id);
+			$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		} else {
+			$stmt = $this->SELECT_ORDER_TYPE($res_id, $type_id);
+			$results = $stmt->fetch(PDO::FETCH_ASSOC);
+		}
+
+		return $results;
+
+	}
+
 	public function search($search) {
-		$stmt = $this->SELECTNAME($search);
+		$stmt = $this->SELECT_NAME($search);
 		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
 	}
@@ -30,7 +44,7 @@ class typeview extends type {
 		$this->total_data = count($foods);
 		$this->total_page = ceil($this->total_data / $row);
 		$this->start = ($currentPage - 1) * $row;
-		$stmt = $this->SELECTLIMIT($search, $this->start, $row);
+		$stmt = $this->SELECT_LIMIT($search, $this->start, $row);
 		$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $data;
 	}
