@@ -108,14 +108,26 @@ $hash = password_hash('edit_password', PASSWORD_DEFAULT);
 		<div class="h6 text-center">
 			<?php
 			if ((string)$_SESSION['cus_id'] == (string)$edit_id) { ?>
-				<a class="text-dark" href="edit_member_password.php?d=<?php echo $edit_id;?>&h=<?php echo $hash;?>">เปลี่ยนรหัส</a>
+				<a class="text-dark" href="users_edit_password.php?d=<?php echo $edit_id;?>&h=<?php echo $hash;?>">เปลี่ยนรหัส</a>
 			<?php }else{ ?>
-				<a class="text-dark" href="reset_password.php?d=<?php echo $edit_id;?>&h=<?php echo $hash;?>">รีเซ็ตรหัสผ่าน</a>
+				<a class="text-dark" href="#" id="resetpwd">รีเซ็ตรหัสผ่าน</a>
 			<?php } ?>
 		</div>
 	</div>
 	<script src="dist/js/be.js"></script>
 	<script>
+		$('#resetpwd').click(function() {
+			var email = $('#email').val();
+			$.ajax({
+				url: 'includes/reset_request.inc.php',
+				type: 'POST',
+				data: {email: email},
+				success: function(data, response) {
+					console.log(data);
+				}
+			});
+			
+		});
 		$(document).ready(function() {
 			'use strict';
 			window.addEventListener('load', function() {
