@@ -16,7 +16,7 @@ module.exports = {
     "ui": {
         "port": 3001
     },
-    "files": ["app/css/style.css", "app/js/*.js", "*/*"],
+    "files": ["app/css/style.css", "app/js/*.js", "includes/*.php", "classes/*.php", "dist/scss/*.scss", "app/php/*.php"],
     "watchEvents": [
         "change"
     ],
