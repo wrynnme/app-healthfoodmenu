@@ -6,13 +6,31 @@ abstract class foods extends Dbh {
 
 		$sql = "SELECT * FROM `menu_foods` WHERE `mf_id` = ?";
 		$stmt = $this->connect()->prepare($sql);
-		$stmt->execute([$id]);
 
-		return $stmt;
+		try {
+			$stmt->execute([$id]);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
+		
+	}
+
+	protected function SELECT_ORDER_MFID($cus_id, $mf_id) {
+
+		$sql = "SELECT * FROM `menu_foods` WHERE `cus_id` = ? AND `mf_id` = ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$cus_id, $mf_id]);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
 	}
 
 	protected function SELECT_TBN($tbName, $mf_id) {
-	
+
 		$sql = "SELECT * FROM ".$tbName." WHERE `mf_id` = ?";
 		$stmt = $this->connect()->prepare($sql);
 
@@ -25,8 +43,60 @@ abstract class foods extends Dbh {
 
 	}
 
+	protected function SELECT_MENU($type) {
+
+		$sql = "SELECT * FROM `menu_foods` WHERE `cus_id` = ? AND `mf_status` = ? AND `type_id` = ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$_SESSION['cus_id'], '1', $type]);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage;
+		}
+		
+	}
+
+	protected function SELECT_ALLMENU() {
+		$sql = "SELECT * FROM `menu_foods` WHERE `cus_id` = ? AND `mf_status` = ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$_SESSION['cus_id'], '1']);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage;
+		}
+		
+	}
+
+	protected function SELECT_ORDER($cus_id) {
+		
+		$sql = "SELECT * FROM `menu_foods` WHERE `cus_id` = ? AND `mf_status` = ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$cus_id, '1']);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
+	}
+
+	protected function SELECT_ORDER_TYPE($cus_id, $type) {
+		
+		$sql = "SELECT * FROM `menu_foods` WHERE `cus_id` = ? AND `mf_status` = ? AND `type_id` = ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$cus_id, '1', $type]);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
+	}
+
 	/*protected function SELECTALL() {
-S
 		$sql = "SELECT * FROM `menu_foods` WHERE `cus_id` = ? AND `mf_status` = ?";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$_SESSION['cus_id'], '1']);
@@ -35,7 +105,7 @@ S
 		return $result;
 	}*/
 
-	protected function SELECTNAME($search) {
+	protected function SELECT_NAME($search) {
 
 		$sql = "SELECT * FROM `menu_foods` WHERE (`mf_name` like ?) AND `cus_id` = ? AND `mf_status` = ?";
 		$stmt = $this->connect()->prepare($sql);
@@ -46,6 +116,7 @@ S
 	}
 
 	protected function SELECT_INGRET($id) {
+
 		$sql = "SELECT * FROM `ingredients` WHERE `ing_id` = ?";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$id]);
@@ -53,7 +124,35 @@ S
 		return $stmt;
 	}
 
-	protected function SELECTLIMIT($search, $start, $row) {
+	protected function SELECT_MENULIMIT($type, $start, $row) {
+
+		$sql = "SELECT * FROM `menu_foods` WHERE `type_id` = ? AND `cus_id` = ? AND `mf_status` = ? LIMIT $start, $row";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$type, $_SESSION['cus_id'], '1']);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
+		
+	}
+
+	protected function SELECT_ALLMENULIMIT($start, $row) {
+
+		$sql = "SELECT * FROM `menu_foods` WHERE `cus_id` = ? AND `mf_status` = ? LIMIT $start, $row";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$_SESSION['cus_id'], '1']);
+			return $stmt;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
+		
+	}
+
+	protected function SELECT_LIMIT($search, $start, $row) {
 		
 		$sql = "SELECT * FROM `menu_foods` WHERE (`mf_name` like ?) AND `cus_id` = ? AND `mf_status` = ? LIMIT $start, $row";
 		$stmt = $this->connect()->prepare($sql);
