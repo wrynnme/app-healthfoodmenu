@@ -20,7 +20,6 @@ if (isset($_GET['m'])) {
 } else {
 	$mode = 1;
 }
-
 $data = $orders->pagination($mode, $row, $currentPage);
 ?>
 <!DOCTYPE html>
@@ -55,16 +54,16 @@ $data = $orders->pagination($mode, $row, $currentPage);
 					<?php for ($i = 0; $i < sizeof($data); $i++) { ?>
 						<tr class="text-center">
 							<td>
-								<a href="bill.php?id=<?php echo $data[$i]['or_id']?>"><?php echo $data[$i]['or_id']; ?></a>
+								<a href="orders_detail.php?id=<?php echo $data[$i]['or_id']?>"><?php echo $data[$i]['or_id']; ?></a>
 							</td>
 							<td>
-								<a href="bill.php?id=<?php echo $data[$i]['or_id']?>"><?php echo $data[$i]['or_table']; ?></a>
+								<a href="orders_detail.php?id=<?php echo $data[$i]['or_id']?>"><?php echo $data[$i]['or_table']; ?></a>
 							</td>
 							<td>
-								<a href="bill.php?id=<?php echo $data[$i]['or_id']?>"><?php echo $data[$i]['or_time']; ?></a>
+								<a href="orders_detail.php?id=<?php echo $data[$i]['or_id']?>"><?php echo $data[$i]['or_time']; ?></a>
 							</td>
 							<td>
-								<a href="bill.php?id=<?php echo $data[$i]['or_id']?>">
+								<a href="orders_detail.php?id=<?php echo $data[$i]['or_id']?>">
 									<?php
 									if ($data[$i]['or_pay_status'] == 2) { ?>
 										<i class="fas fa-check text-success" aria-hidden="true"></i>
