@@ -6,11 +6,17 @@ class foodsview extends foods {
 	public $total_page;
 	public $start;
 
-	public function getFoodInfo($id) {
+	public function getId($id) {
 		$stmt = $this->SELECT($id);
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $result;
 
+	}
+
+	public function myOrder($cus_id, $mf_id) {
+		$stmt = $this->SELECT_ORDER_MFID($cus_id, $mf_id);
+		$results = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $results;
 	}
 
 	public function getDetail($tb, $id) {
@@ -19,10 +25,58 @@ class foodsview extends foods {
 		return $results;
 	}
 
+	public function menu($type) {
+		$stmt = $this->SELECT_MENU($type);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
+	}
+
+	public function allmenu() {
+		$stmt = $this->SELECT_ALLMENU();
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
+	}
+
+	public function getOrder($res_id) {
+
+		$stmt = $this->SELECT_ORDER($res_id);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
+
+	}
+
+	public function getOrder_Type($res_id, $type) {
+		
+		$stmt = $this->SELECT_ORDER_TYPE($res_id, $type);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
+	}
+
 	public function search($search) {
-		$stmt = $this->SELECTNAME($search);
+		$stmt = $this->SELECT_NAME($search);
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
+	}
+
+	public function pagination_menu($type, $row, $currentPage) {
+
+		if (empty($type)) {
+			$foods = self::allmenu();
+		} else {
+			$foods = self::menu($type);
+		}
+		
+		$this->total_data = count($foods);
+		$this->total_page = ceil($this->total_data / $row);
+		$this->start = ($currentPage - 1) * $row;
+
+		if (empty($type)) {
+			$stmt = $this->SELECT_ALLMENULIMIT($this->start, $row);
+		} else {
+			$stmt = $this->SELECT_MENULIMIT($type, $this->start, $row);
+		}
+		$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $data;
 	}
 
 	public function pagination($search, $row, $currentPage) {
@@ -30,7 +84,7 @@ class foodsview extends foods {
 		$this->total_data = count($foods);
 		$this->total_page = ceil($this->total_data / $row);
 		$this->start = ($currentPage - 1) * $row;
-		$stmt = $this->SELECTLIMIT($search, $this->start, $row);
+		$stmt = $this->SELECT_LIMIT($search, $this->start, $row);
 		$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $data;
 	}
