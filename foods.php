@@ -5,7 +5,7 @@ if (isset($_GET['id'])) {
 	$img_default = '404-img.png';
 	$id = $_GET['id'];
 	$foods = new foodsview();
-	$thismenu = $foods->getFoodInfo($id);
+	$thismenu = $foods->getId($id);
 	$mf_id = $thismenu['mf_id'];
 	$_SESSION['thismenu']['id'] = $thismenu['mf_id'];
 	$_SESSION['thismenu']['old_img'] = $thismenu['mf_img'];
