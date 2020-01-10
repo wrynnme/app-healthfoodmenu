@@ -9,7 +9,7 @@ if($_GET["obj"] == "delete_account_cookie"){
 
 }
 if($_GET["obj"] == "check_login"){
-	$login = new UsersContr();
+	$login = new userscontr();
 	if (!$user = $login->Login($_POST['email'], $_POST['password'])) {
 		echo 'error!';
 		exit();
