@@ -107,7 +107,7 @@ function edit(e){
 	window.location = type+'_edit.php?id='+id;
 }
 
-function del(value){
+/*function del(value){
 	Swal.fire({
 		title: 'คุณต้องการที่จะลบ?',
 		text: "คุณต้องการลบเมนูนี้!",
@@ -122,6 +122,26 @@ function del(value){
 		if (result.value) {
 			Swal.fire('ลบเรียบร้อย !', 'เมนูถูกลบเรียบร้อย.', 'success').then(function(){
 				window.location = 'del.php?cancelfood='+value;
+			})
+		}
+	})
+}*/
+
+function del_foods(Line ,Type){
+	Swal.fire({
+		title: 'คุณต้องการที่จะลบ?',
+		text: "คุณต้องการลบวัตถุดิบชิ้นนี้ ออกจากเมนูนีั!",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'ใช่, ฉันต้องการลบ!',
+		cancelButtonText: 'ยกเลิก',
+		reverseButtons: true
+	}).then((result) => {
+		if (result.value) {
+			Swal.fire('ลบเรียบร้อย !', 'วัตถุดิบถูกลบเรียบร้อย.', 'success').then(function(){
+				window.location = 'includes/foods_control.inc.php?Line='+Line+'&from='+Type;
 			})
 		}
 	})

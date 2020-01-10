@@ -31,6 +31,26 @@ class foodscontr extends foods {
 		unset($_SESSION['edit_food']);
 	}
 
+	public function edit($attr, $value, $id) {
+		$result = $this->UPDATE($attr, $value, $id);
+		return $result;
+	}
+
+	public function del($tb, $mf_id, $ing_id) {
+		$result = $this->DELETE($tb, $mf_id, $ing_id);
+		return $result;
+	}
+
+	public function add_ingt($dbt ,$lastid, $ing_id, $gram, $kcal) {
+		$result = $this->INSERT_INGRET($dbt ,$lastid, $ing_id, $gram, $kcal);
+		return $result;
+	}
+
+	public function edit_ingt($dbt, $attr, $value, $mf_id, $ing_id) {
+		$result = $this->UPDATE_INGRET($dbt, $attr, $value, $mf_id, $ing_id);
+		return $result;
+	}
+
 	public function changeImg($value, $id) {
 		$result = $this->UPDATE('mf_img', $value, $id);
 		return $result;

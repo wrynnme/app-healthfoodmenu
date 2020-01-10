@@ -5,7 +5,7 @@ if (isset($_SESSION['edit_food'])) {
 	?>
 	<ul class="nav justify-content-center bg-warning" style="margin: 0;">
 		<li class="nav-item">
-			<span>คุณกำลังแก้ไขเมนูอาหาร</span> <a href="edit_foods.php?mf_id=<?=$_SESSION['edit_food']?>" class="text-dark"><?php echo $food['mf_name'] ?></a> <a href="includes/delete_session.inc.php?s=edit_food" class="text-danger">ยกเลิก</a>
+			<span>คุณกำลังแก้ไขเมนูอาหาร</span> <a href="foods_edit.php?id=<?=$_SESSION['edit_food']?>" class="text-dark"><?php echo $food['mf_name'] ?></a> <a href="includes/delete_session.inc.php?s=edit_food" class="text-danger">ยกเลิก</a>
 		</li>
 	</ul>
 <?php } ?>

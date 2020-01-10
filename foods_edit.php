@@ -81,25 +81,27 @@ if (isset($_GET['id'])) {
 						<?php
 						$Total = 0;
 						$SumTotal = 0;
-
-						for($i=0; $i < (int)$_SESSION["intLine"]; $i++) {
-							if($_SESSION["pro_id"][$i] != "") {
-								$ings = new ingredientsview();
-								$ing = $ings->id($_SESSION['pro_id'][$i]);
+						$ings = new ingredientsview();
+						$i = 0;
+						foreach ($_SESSION['pro_id'] as $key => $value) {
+							// echo $key.'=>'.$value.'<br>';
+							if($value != "") {
+								$ing = $ings->id($value);
 								$type = $ings->idType($ing['ing_type']);
 								?>
 								<tr>
-									<td class="text-center"><?php echo $_SESSION["pro_id"][$i];?></td>
-									<td><?=$ing["ing_name"];?></td>
+									<td class="text-center"><?php echo $i+1;?></td>
+									<td><?php echo $ing["ing_name"];?></td>
 									<td class="text-center"><?php echo $type['ingt_name'];?></td>
 									<td class="text-center">
-										<input type="number" class="form-control fix-width" name="gram" id="gram" value="<?=$_SESSION['gram'][$i]?>" placeholder="จำนวนกรัม" onkeyup="return cal_kcal(this.value, <?=$ing['ing_unit'];?>, <?=$ing['ing_kcal'];?>, <?=$i;?>);" required maxlength="4">
+										<input type="number" class="form-control fix-width" name="gram" id="gram" value="<?php echo $_SESSION['gram'][$key]?>" placeholder="จำนวนกรัม" onkeyup="return cal_kcal(this.value, <?php echo $ing['ing_unit'];?>, <?php echo $ing['ing_kcal'];?>, <?php echo $key;?>);" required maxlength="4">
 									</td>
-									<td class="text-center" id="allcal<?=$i?>"><?=number_format(@$_SESSION['allcal'][$i],2);?></td>
-									<td class="text-center"><button class="btn btn-outline-danger" onclick="del(<?=$i;?>, 'edit');"><i class="fas fa-minus-circle"></i></button></td>
+									<td class="text-center" id="allcal<?php echo $key; ?>"><?php echo number_format(@$_SESSION['allcal'][$key],2);?></td>
+									<td class="text-center"><button class="btn btn-outline-danger" onclick="del_foods(<?php echo $key;?>, 'edit');"><i class="fas fa-minus-circle"></i></button></td>
 								</tr>
 								<?php
 							}
+							$i++;
 						}
 						?>
 					</tbody>
@@ -161,7 +163,7 @@ if (isset($_GET['id'])) {
 			$.post('includes/foods_edit.inc.php', function(data, textStatus, xhr) {
 				console.log(data);
 				if (data == 'success') {
-					Swal.fire('แก้ไข', 'แก้ไขข้อมูลอาหารสำเร็จ !', 'success').then(function(){window.location = 'fmm.php';})
+					Swal.fire('แก้ไข', 'แก้ไขข้อมูลอาหารสำเร็จ !', 'success').then(function(){window.location = 'foods_list.php';})
 				}else if(data == 'gram'){
 					Swal.fire('แก้ไข', 'กรุณากรอกจำนวน กรัมของวัตถุดิบ !', 'error')
 				}else if(data == 'ingt'){

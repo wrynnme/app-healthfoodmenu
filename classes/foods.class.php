@@ -184,6 +184,52 @@ abstract class foods extends dbh {
 		
 	}
 
+	protected function UPDATE($attr, $value, $id) {
+
+		if ($attr == 'type_id') {
+			if ($value == '0') {
+				$sql = "UPDATE `menu_foods` SET `".$attr."` = NULL WHERE `mf_id` = ?";
+			} else {
+				$sql = "UPDATE `menu_foods` SET `".$attr."` = ? WHERE `mf_id` = ?";
+			}
+		} else {
+			$sql = "UPDATE `menu_foods` SET `".$attr."` = ? WHERE `mf_id` = ?";
+		}
+
+		
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			if ($attr == 'type_id') {
+				if ($value == '0') {
+					$stmt->execute([$id]);
+				} else {
+					$stmt->execute([$value, $id]);
+				}
+			} else {
+				$stmt->execute([$value, $id]);
+			}
+			
+			return true;
+
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+	protected function DELETE($tb, $mf_id, $ing_id) {
+		
+		$sql = "DELETE FROM `".$tb."` WHERE `mf_id` = ? AND ing_id = ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$mf_id, $ing_id]);
+			return true;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
 	protected function INSERT_INGRET($dbt ,$lastid, $ing_id, $gram, $kcal) {
 
 		$sql = "INSERT INTO ".$dbt." VALUES(NULL, ?, ?, ?, ?)";
@@ -203,16 +249,16 @@ abstract class foods extends dbh {
 		}
 	}
 
-	protected function UPDATE($attr, $value, $id) {
-
-		$sql = "UPDATE `menu_foods` SET `".$attr."` = ? WHERE `mf_id` = ?";
+	protected function UPDATE_INGRET($dbt, $attr, $value, $mf_id, $ing_id) {
+		
+		$sql = "UPDATE `".$dbt."` SET `".$attr."` = ? WHERE `mf_id` = ? AND `ing_id` = ?";
 		$stmt = $this->connect()->prepare($sql);
 
 		try {
-			$stmt->execute([$value, $id]);
+			$stmt->execute([$value, $mf_id, $ing_id]);
 			return true;
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			return $e->getMessage();
 		}
 	}
 }
