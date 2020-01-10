@@ -1,7 +1,7 @@
 <?php
 if (isset($_SESSION['edit_food'])) {
-	$foods = new foodview();
-	$food = $foods->getFoodInfo($_SESSION['edit_food']);
+	$foods = new foodsview();
+	$food = $foods->getId($_SESSION['edit_food']);
 	?>
 	<ul class="nav justify-content-center bg-warning" style="margin: 0;">
 		<li class="nav-item">
