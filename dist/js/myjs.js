@@ -43,7 +43,7 @@ function send_data(value){
 function choosetype(){
 	var value = "";
 	$('select option:selected').each(function(){
-		value += $(this).attr("value") + " ";
+		value = $(this).attr("value");
 	});
 	$.ajax({
 		type:"POST",
