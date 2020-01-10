@@ -14,8 +14,11 @@ if ($_GET['s']) {
 		unset($_SESSION['old_ingt']);
 		unset($_SESSION['old_gram']);
 		unset($_SESSION['old_allcal']);
+		unset($_SESSION['thismenu']);
+		unset($_SESSION['old_img']);
 	} else {
 		unset($_SESSION[$_GET['s']]);
 	}
-	echo "<script>window.history.back();</script>";
+	header("Location: ../index.php");
+	// echo "<script>window.history.back();</script>";
 }

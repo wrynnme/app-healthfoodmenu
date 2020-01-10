@@ -1,6 +1,11 @@
 <?php require_once 'includes/class-autoload.inc.php'; ?>
 <?php require_once 'includes/check_unlogin.inc.php'; ?>
 <?php (empty($_SESSION['currentSize']))?header('Location:foods_list.php'):NULL; ?>
+<?php
+if (isset($_SESSION['edit_food'])) {
+	header('Location: foods_edit.php?id='.$_SESSION['edit_food']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,14 +52,14 @@
 						?>
 						<tbody>
 							<tr>
-								<td class="text-center"><?php echo $_SESSION['pro_id'][$i];?></td>
+								<td class="text-center"><?php echo $_SESSION['pro_id'][$i]; ?></td>
 								<td><?php echo $pro['ing_name'];?></td>
-								<td class="text-center"><?php echo $proType['ingt_name'];?></td>
+								<td class="text-center"><?php echo $proType['ingt_name']; ?></td>
 								<td class="text-center">
-									<input type="number" class="form-control fix-width" name="gram" id="gram" value="<?=$_SESSION['gram'][$i]?>" placeholder="จำนวนกรัม" onkeyup="return cal_kcal(this.value, <?php echo $pro['ing_unit'];?>, <?php echo $pro['ing_kcal'];?>, <?php echo $i;?>);" onfocusout="return cal_kcal(this.value, <?php echo $pro['ing_unit'];?>, <?php echo $pro['ing_kcal'];?>, <?php echo $i;?>);" min="0" maxlength="4" required>
+									<input type="number" class="form-control fix-width" name="gram" id="gram" value="<?php echo $_SESSION['gram'][$i]; ?>" placeholder="จำนวนกรัม" onkeyup="return cal_kcal(this.value, <?php echo $pro['ing_unit']; ?>, <?php echo $pro['ing_kcal']; ?>, <?php echo $i;?>);" onfocusout="return cal_kcal(this.value, <?php echo $pro['ing_unit'];?>, <?php echo $pro['ing_kcal']; ?>, <?php echo $i; ?>);" min="0" maxlength="4" required>
 								</td>
-								<td class="text-center" id="allcal<?=$i?>"><?=number_format(@$_SESSION['allcal'][$i],2);?></td>
-								<td class="text-center"><button class="btn btn-outline-danger" onclick="del(<?=$i;?>, 'show');"><i class="fas fa-minus-circle"></i></button></td>
+								<td class="text-center" id="allcal<?php echo $i; ?>"><?php echo number_format(@$_SESSION['allcal'][$i],2); ?></td>
+								<td class="text-center"><button class="btn btn-outline-danger" onclick="del_foods(<?php echo $i; ?>, 'add');"><i class="fas fa-minus-circle"></i></button></td>
 							</tr>
 						</tbody>
 						<?php

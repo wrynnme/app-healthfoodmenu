@@ -20,24 +20,37 @@ if (isset($_GET['Line'])) {
 		$link = "foods_edit.php?id=".$_SESSION['edit_food'];
 		header("Location: ../$link");
 	}elseif ($_GET['from'] == 'add') {
-		header("Lcaotion: ../foods_add.php");
+		header("Location: ../foods_add.php");
 	}
 }
-if (isset($_GET['cancelmenu'])) {
-	uns('menu');
-	hd('product.php');
-}
+
 if (isset($_GET['cancelfood'])) {
-	/*$id = $_GET['cancelfood'];
-	$cus_id = $_SESSION['cus_id'];	
-	$chk1 = $con->query("SELECT * FROM `menu_foods` WHERE `mf_id` = '$id' AND `cus_id` = '$cus_id' ");
-	$chk2 = nr($chk1);
+	$id = $_GET['cancelfood'];
+	$cus_id = $_SESSION['cus_id'];
+	$foodsv = new foodsview();
+	$chk1 = $foodsv->myOrder($cus_id, $id);
+	$chk2 = $foodsv->num_row;
+
 	if ((int)$chk2 > 0) {
-		$x = $con->query("UPDATE `menu_foods` SET `mf_status` = '0' WHERE `mf_id` = '$id' AND `cus_id` = '$cus_id' ");
+		$foodsc = new foodscontr();
+		$x = $foodsc->edit('mf_status', '0', $id);
 		if ($x) {
-			uns('menu');
-			hd('index.php');
+			unset($_SESSION['intLine']);
+			unset($_SESSION['pro_id']);
+			unset($_SESSION['gram']);
+			unset($_SESSION['allcal']);
+			unset($_SESSION['food_name']);
+			unset($_SESSION['food_price']);
+			unset($_SESSION['type_id']);
+			unset($_SESSION['edit_food']);
+			unset($_SESSION['currentSize']);
+			unset($_SESSION['old_ingt']);
+			unset($_SESSION['old_gram']);
+			unset($_SESSION['old_allcal']);
+			unset($_SESSION['thismenu']);
+			unset($_SESSION['old_img']);
+			header('Location: ../foods_list.php');
 		}
-	}*/
+	}
 }
 ?>

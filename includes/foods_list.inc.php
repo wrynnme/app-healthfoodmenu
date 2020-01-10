@@ -53,7 +53,7 @@ $status = array('ปิดใช้งาน', 'เปิดใช้งาน')
 						<a href="foods.php?id=<?php echo $data[$i]['mf_id'];?>"><?php echo $status[$data[$i]['mf_status']];?></a>
 					</td>
 					<td align="center"><i class="fal fa-edit" data-id="<?php echo $data[$i]['mf_id'];?>" onclick="edit(this);"></i></td>
-					<td align="center"><i class="fal fa-edit" data-id="<?php echo $data[$i]['mf_id'];?>" onclick="del(this);"></i></td>
+					<td align="center"><i class="fal fa-trash" data-id="<?php echo $data[$i]['mf_id'];?>" onclick="del(this);"></i></td>
 				</tr>
 			<?php } ?>
 		</tbody>

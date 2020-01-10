@@ -107,7 +107,8 @@ function edit(e){
 	window.location = type+'_edit.php?id='+id;
 }
 
-/*function del(value){
+function del(e){
+	let id = $(e).data("id");
 	Swal.fire({
 		title: 'คุณต้องการที่จะลบ?',
 		text: "คุณต้องการลบเมนูนี้!",
@@ -121,11 +122,11 @@ function edit(e){
 	}).then((result) => {
 		if (result.value) {
 			Swal.fire('ลบเรียบร้อย !', 'เมนูถูกลบเรียบร้อย.', 'success').then(function(){
-				window.location = 'del.php?cancelfood='+value;
+				window.location = 'includes/foods_control.inc.php?cancelfood='+id;
 			})
 		}
 	})
-}*/
+}
 
 function del_foods(Line ,Type){
 	Swal.fire({

@@ -2,6 +2,7 @@
 
 class foodsview extends foods {
 
+	public $num_row;
 	public $total_data;
 	public $total_page;
 	public $start;
@@ -16,6 +17,7 @@ class foodsview extends foods {
 	public function myOrder($cus_id, $mf_id) {
 		$stmt = $this->SELECT_ORDER_MFID($cus_id, $mf_id);
 		$results = $stmt->fetch(PDO::FETCH_ASSOC);
+		$this->num_row = $stmt->rowCount();
 		return $results;
 	}
 

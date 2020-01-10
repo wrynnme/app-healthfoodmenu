@@ -124,12 +124,12 @@ if (isset($_GET['id'])) {
 						<?php if($_SESSION['type_id'] == NULL){ ?>
 							<option selected disabled><h6 class="dropdown-header">เลือกประเภทของคุณ</h6></option>
 						<?php }else{ ?>
-							<?php $$hc = $types->getId($_SESSION['type_id']);?>
-							<option selected value="<?=$_SESSION['type_id']?>"><?=$hc['type_name']?></option>
+							<?php $hc = $types->getId($_SESSION['type_id']);?>
+							<option selected value="<?php echo $_SESSION['type_id']; ?>"><?php echo $hc['type_name']; ?></option>
 							<option value="0"><h6 class="dropdown-header">นำประเภทออกจากเมนู</h6></option>
 						<?php } ?>
 						<?php for ($i = 0; $i < sizeof($type); $i++) { ?>
-							<option value="<?php echo $type[$i]['type_id']?>"><?php echo $type[$i]['type_name']?></option>
+							<option value="<?php echo $type[$i]['type_id']; ?>"><?php echo $type[$i]['type_name']; ?></option>
 						<?php } ?>
 					</select>
 				</div>
