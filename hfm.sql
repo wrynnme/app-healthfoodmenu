@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2020 at 07:37 PM
+-- Generation Time: Jan 09, 2020 at 07:55 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.13
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `hfm`
 --
-CREATE DATABASE IF NOT EXISTS `hfm` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `hfm`;
 
 -- --------------------------------------------------------
 
