@@ -1,6 +1,6 @@
 <?php
 
-abstract class foods extends Dbh {
+abstract class foods extends dbh {
 
 	protected function SELECT($id) {
 

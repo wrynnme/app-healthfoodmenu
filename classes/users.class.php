@@ -1,6 +1,6 @@
 <?php
 
-class users extends Dbh {
+class users extends dbh {
 
 	protected function SELECT($id) {
 		$sql = "SELECT * FROM `customers` WHERE `cus_id` = ?";

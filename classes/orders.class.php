@@ -1,6 +1,6 @@
 <?php
 
-abstract class orders extends Dbh {
+abstract class orders extends dbh {
 
 	protected function SELECT($id, $cus_id) {
 		$sql = "SELECT * FROM `orders` WHERE `or_id` = ? AND `cus_id` = ? ORDER BY `or_time_newStatus` DESC";

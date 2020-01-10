@@ -1,6 +1,6 @@
 <?php
 
-abstract class type extends Dbh {
+abstract class type extends dbh {
 
 	protected function SELECT($id) {
 		$sql = "SELECT * FROM `type_food` WHERE `type_id` = ? AND `cus_id` = ?";

@@ -1,6 +1,6 @@
 <?php
 
-class ingredients extends Dbh {
+class ingredients extends dbh {
 
 	protected function SELECT($id) {
 		$sql = "SELECT * FROM `ingredients` WHERE `ing_id` = ?";

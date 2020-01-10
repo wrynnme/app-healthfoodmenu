@@ -1,6 +1,6 @@
 <?php
 
-class Test extends Dbh {
+class Test extends dbh {
 
 	public function getUsers() {
 		$sql = "SELECT * FROM `customers`";
