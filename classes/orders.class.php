@@ -40,6 +40,19 @@ abstract class orders extends dbh {
 		}
 	}
 
+	protected function SELECT_RECENT($cus_id, $pay_status, $status) {
+		
+		$sql = "SELECT * FROM `orders` WHERE `cus_id` = ? AND `or_pay_status` = ? AND `or_status` = ? ORDER BY `or_time` DESC LIMIT 0,5";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$cus_id, $pay_status, $status]);
+			return $stmt;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
 	protected function SELECT_LIMIT($attr, $value, $start, $row) {
 		$sql = "SELECT * FROM `orders` WHERE ".$attr." = ? LIMIT $start, $row";
 		$stmt = $this->connect()->prepare($sql);

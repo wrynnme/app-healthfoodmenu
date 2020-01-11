@@ -14,6 +14,12 @@ class foodsview extends foods {
 
 	}
 
+	public function recent($cus_id, $status) {
+		$stmt = $this->SELECT_RECENT($cus_id, $status);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
+	}
+
 	public function myOrder($cus_id, $mf_id) {
 		$stmt = $this->SELECT_ORDER_MFID($cus_id, $mf_id);
 		$results = $stmt->fetch(PDO::FETCH_ASSOC);

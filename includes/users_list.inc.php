@@ -40,7 +40,7 @@ $status = array('ออกจากระบบ', 'กำลังใช้ง�
 		</thead>
 		<tbody>
 			<?php for ($i = 0; $i < sizeof($data); $i++) { ?>
-				<tr class="text-center <?php echo ((string)$data[$i]['cus_permission'] == '0')?'bg-primary text-light': NULL; ?>">
+				<tr class="text-center <?php echo ((string)$data[$i]['cus_permission'] == '0')?'bg-primary text-light': NULL; ?> <?php echo ((string)$data[$i]['cus_status'] == '0')?'bg-danger text-light': NULL; ?>">
 					<td><?php echo $i+1;?></td>
 					<td><?php echo $data[$i]['cus_fname']." ".$data[$i]['cus_lname'];?></td>
 					<td class="text-center"><?php echo $data[$i]['cus_res_name'];?></td>
@@ -50,7 +50,7 @@ $status = array('ออกจากระบบ', 'กำลังใช้ง�
 					<td><?php echo $status[$data[$i]['cus_login']];?></td>
 					<td><?php echo $permission[$data[$i]['cus_permission']];?></td>
 					<td class="text-center"><i class="fal fa-edit" data-id="<?php echo $data[$i]['cus_id'];?>" onclick="edit(this);"></i></td>
-					<td class="text-center"><i class="fal fa-trash" data-id="<?php echo $data[$i]['cus_id'];?>" onclick="del(this);"></i></td>
+					<td class="text-center"><i class="fal fa-trash" data-id="<?php echo $data[$i]['cus_id'];?>" onclick="del_user(this);"></i></td>
 				</tr>
 			<?php } ?>
 		</tbody>

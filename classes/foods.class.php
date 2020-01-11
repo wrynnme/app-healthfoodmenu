@@ -16,6 +16,19 @@ abstract class foods extends dbh {
 		
 	}
 
+	protected function SELECT_RECENT($cus_id, $status) {
+		
+		$sql = "SELECT * FROM `menu_foods` WHERE `cus_id` = ? AND `mf_status` = ? ORDER BY `mf_time` DESC LIMIT 0,5";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$cus_id, $status]);
+			return $stmt;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
 	protected function SELECT_ORDER_MFID($cus_id, $mf_id) {
 
 		$sql = "SELECT * FROM `menu_foods` WHERE `cus_id` = ? AND `mf_id` = ?";

@@ -25,6 +25,18 @@ class usersview extends users {
 		return $result;
 	}
 
+	public function recentLogin() {
+		$stmt = $this->SELECT_RECENT_LOGIN();
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
+	}
+
+	public function recentCustomer() {
+		$stmt = $this->SELECT_RECENT_CUSTOMER();
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
+	}
+
 	public function myInfo() {
 		$stmt = $this->SELECT($_SESSION['cus_id']);
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);

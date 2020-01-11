@@ -1,15 +1,6 @@
 <?php require_once 'class-autoload.inc.php'; ?>
 <?php
 @SESSION_START();
-if (isset($_GET['dcus'])) {
-	/*$cus_id = $_GET['dcus'];
-	$query = $con->query("UPDATE `customers` SET `cus_status` = '0' WHERE `cus_id` = '$cus_id'");
-	if ($query) {
-		sc("ลบสำเร็จ !!!");
-	}else{
-		sc("ไม่สามารถลบได้กรุณาติดต่อผู้ดูแล !!");
-	}*/
-}
 if (isset($_GET['Line'])) {
 	$Line = $_GET['Line'];
 	$_SESSION["pro_id"][$Line] = "";

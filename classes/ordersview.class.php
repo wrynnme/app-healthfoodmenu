@@ -17,6 +17,12 @@ class ordersview extends orders {
 		return $results;
 	}
 
+	public function recent($cus_id, $pay_status, $status) {
+		$stmt = $this->SELECT_RECENT($cus_id, $pay_status, $status);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
+	}
+
 	public function search($mode) {
 		if ($mode = 0) {
 			$stmt = $this->SELECT_ATTR('cus_id', $_SESSION['cus_id']);

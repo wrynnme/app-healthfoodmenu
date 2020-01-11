@@ -10,6 +10,15 @@ class ingredients extends dbh {
 		return $stmt;
 	}
 
+	protected function SELECT_RECENT() {
+
+		$sql = "SELECT * FROM `ingredients` WHERE `ing_status` = ? ORDER BY `ing_time` DESC LIMIT 0,5";
+		$stmt = $this->connect()->prepare($sql);
+		$stmt->execute(['2']);
+
+		return $stmt;
+	}
+
 	protected function SELECT_TYPE($id) {
 		$sql = "SELECT * FROM `ingredients_type` WHERE `ingt_id` = ?";
 		$stmt = $this->connect()->prepare($sql);

@@ -47,4 +47,17 @@ if (isset($_POST['id'])) {
 	$_SESSION['cus_rname'] = $rname;
 	$_SESSION['cus_rtable'] = $rtable;
 }
+
+if (isset($_GET['del'])) {
+	$cus_id = $_GET['del'];
+	$users = new userscontr();
+	$query = $users->change('cus_status', '0', $cus_id);
+	if ($query) {
+		header("Location: ../users_list.php");
+		exit();
+	}else{
+		echo "fail";
+		exit();
+	}
+}
 ?>

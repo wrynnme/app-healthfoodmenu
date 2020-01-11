@@ -102,12 +102,12 @@ function approved(id, status){
 	});
 }
 
-function edit(e){
+function edit(e) {
 	var id = $(e).data("id");
 	window.location = type+'_edit.php?id='+id;
 }
 
-function del(e){
+function del(e) {
 	let id = $(e).data("id");
 	Swal.fire({
 		title: 'คุณต้องการที่จะลบ?',
@@ -128,7 +128,7 @@ function del(e){
 	})
 }
 
-function del_foods(Line ,Type){
+function del_foods(Line ,Type) {
 	Swal.fire({
 		title: 'คุณต้องการที่จะลบ?',
 		text: "คุณต้องการลบวัตถุดิบชิ้นนี้ ออกจากเมนูนีั!",
@@ -143,6 +143,27 @@ function del_foods(Line ,Type){
 		if (result.value) {
 			Swal.fire('ลบเรียบร้อย !', 'วัตถุดิบถูกลบเรียบร้อย.', 'success').then(function(){
 				window.location = 'includes/foods_control.inc.php?Line='+Line+'&from='+Type;
+			})
+		}
+	})
+}
+
+function del_user(e) {
+	let id = $(e).data("id");
+	Swal.fire({
+		title: 'คุณต้องการที่จะลบ?',
+		text: "คุณต้องการลบผู้ใช้นี้ออกจากระบบ!",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'ใช่, ฉันต้องการลบ!',
+		cancelButtonText: 'ยกเลิก',
+		reverseButtons: true
+	}).then((result) => {
+		if (result.value) {
+			Swal.fire('ลบเรียบร้อย !', 'ผู้ใช้นี้ถูกลบเรียบร้อย.', 'success').then(function(){
+				window.location = 'includes/users_edit.inc.php?del='+id;
 			})
 		}
 	})

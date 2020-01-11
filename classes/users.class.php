@@ -10,6 +10,22 @@ class users extends dbh {
 		return $stmt;
 	}
 
+	protected function SELECT_RECENT_LOGIN() {
+		
+		$sql = "SELECT * FROM `customers` WHERE `cus_login` = ? ORDER BY `cus_login_time` DESC LIMIT 0,5";
+		$stmt = $this->connect()->prepare($sql);
+		$stmt->execute(['1']);
+		return $stmt;
+	}
+
+	protected function SELECT_RECENT_CUSTOMER() {
+		
+		$sql = "SELECT * FROM `customers` WHERE `cus_status` = ? ORDER BY `cus_regis_date` DESC LIMIT 0,5";
+		$stmt = $this->connect()->prepare($sql);
+		$stmt->execute(['1']);
+		return $stmt;
+	}
+
 	protected function SELECT_TEL($tel) {
 		$sql = "SELECT * FROM `customers` WHERE `cus_tel` = ?";
 		if (!$stmt = $this->connect()->prepare($sql)) {

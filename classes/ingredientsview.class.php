@@ -6,6 +6,12 @@ class ingredientsview extends ingredients {
 	public $total_page;
 	public $start;
 
+	public function recent() {
+		$stmt = $this->SELECT_RECENT();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $result;
+	}
+
 	public function id($id) {
 		$stmt = $this->SELECT($id);
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
