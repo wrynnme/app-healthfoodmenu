@@ -73,7 +73,8 @@ class userscontr extends users {
 	}
 
 	public function create($fname, $lname, $rname, $email, $pass, $tel) {
-		$this->INSERT($fname, $lname, $rname, $email, $pass, $tel);
+		$result = $this->INSERT($fname, $lname, $rname, $email, $pass, $tel);
+		return $result;
 	}
 
 	public function change($attr, $value, $id) {

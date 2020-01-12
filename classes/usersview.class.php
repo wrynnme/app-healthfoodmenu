@@ -2,6 +2,7 @@
 
 class usersview extends users {
 
+	public $num_rows;
 	public $total_data;
 	public $total_page;
 	public $start;
@@ -16,6 +17,14 @@ class usersview extends users {
 	public function getTel($tel) {
 		$stmt = $this->SELECT_TEL($tel);
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		$this->num_rows = $stmt->rowCount();
+		return $result;
+	}
+
+	public function getEmail($email) {
+		$stmt = $this->SELECT_EMAIL($email);
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		$this->num_rows = $stmt->rowCount();
 		return $result;
 	}
 

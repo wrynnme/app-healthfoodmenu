@@ -75,8 +75,14 @@ class users extends dbh {
 		$stmt = $this->connect()->prepare($sql);
 		$id = date("Ymd").substr(str_shuffle('1234567890'),0,5);
 		$newpass = password_hash("$pass", PASSWORD_DEFAULT);
-		$stmt->execute([$id, $fname, $lname, $rname, $email, $newpass, $tel]);
-		$stmt->close();
+
+		try {
+			$stmt->execute([$id, $fname, $lname, $rname, $email, $newpass, $tel]);
+			return true;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+		
 	}
 
 	protected function UPDATE($attr, $value, $id) {
