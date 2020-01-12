@@ -1,7 +1,7 @@
 <?php require_once 'class-autoload.inc.php'; ?>
 <?php
 
-$row = 20;
+$row = 15;
 
 if (empty($_POST['currentPage'])) {
 	$currentPage = 1;
@@ -35,31 +35,6 @@ $data = $foods->pagination_menu($value, $row, $currentPage);
 			});
 		}
 	});
-	$('#print').on('click', function(){
-		$('.print').hide();
-		$('.sideMenu').hide();
-		$('blockquote').hide();
-		$('nav').hide();
-		$(".g1").css("font-size", "25px");
-		window.print();
-		$('nav').show();
-		$('.print').show();
-		$('.sideMenu').show();
-		$('blockquote').show();
-		$(".g1").css("font-size", "16px");
-	});
-	function generate_qrcode(value1, value2){
-		$.ajax({
-			type: 'post',
-			url: 'includes/generate_qrcode.php',
-			data: {cus_id: value1, table: value2},
-			success: function(code){
-				$('#qrDiv').show();
-				$('#qrDiv').html(code);
-				$('#qrDiv').addClass('col');
-			}
-		})
-	}
 </script>
 <div class="row">
 	<div class="col text-center py-5">
@@ -96,7 +71,7 @@ $data = $foods->pagination_menu($value, $row, $currentPage);
 </table>
 <div class="text-center print" id="">
 	<br>
-	<button class="btn btn-warning btn-block" id="print"><i class="fal fa-print"></i> พิมพ์</button>
+	<button type="button" class="btn btn-warning btn-block" id="print" onclick="printDiv();"><i class="fal fa-print"></i> พิมพ์</button>
 </div>
 <br>
 <?php $foods->navPagination($currentPage); ?>

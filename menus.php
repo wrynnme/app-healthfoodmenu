@@ -11,26 +11,31 @@ if (empty($_GET['p'])) {
 <html lang="en">
 <head>
 	<?php require_once 'includes/head.inc.php'; ?>
-	<script>
-		function printValue(type){
-			var currentPage = $('body').data("page");
-			$.ajax({
-				type:"POST",
-				url:"includes/menus.inc.php",
-				data:{type:type, currentPage:currentPage},
-				success:function(data){
-					$("#printDiv").html(data);
-					$('.btn').removeClass('active');
-				}
-			});
+	<style type="text/css" media="screen">
+		@media print {
+			@page {
+				size: A4;
+				margin: 27mm 16mm 27mm 16mm;
+			}
+			body * {
+				visibility: hidden;
+				margin: 0 0;
+			}
+			#printDiv, #printDiv * {
+				visibility: visible;
+			}
+			#printDiv {
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
 		}
-		
-	</script>
+	</style>
 </head>
 <body data-page="<?php echo $currentPage; ?>" onload="return printValue(0);">
 	<?php require_once 'includes/nav_defalut.inc.php'; ?>
 	<?php require_once 'includes/nav_menu.inc.php'; ?>
-	<div class="container">
+	<div class="container" id="menus_page">
 		<blockquote class="blockquote text-center">
 			<p class="mb-0">การสั่งอาหารออนไลน์จะ แสดงทั้งหมดและแยกประเภท</p>
 			<footer class="blockquote-footer">ไม่เกี่ยวกับการ <cite title="Source Title">เลือกประเภท</cite> ในหน้านี้</footer>
@@ -39,12 +44,6 @@ if (empty($_GET['p'])) {
 			<div id="printDiv"></div>
 		</div>
 	</div>
-	<script>
-		function removeQR(table){
-			$('#qrDiv').removeClass('col');
-			$('#bst'+table).removeClass('active');
-			$('#qrDiv').hide();
-		}
-	</script>
+	<script src="dist/js/menus.js" type="text/javascript" charset="utf-8" async defer></script>
 </body>
 </html>
