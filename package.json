@@ -9,7 +9,6 @@
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.0",
-    "print-js": "^1.0.63",
     "sweetalert2": "^9.5.3"
   },
   "devDependencies": {},
