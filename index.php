@@ -29,8 +29,8 @@
 		echo "<h3> PHP List All Session Variables</h3>";
 		$arr = get_defined_vars();
 		print_r($arr);
-	}
-	
+
+	}	
 	?>
 	<hr>
 	<div class="container">
