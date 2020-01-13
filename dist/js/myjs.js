@@ -1,10 +1,10 @@
 var page = $('body').data("page");
-var type = $('body').data("name");
+var types = $('body').data("name");
 
 function search(value){
 	$.ajax({
 		type:"POST",
-		url:"includes/"+type+"_list.inc.php",
+		url:"includes/"+types+"_list.inc.php",
 		data:{value:value, page:page},
 		success:function(data){
 			$("#resultDiv").html(data);
@@ -15,7 +15,7 @@ function search(value){
 function search_product(value, typep){
 	$.ajax({
 		type:"POST",
-		url:"includes/"+type+"_list.inc.php",
+		url:"includes/"+types+"_list.inc.php",
 		data:{value:value, type:typep},
 		success:function(data){
 			$(".this").html(data);
@@ -186,7 +186,7 @@ function order_this(e){
 
 function edit(e) {
 	var id = $(e).data("id");
-	window.location = type+'_edit.php?id='+id;
+	window.location = types+'_edit.php?id='+id;
 }
 
 function del(e) {
