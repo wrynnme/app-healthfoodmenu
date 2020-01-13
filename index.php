@@ -24,9 +24,13 @@
 <body onload="dateNow(1); recent('order'); recent('checkbill'); recent('menu'); recent('login'); recent('customer'); recent('ingt');">
 	<?php require_once 'includes/nav_defalut.inc.php'; ?>
 	<?php 
-	echo "<h3> PHP List All Session Variables</h3>";
-	$arr = get_defined_vars();
-	print_r($arr);
+
+	if ($_SESSION['cus_permission'] == '0') {
+		echo "<h3> PHP List All Session Variables</h3>";
+		$arr = get_defined_vars();
+		print_r($arr);
+	}
+	
 	?>
 	<hr>
 	<div class="container">
