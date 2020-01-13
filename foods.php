@@ -103,13 +103,13 @@ if (isset($_GET['id'])) {
 			$('.divPrint').show();
 		})
 		$(function () {
-			$.ajax({
+			/*$.ajax({
 				url:'http://<?php echo $_SERVER['HTTP_HOST'];?>/new_hfm/dist/img/foods/<?php echo $thismenu['mf_img'];?>',
 				type:'HEAD',
 				error: function(){
 					$(".img-thumbnail").attr("src",'dist/img/foods/404-img.png'); 
 				}
-			});
+			});*/
 			var _URL = window.URL || window.webkitURL;
 			$('[data-toggle="tooltip"]').tooltip();
 			$('#picfood').change(function(event) {
