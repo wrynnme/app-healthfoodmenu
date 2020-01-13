@@ -40,6 +40,8 @@ function send_data(value){
 	});
 }
 
+
+
 function choosetype(){
 	var value = "";
 	$('select option:selected').each(function(){
@@ -102,6 +104,86 @@ function approved(id, status){
 	});
 }
 
+function mymenu(e){
+	let res_id = $(e).data('res');
+	$.ajax({
+		type:"POST",
+		url:"includes/orders_mymenu.inc.php",
+		data:{res_id : res_id},
+		success:function(data){
+			$("#my-menu").html(data);
+		}
+	});
+}
+
+function checkbill(e) {
+	let cus_id = $(e).data('cus');
+	$.post('includes/orders.inc.php', {cus_id: cus_id, pay_status: '1'}, function(data, textStatus, xhr) {
+		Swal.fire({
+			title: 'กรุณารอพนักงาน',
+			text: "กรุณารอพนักงานคิดเงิน!",
+			confirmButtonText: "รอพนักงาน",
+			confirmButtonColor: "#28A745",
+			icon: 'success',
+			width: 600,
+			padding: '3em',
+			background: '#fff',
+			backdrop: `
+			rgba(0, 51, 102,0.4)
+			url("dist/img/giphy.gif")
+			`,
+		}).then(value => {window.location.reload();}, dismiss => {Swal.DismissReason.close});
+	});
+}
+
+function confrim() {
+	Swal.fire({
+		title: 'ยืนยัน?',
+		text: "คุณต้องการ สั่งอาหารเมนูนี้!",
+		icon: 'success',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'ฉันต้องการสั่ง!',
+		cancelButtonText: 'ยกเลิก',
+		reverseButtons: true
+	}).then((result) => {
+		if (result.value) {
+			$.ajax({
+				type: 'POST',
+				url: 'includes/orders_confrim.inc.php',
+			}).done(function(result, textStatus, xhr){
+				if (result == 'fail') {
+					Swal.fire('สั่งอาหาร !', 'ไม่สามารถยืนยันการสั่งอาหารได้', 'error')
+				}else if (result == 'error table or res_id') {
+					Swal.fire('สั่งอาหาร !', 'ไม่สามารถยืนยันโต๊ะ หรือ ร้านอารหาร ได้', 'error')
+				}else if (result == 'success') {
+					Swal.fire('สั่งเรียบร้อย !', 'ยืนยันการสั่งอารหารเรียบร้อย.', 'success').then(function(){
+						window.location.reload();
+					})
+				}
+			});
+		}
+	});
+}
+
+function order_this(e){
+	let res_id = $(e).data("res");
+	let or_id = $(e).data("id");
+	$.ajax({
+		type:"POST",
+		url:"includes/orders.inc.php",
+		data:{order: or_id, res_id: res_id}
+	});
+	Swal.fire({
+		position: 'top-end',
+		type: 'success',
+		title: 'เพื่มรายการอาหาร',
+		showConfirmButton: false,
+		timer: 1500
+	})
+}
+
 function edit(e) {
 	var id = $(e).data("id");
 	window.location = type+'_edit.php?id='+id;
@@ -123,6 +205,28 @@ function del(e) {
 		if (result.value) {
 			Swal.fire('ลบเรียบร้อย !', 'เมนูถูกลบเรียบร้อย.', 'success').then(function(){
 				window.location = 'includes/foods_control.inc.php?cancelfood='+id;
+			})
+		}
+	})
+}
+
+function del_order(e){
+	let res_id = $(e).data("res");
+	let or_id = $(e).data("id");
+	Swal.fire({
+		title: 'คุณต้องการที่จะลบ?',
+		text: "คุณต้องการลบวัตถุดิบชิ้นนี้ ออกจากเมนูนีั!",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'ใช่, ฉันต้องการลบ!',
+		cancelButtonText: 'ยกเลิก',
+		reverseButtons: true
+	}).then((result) => {
+		if (result.value) {
+			Swal.fire('ลบเรียบร้อย !', 'วัตถุดิบถูกลบเรียบร้อย.', 'success').then(function(){
+				window.location = 'includes/orders.inc.php?del='+or_id+'&r='+res_id;
 			})
 		}
 	})

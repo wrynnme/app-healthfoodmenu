@@ -52,7 +52,7 @@ $type = $types->getOrder($res_id, NULL);
 		}
 	</style>
 </head>
-<body>
+<body data-size="<?php echo (int)@$_SESSION['order_size'];?>" data-price="<?php echo (int)@$_SESSION['order_submit'][0][0];?>" data-x="<?php echo $x;?>">
 	<?php require_once 'includes/nav_clients.php'; ?>
 	<div class="container">
 		<div class="g1">
@@ -66,7 +66,7 @@ $type = $types->getOrder($res_id, NULL);
 					</li>
 				<?php } ?>
 				<li class="nav-item">
-					<a class="nav-link bg-info text-light" id="order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="order" aria-selected="false" onclick="mymenu();">รายการสั่งอาหาร</a>
+					<a class="nav-link bg-info text-light" id="order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="order" aria-selected="false" data-res="<?php echo $_SESSION['order_res_id'] ?>" onclick="mymenu(this);">รายการสั่งอาหาร</a>
 				</li>
 			</ul>
 
@@ -79,7 +79,7 @@ $type = $types->getOrder($res_id, NULL);
 								<div class="card-body text-center ">
 									<h5 class="card-title"><?php echo $food[$i]['mf_name'];?></h5>
 									<p class="card-text"><?php echo $food[$i]['mf_kcal']." แคลอรี่ ";?> : <?php echo $food[$i]['mf_price']." บาท ";?></p>
-									<button type="button" name="<?php echo $food[$i]['mf_id']?>" id="add" class="btn btn-outline-success" onclick="return order_this(this.name);"><i class="fa fa-cart-plus"></i></button>
+									<button type="button" data-id="<?php echo $food[$i]['mf_id']?>" data-res="<?php echo $_SESSION['order_res_id'] ?>" class="btn btn-outline-success" onclick="order_this(this);"><i class="fa fa-cart-plus"></i></button>
 								</div>
 							</div>
 						<?php } ?>
@@ -95,7 +95,7 @@ $type = $types->getOrder($res_id, NULL);
 								<div class="card-body text-center ">
 									<h5 class="card-title"><?php echo $food_type[$l]['mf_name'];?></h5>
 									<p class="card-text"><?php echo $food_type[$l]['mf_kcal']." แคลอรี่ ";?> : <?php echo $food_type[$l]['mf_price']." บาท ";?></p>
-									<button type="button" name="<?php echo $food_type[$l]['mf_id']?>" class="btn btn-outline-success" onclick="return order_this(this.name);"><i class="fa fa-cart-plus"></i></button>
+									<button type="button" data-id="<?php echo $food_type[$l]['mf_id']?>" data-res="<?php echo $_SESSION['order_res_id'] ?>" class="btn btn-outline-success" onclick="order_this(this);"><i class="fa fa-cart-plus"></i></button>
 								</div>
 							</div>
 						<?php } ?>
@@ -107,53 +107,7 @@ $type = $types->getOrder($res_id, NULL);
 			</div>
 		</div>
 	</div>
-	<script>
-		function order_this(value){
-			var res_id = <?php echo $res_id; ?>;
-			$.ajax({
-				type:"POST",
-				url:"includes/orders.inc.php",
-				data:{order: value, res_id: res_id}
-			});
-			Swal.fire({
-				position: 'top-end',
-				type: 'success',
-				title: 'เพื่มรายการอาหาร',
-				showConfirmButton: false,
-				timer: 1500
-			})
-		}
-		function mymenu(){
-			var res_id = <?php echo $res_id; ?>;
-			$.ajax({
-				type:"POST",
-				url:"includes/orders_mymenu.inc.php",
-				data:{res_id : res_id},
-				success:function(data){
-					$("#my-menu").html(data);
-				}
-			});
-		}
-		function del(Id){
-			var res_id = <?php echo $res_id; ?>;
-			Swal.fire({
-				title: 'คุณต้องการที่จะลบ?',
-				text: "คุณต้องการลบวัตถุดิบชิ้นนี้ ออกจากเมนูนีั!",
-				type: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'ใช่, ฉันต้องการลบ!',
-				cancelButtonText: 'ยกเลิก',
-				reverseButtons: true
-			}).then((result) => {
-				if (result.value) {
-					Swal.fire('ลบเรียบร้อย !', 'วัตถุดิบถูกลบเรียบร้อย.', 'success').then(function(){
-						window.location = 'includes/orders.inc.php?del='+Id+'&r='+res_id;
-					})
-				}
-			})
-		}
-	</script>
+	<script src="dist/js/myjs.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="dist/js/orders.js" type="text/javascript" charset="utf-8" async defer></script>
 </body>
 </html>
