@@ -28,6 +28,19 @@ abstract class orders extends dbh {
 		
 	}
 
+	protected function SELECT_MODE($mode) {
+		
+		$sql = "SELECT * FROM `orders` WHERE `cus_id` = ? AND `or_pay_status` = ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$_SESSION['cus_id'], $mode]);
+			return $stmt;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
 	protected function SELECT_ATTR($attr, $value) {
 		$sql = "SELECT * FROM `orders` WHERE ".$attr." = ?";
 		$stmt = $this->connect()->prepare($sql);
@@ -54,11 +67,11 @@ abstract class orders extends dbh {
 	}
 
 	protected function SELECT_LIMIT($attr, $value, $start, $row) {
-		$sql = "SELECT * FROM `orders` WHERE ".$attr." = ? LIMIT $start, $row";
+		$sql = "SELECT * FROM `orders` WHERE ".$attr." = ? AND `cus_id` = ? LIMIT $start, $row";
 		$stmt = $this->connect()->prepare($sql);
 
 		try {
-			$stmt->execute([$value]);
+			$stmt->execute([$value, $_SESSION['cus_id']]);
 			return $stmt;
 		} catch (Exception $e) {
 			return $e->getMessage();

@@ -24,16 +24,14 @@ class ordersview extends orders {
 	}
 
 	public function search($mode) {
-		if ($mode = 0) {
-			$stmt = $this->SELECT_ATTR('cus_id', $_SESSION['cus_id']);
-		} else {
-			$stmt = $this->SELECT_ATTR('or_pay_status', $mode);
-		}
+
+		$stmt = $this->SELECT_MODE($mode);
 		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
 	}
 
 	public function ssid($ssid) {
+		
 		$stmt = $this->SELECT_ATTR('or_phpsessid', $ssid);
 		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
