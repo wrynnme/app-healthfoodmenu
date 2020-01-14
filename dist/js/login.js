@@ -68,34 +68,31 @@ $('#deleteModal').on('show.bs.modal', function (event) {
 	modal.find('.account_id').text('account ' + key);
 	// modal.find('.modal-body input').val(recipient);
 });
-
-$(document).ready(function() {
-
-	window.addEventListener('load', function() {
-		var forms = $('.needs-validation');
-		var validation = Array.prototype.filter.call(forms, function(form) {
-			form.addEventListener('submit', function(event) {
-				if (form.checkValidity() === false) {
-					event.preventDefault();
-					event.stopPropagation();
-				}else{
-					event.preventDefault();
-					var myForm = document.getElementById('loginForm');
-					var data = new FormData(myForm);
-					/*for(var pair of data.entries()) {
-						console.log(pair[0]+ ', '+ pair[1]); 
-					}*/
-					$.ajax({
-						url: 'includes/login.inc.php?obj=check_login',
-						type: 'POST',
-						data: data,
-						processData: false,
-						contentType: false,
-						beforeSend: function() {
-							$('.btn-login').css("display","none");
-							$('.btn-loading').removeClass("d-none");
-						},
-						success: function(data, textStatus, xhr) {
+window.addEventListener('load', function() {
+	var forms = $('.needs-validation');
+	var validation = Array.prototype.filter.call(forms, function(form) {
+		form.addEventListener('submit', function(event) {
+			if (form.checkValidity() === false) {
+				event.preventDefault();
+				event.stopPropagation();
+			}else{
+				event.preventDefault();
+				var myForm = document.getElementById('loginForm');
+				var data = new FormData(myForm);
+				for(var pair of data.entries()) {
+					console.log(pair[0]+ ', '+ pair[1]); 
+				}
+				$.ajax({
+					url: 'includes/login.inc.php?obj=check_login',
+					type: 'POST',
+					data: data,
+					processData: false,
+					contentType: false,
+					beforeSend: function() {
+						$('.btn-login').css("display","none");
+						$('.btn-loading').removeClass("d-none");
+					},
+					success: function(data, textStatus, xhr) {
 							// console.log(textStatus);
 							if (data == 'success') {
 								Swal.fire("สำเร็จ !", "<b>เข้าสู่ระบบสำเร็จ !!</b>", "success").then(function(){
@@ -109,9 +106,8 @@ $(document).ready(function() {
 							}
 						}
 					});
-				}
-				form.classList.add('was-validated');
-			}, false);
-		});
-	}, false);
-});
+			}
+			form.classList.add('was-validated');
+		}, false);
+	});
+}, false);

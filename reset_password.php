@@ -53,56 +53,55 @@
 		</div>
 	</div>
 	<script>
-		$(document).ready(function() {
-			'use strict';
+		'use strict';
 
-			window.addEventListener('load', function() {
-				var forms = $('.needs-validation');
-				var validation = Array.prototype.filter.call(forms, function(form) {
-					form.addEventListener('submit', function(event) {
-						if (form.checkValidity() === false) {
-							event.preventDefault();
-							event.stopPropagation();
-						}else{
-							event.preventDefault();
-							var myForm = document.getElementById('pwdReset');
-							var data = new FormData(myForm);
-							/*for(var pair of data.entries()) {
-								console.log(pair[0]+ ', '+ pair[1]); 
-							}*/
-							$('#submit').attr('disabled', 'on');
-							$('.load').removeClass('sr-only');
-							$('#text-con').addClass('sr-only');
-
-							$.ajax({
-								url: 'includes/reset_request.inc.php',
-								type: 'POST',
-								data: data,
-								processData: false,
-								contentType: false,
-								success: function(response) {
-									if (response == 'success') {
-										Swal.fire("สำเร็จ !", "<b>กรุณาเช็คที่อีเมล์ หากไม่พบกรุณาดูที่อีเมล์ขยะ หรือ Junk !!</b>", "success").then(function(){
-											window.location.href="login.php";
-										})
-									}else if (response == 'error mail not match') {
-										Swal.fire("ไม่สำเร็จ !", "<b>อีเมล์ที่กรอกไม่พบอยู่ในระบบ !!</b>", "error");
-									}else{
-										Swal.fire("ไม่สำเร็จ !", "<b>กรุณาตรวจสอบข้อมูลที่กรอก !!</b>", "error");
-									}
-								}
-							}).always(function() {
-								$('#pwdReset').trigger("reset");
-								$('#submit').removeAttr("disabled");
-								$('.load').addClass('sr-only');
-								$('#text-con').removeClass('sr-only');
-							});
+		window.addEventListener('load', function() {
+			var forms = $('.needs-validation');
+			var validation = Array.prototype.filter.call(forms, function(form) {
+				form.addEventListener('submit', function(event) {
+					if (form.checkValidity() === false) {
+						event.preventDefault();
+						event.stopPropagation();
+					}else{
+						event.preventDefault();
+						var myForm = document.getElementById('pwdReset');
+						var data = new FormData(myForm);
+						for(var pair of data.entries()) {
+							console.log(pair[0]+ ', '+ pair[1]); 
 						}
-						form.classList.add('was-validated');
-					}, false);
-				});
-			}, false);
-		});
+						$('#submit').attr('disabled', 'on');
+						$('.load').removeClass('sr-only');
+						$('#text-con').addClass('sr-only');
+
+						$.ajax({
+							url: 'includes/reset_request.inc.php',
+							type: 'POST',
+							data: data,
+							processData: false,
+							contentType: false,
+							success: function(response) {
+								if (response == 'success') {
+									Swal.fire("สำเร็จ !", "<b>กรุณาเช็คที่อีเมล์ หากไม่พบกรุณาดูที่อีเมล์ขยะ หรือ Junk !!</b>", "success").then(function(){
+										window.location.href="login.php";
+									})
+								}else if (response == 'error mail not match') {
+									Swal.fire("ไม่สำเร็จ !", "<b>อีเมล์ที่กรอกไม่พบอยู่ในระบบ !!</b>", "error");
+								}else{
+									Swal.fire("ไม่สำเร็จ !", "<b>กรุณาตรวจสอบข้อมูลที่กรอก !!</b>", "error");
+								}
+							}
+						}).always(function() {
+							$('#pwdReset').trigger("reset");
+							$('#submit').removeAttr("disabled");
+							$('.load').addClass('sr-only');
+							$('#text-con').removeClass('sr-only');
+						});
+					}
+					form.classList.add('was-validated');
+				}, false);
+			});
+		}, false);
+
 	</script>
 </body>
 </html>

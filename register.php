@@ -94,17 +94,17 @@
 		</div>
 	</div>
 	<script>
-		$(document).ready(function(){
-			var forms = $('.needs-validation');
-			var validation = Array.prototype.filter.call(forms, function(form) {
-				$("#submit").on('click', function(event) {
-					if (form.checkValidity() === false) {
-						event.preventDefault();
-						event.stopPropagation();
-					}
-					form.classList.add('was-validated');
-				}, false);
-			});
+
+		var forms = $('.needs-validation');
+		var validation = Array.prototype.filter.call(forms, function(form) {
+			$("#submit").on('click', function(event) {
+				if (form.checkValidity() === false) {
+					event.preventDefault();
+					event.stopPropagation();
+				}
+				form.classList.add('was-validated');
+			}, false);
+
 
 			$('#fname').on('input', function(){
 				var input = $(this);

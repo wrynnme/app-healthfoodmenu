@@ -70,60 +70,60 @@
 		</div>
 	</div>
 	<script>
-		$(document).ready(function() {
-			'use strict';
 
-			window.addEventListener('load', function() {
-				var forms = $('.needs-validation');
-				var validation = Array.prototype.filter.call(forms, function(form) {
-					form.addEventListener('submit', function(event) {
-						if (form.checkValidity() === false) {
-							event.preventDefault();
-							event.stopPropagation();
-						}else{
-							event.preventDefault();
-							var myForm = document.getElementById('pwdReset');
-							var data = new FormData(myForm);
-							/*for(var pair of data.entries()) {
-								console.log(pair[0]+ ', '+ pair[1]); 
-							}*/
-							$('#submit').attr('disabled', 'on');
-							$('.load').removeClass('sr-only');
-							$('#text-con').addClass('sr-only');
+		'use strict';
 
-							$.ajax({
-								url: 'includes/reset_newpassword.inc.php',
-								type: 'POST',
-								data: data,
-								processData: false,
-								contentType: false,
-								success: function(response) {
-									if (response == 'password has change') {
-										Swal.fire("สำเร็จ !", "<b>เปลี่ยนรหัสผ่านสำเร็จ !!</b>", "success").then(function(){
-											window.location.href="login.php";
-										})
-									}else if (response == 'password not match') {
-										Swal.fire("ไม่สำเร็จ !", "<b>รหัสผ่านที่กรอกไม่ตรงกัน !!</b>", "error");
-									}else if (response == 'You need to re-submit your reset request.') {
-										Swal.fire("ไม่สำเร็จ !", "<b>ระยะเวลาในการเปลี่ยนรหัสผ่านใหม่หมดเวลา กรุณากรอกข้อมูลการรีเซ็ตรหัสผ่านใหม่ !!</b>", "error").then(function(){
-											window.location.href="reset_password.php";
-										});
-									}else{
-										Swal.fire("ไม่สำเร็จ !", "<b>กรุณาตรวจสอบข้อมูลที่กรอก !!</b>", "error");
-									}
-								}
-							}).always(function() {
-								$('#pwdReset').trigger("reset");
-								$('#submit').removeAttr("disabled");
-								$('.load').addClass('sr-only');
-								$('#text-con').removeClass('sr-only');
-							});
+		window.addEventListener('load', function() {
+			var forms = $('.needs-validation');
+			var validation = Array.prototype.filter.call(forms, function(form) {
+				form.addEventListener('submit', function(event) {
+					if (form.checkValidity() === false) {
+						event.preventDefault();
+						event.stopPropagation();
+					}else{
+						event.preventDefault();
+						var myForm = document.getElementById('pwdReset');
+						var data = new FormData(myForm);
+						for(var pair of data.entries()) {
+							console.log(pair[0]+ ', '+ pair[1]); 
 						}
-						form.classList.add('was-validated');
-					}, false);
-				});
-			}, false);
-		});
+						$('#submit').attr('disabled', 'on');
+						$('.load').removeClass('sr-only');
+						$('#text-con').addClass('sr-only');
+
+						$.ajax({
+							url: 'includes/reset_newpassword.inc.php',
+							type: 'POST',
+							data: data,
+							processData: false,
+							contentType: false,
+							success: function(response) {
+								if (response == 'password has change') {
+									Swal.fire("สำเร็จ !", "<b>เปลี่ยนรหัสผ่านสำเร็จ !!</b>", "success").then(function(){
+										window.location.href="login.php";
+									})
+								}else if (response == 'password not match') {
+									Swal.fire("ไม่สำเร็จ !", "<b>รหัสผ่านที่กรอกไม่ตรงกัน !!</b>", "error");
+								}else if (response == 'You need to re-submit your reset request.') {
+									Swal.fire("ไม่สำเร็จ !", "<b>ระยะเวลาในการเปลี่ยนรหัสผ่านใหม่หมดเวลา กรุณากรอกข้อมูลการรีเซ็ตรหัสผ่านใหม่ !!</b>", "error").then(function(){
+										window.location.href="reset_password.php";
+									});
+								}else{
+									Swal.fire("ไม่สำเร็จ !", "<b>กรุณาตรวจสอบข้อมูลที่กรอก !!</b>", "error");
+								}
+							}
+						}).always(function() {
+							$('#pwdReset').trigger("reset");
+							$('#submit').removeAttr("disabled");
+							$('.load').addClass('sr-only');
+							$('#text-con').removeClass('sr-only');
+						});
+					}
+					form.classList.add('was-validated');
+				}, false);
+			});
+		}, false);
+
 	</script>
 </body>
 </html>

@@ -128,54 +128,51 @@ $hash = password_hash('edit_password', PASSWORD_DEFAULT);
 			});
 			
 		});
-		$(document).ready(function() {
-			'use strict';
-			window.addEventListener('load', function() {
-				var forms = document.getElementsByClassName('needs-validation');
-				var validation = Array.prototype.filter.call(forms, function(form) {
-					form.addEventListener('submit', function(event) {
-						if (form.checkValidity() === false) {
-							event.preventDefault();
-							event.stopPropagation();
-						}else{
-							event.preventDefault();
-							var myForm = document.getElementById('myForm');
-							var data = new FormData(myForm);
-							var id = <?php echo $edit_id; ?>;
-							data.append('id', id);
-							/*for(var pair of data.entries()) {
-								console.log(pair[0]+ ', '+ pair[1]); 
-							}*/
-							$.ajax({
-								url: 'includes/users_edit.inc.php',
-								type: 'POST',
-								data: data,
-								processData: false,
-								contentType: false,
-								success: function(data, response) {
-									// console.log(response);
-									if (data == '') {
-										Swal.fire("สำเร็จ !", "<b>แก้ไขข้อมูลสำเร็จ !!</b>", "success").then(function(){
-											window.location.reload();
-										})
-									}else if (data == 'error tel') {
-										event.stopPropagation();
-										$('#tel').removeClass('is-valid');
-										$('#tel').addClass('is-invalid');
-										form.classList.remove('was-validated');
-										Swal.fire("ไม่สำเร็จ !", "<b>ข้อมูล <u>เบอร์โทร</u> ที่กรอกซ้ำกัน !!</b>", "error");
-									}else{
-										Swal.fire("ไม่สำเร็จ !", "<b>กรุณาตรวจสอบข้อมูลที่กรอก !!</b>", "error")
-									}
+		'use strict';
+		window.addEventListener('load', function() {
+			var forms = document.getElementsByClassName('needs-validation');
+			var validation = Array.prototype.filter.call(forms, function(form) {
+				form.addEventListener('submit', function(event) {
+					if (form.checkValidity() === false) {
+						event.preventDefault();
+						event.stopPropagation();
+					}else{
+						event.preventDefault();
+						var myForm = document.getElementById('myForm');
+						var data = new FormData(myForm);
+						var id = <?php echo $edit_id; ?>;
+						data.append('id', id);
+						/*for(var pair of data.entries()) {
+							console.log(pair[0]+ ', '+ pair[1]); 
+						}*/
+						$.ajax({
+							url: 'includes/users_edit.inc.php',
+							type: 'POST',
+							data: data,
+							processData: false,
+							contentType: false,
+							success: function(data, response) {
+								if (data == '') {
+									Swal.fire("สำเร็จ !", "<b>แก้ไขข้อมูลสำเร็จ !!</b>", "success").then(function(){
+										window.location.reload();
+									})
+								}else if (data == 'error tel') {
+									event.stopPropagation();
+									$('#tel').removeClass('is-valid');
+									$('#tel').addClass('is-invalid');
+									form.classList.remove('was-validated');
+									Swal.fire("ไม่สำเร็จ !", "<b>ข้อมูล <u>เบอร์โทร</u> ที่กรอกซ้ำกัน !!</b>", "error");
+								}else{
+									Swal.fire("ไม่สำเร็จ !", "<b>กรุณาตรวจสอบข้อมูลที่กรอก !!</b>", "error")
 								}
+							}
 
-							});
-						}
-						form.classList.add('was-validated');
-					}, false);
-				});
-			}, false);
-		});
+						});
+					}
+					form.classList.add('was-validated');
+				}, false);
+			});
+		}, false);
 	</script>
 </body>
 </html>

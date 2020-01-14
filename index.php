@@ -119,16 +119,14 @@
 				console.log("error");
 			});
 		}
-		$(document).ready(function() {
-			setInterval(function() {
-				recent('order');
-				recent('checkbill');
-				recent('menu');
-				recent('login');
-				recent('customer');
-				recent('ingt');
-			}, ((1000 * 60) * 5));
-		});
+		setInterval(function() {
+			recent('order');
+			recent('checkbill');
+			recent('menu');
+			recent('login');
+			recent('customer');
+			recent('ingt');
+		}, ((1000 * 60) * 5));
 	</script>
 </body>
 </html>

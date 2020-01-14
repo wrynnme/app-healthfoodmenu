@@ -77,55 +77,55 @@ if (!$x) {
 	</div>
 	<script src="dist/js/be.js"></script>
 	<script>
-		$(document).ready(function() {
-			$('#submit').click(function() {
-				var form_data = $('#edit_password').serializeArray();
-				if (form_data[0]['value'].length < 6) {
-					$('#oldpass').addClass('is-invalid').removeClass('is-valid');
-				}else{
-					$('#oldpass').addClass('is-valid').removeClass('is-invalid');
-				}
-				if (form_data[1]['value'].length < 6) {
-					$('#newpass').addClass('is-invalid').removeClass('is-valid');
-				}else{
-					$('#newpass').addClass('is-valid').removeClass('is-invalid');
-				}
-				var con = form_data[1]['value'].localeCompare(form_data[2]['value']);
-				if (con != 0) {
+
+		$('#submit').click(function() {
+			var form_data = $('#edit_password').serializeArray();
+			if (form_data[0]['value'].length < 6) {
+				$('#oldpass').addClass('is-invalid').removeClass('is-valid');
+			}else{
+				$('#oldpass').addClass('is-valid').removeClass('is-invalid');
+			}
+			if (form_data[1]['value'].length < 6) {
+				$('#newpass').addClass('is-invalid').removeClass('is-valid');
+			}else{
+				$('#newpass').addClass('is-valid').removeClass('is-invalid');
+			}
+			var con = form_data[1]['value'].localeCompare(form_data[2]['value']);
+			if (con != 0) {
+				$('#conpass').addClass('is-invalid').removeClass('is-valid');
+			}else{
+				if (form_data[2]['value'].length < 6) {
 					$('#conpass').addClass('is-invalid').removeClass('is-valid');
 				}else{
-					if (form_data[2]['value'].length < 6) {
-						$('#conpass').addClass('is-invalid').removeClass('is-valid');
-					}else{
-						$('#conpass').addClass('is-valid').removeClass('is-invalid');
-					}
+					$('#conpass').addClass('is-valid').removeClass('is-invalid');
 				}
-				// console.log('1: '+form_data[0]['value'].length+' 2 : '+form_data[1]['value'].length+' 3 : '+form_data[2]['value'].length);
-				var oldpass_valid = $('#oldpass').hasClass('is-valid');
-				var newpass_valid = $('#newpass').hasClass('is-valid');
-				var conpass_valid = $('#conpass').hasClass('is-valid');
-				var cus_id = <?php echo $cus_id; ?>;
-				if (oldpass_valid && newpass_valid && conpass_valid) {
-					var valid = 1;
-				}
-				if (valid == 1) {
-					$.post(
-						'includes/users_edit_password.inc.php', {
-							form_data: form_data,
-							cus_id: cus_id
-						}, function(result, textStatus, xhr){
-							if (result == 'oldpass error') {
-								Swal.fire('ไม่สำเร็จ', 'รหัสผ่านเก่าไม่ถูกต้อง !', 'error');
-							}else if(result == 'success'){
-								Swal.fire('สำเร็จ', 'เปลี่ยนรหัสผ่านเรียบร้อย !', 'succes').then(window.location.href="index.php");
-							}else if(result == 'fail'){
-								Swal.fire('ไม่สำเร็จ', 'ไม่สามารถเปลี่ยนรหัสผ่านได้ !', 'error');
-							}
+			}
+			// console.log('1: '+form_data[0]['value'].length+' 2 : '+form_data[1]['value'].length+' 3 : '+form_data[2]['value'].length);
+			var oldpass_valid = $('#oldpass').hasClass('is-valid');
+			var newpass_valid = $('#newpass').hasClass('is-valid');
+			var conpass_valid = $('#conpass').hasClass('is-valid');
+			var cus_id = <?php echo $cus_id; ?>;
+			if (oldpass_valid && newpass_valid && conpass_valid) {
+				var valid = 1;
+			}
+			if (valid == 1) {
+				$.post(
+					'includes/users_edit_password.inc.php', {
+						form_data: form_data,
+						cus_id: cus_id
+					}, function(result, textStatus, xhr){
+						if (result == 'oldpass error') {
+							Swal.fire('ไม่สำเร็จ', 'รหัสผ่านเก่าไม่ถูกต้อง !', 'error');
+						}else if(result == 'success'){
+							Swal.fire('สำเร็จ', 'เปลี่ยนรหัสผ่านเรียบร้อย !', 'succes').then(window.location.href="index.php");
+						}else if(result == 'fail'){
+							Swal.fire('ไม่สำเร็จ', 'ไม่สามารถเปลี่ยนรหัสผ่านได้ !', 'error');
 						}
-					);
-				}
-			});
+					}
+				);
+			}
 		});
+
 	</script>
 </body>
 </html>
