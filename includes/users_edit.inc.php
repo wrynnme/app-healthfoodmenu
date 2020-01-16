@@ -22,7 +22,10 @@ if (isset($_POST['id'])) {
 			if (isset($_POST['permission'])) {
 				$permission = $_POST['permission'];
 				echo ($users->change('cus_permission', $permission, $id))? NULL: 'error';
-				$_SESSION['cus_permission'] = $permission;
+				if ($_SESSION['cus_id'] == $id) {
+					$_SESSION['cus_permission'] = $permission;
+				}
+
 			}
 			echo ($users->change('cus_fname', $fname, $id))? NULL: 'error';
 			echo ($users->change('cus_lname', $lname, $id))? NULL: 'error';
@@ -33,7 +36,10 @@ if (isset($_POST['id'])) {
 		if (isset($_POST['permission'])) {
 			$permission = $_POST['permission'];
 			echo ($users->change('cus_permission', $permission, $id))? NULL: 'error';
-			$_SESSION['cus_permission'] = $permission;
+			if ($_SESSION['cus_id'] == $id) {
+				$_SESSION['cus_permission'] = $permission;
+			}
+
 		}
 		echo ($users->change('cus_fname', $fname, $id))? NULL: 'error';
 		echo ($users->change('cus_lname', $lname, $id))? NULL: 'error';
@@ -42,10 +48,13 @@ if (isset($_POST['id'])) {
 		echo ($users->change('cus_rtable', $rtable, $id))? NULL: 'error';
 	}
 	
-	$_SESSION['cus_fname'] = $fname;
-	$_SESSION['cus_lname'] = $lname;
-	$_SESSION['cus_rname'] = $rname;
-	$_SESSION['cus_rtable'] = $rtable;
+	if ($_SESSION['cus_id'] == $id) {
+		$_SESSION['cus_fname'] = $fname;
+		$_SESSION['cus_lname'] = $lname;
+		$_SESSION['cus_rname'] = $rname;
+		$_SESSION['cus_rtable'] = $rtable;
+	}
+	
 }
 
 if (isset($_GET['del'])) {
