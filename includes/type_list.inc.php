@@ -1,7 +1,7 @@
 <?php require_once 'class-autoload.inc.php'; ?>
 <?php
 @SESSION_START();
-$type = $_POST['type'];
+$type = @$_POST['type'];
 $types = new typecontr();
 if ($type == 'del') {
 	$type_id = $_POST['value'];

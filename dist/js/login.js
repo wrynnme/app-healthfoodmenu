@@ -79,9 +79,9 @@ window.addEventListener('load', function() {
 				event.preventDefault();
 				var myForm = document.getElementById('loginForm');
 				var data = new FormData(myForm);
-				for(var pair of data.entries()) {
+				/*for(var pair of data.entries()) {
 					console.log(pair[0]+ ', '+ pair[1]); 
-				}
+				}*/
 				$.ajax({
 					url: 'includes/login.inc.php?obj=check_login',
 					type: 'POST',

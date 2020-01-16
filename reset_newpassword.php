@@ -84,9 +84,9 @@
 						event.preventDefault();
 						var myForm = document.getElementById('pwdReset');
 						var data = new FormData(myForm);
-						for(var pair of data.entries()) {
+						/*for(var pair of data.entries()) {
 							console.log(pair[0]+ ', '+ pair[1]); 
-						}
+						}*/
 						$('#submit').attr('disabled', 'on');
 						$('.load').removeClass('sr-only');
 						$('#text-con').addClass('sr-only');

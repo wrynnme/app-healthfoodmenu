@@ -9,7 +9,7 @@
 	<style>
 		.card{
 			min-width: unset;
-			width: unset;
+			width: 100% !important;
 		}
 	</style>
 </head>
