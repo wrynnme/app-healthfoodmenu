@@ -14,6 +14,18 @@ abstract class type extends dbh {
 		}
 	}
 
+	protected function SELECT_ADD() {
+		$sql = "SELECT COUNT(*) FROM `type_food`";
+		$stmt = $this->connect()->query($sql);
+
+		try {
+			$stmt->execute();
+			return $stmt;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
 	protected function SELECT_SESSION() {
 		$sql = "SELECT * FROM `type_food` WHERE `cus_id` = ?";
 		$stmt = $this->connect()->prepare($sql);

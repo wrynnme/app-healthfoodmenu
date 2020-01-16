@@ -3,10 +3,9 @@
 class typecontr extends type {
 
 	public function add($name) {
-		$stmt = $this->SELECT_SESSION();
-		$data = $stmt->fetch(PDO::FETCH_ASSOC);
-		$rowId = $data->rowCount();
-		$newId = $rowId +1;
+		$stmt = $this->SELECT_ADD();
+		$data = $stmt->fetch(PDO::FETCH_NUM);
+		$newId = $data[0] +1;
 		$result = $this->INSERT($newId, $name);
 		return true;
 	}
