@@ -26,9 +26,9 @@
 	<?php 
 
 	if ($_SESSION['cus_permission'] == '0') {
-		echo "<h3> PHP List All Session Variables</h3>";
 		$arr = get_defined_vars();
-		print_r($arr);
+		/*echo "<h3> PHP List All Session Variables</h3>";
+		print_r($arr);*/
 
 	}	
 	?>
