@@ -148,10 +148,10 @@ if (isset($_GET['id'])) {
 					</div>
 				</div>
 				<div class="col-md">
-					<button class="btn btn-success btn-block" id="save">ยืนยันเมนูอาหารนี้</button>
+					<button class="btn btn-success btn-block" id="save">ยืนยันการแก้ไข</button>
 				</div>
 				<div class="col-md-2">
-					<button class="btn btn-outline-danger btn-block" onclick="window.location.href='del.php?cancelfood=<?php echo $mf_id;?>';">ยกเลิกเมนูนี้</button>
+					<button class="btn btn-outline-danger btn-block" onclick="window.location.href='del.php?cancelfood=<?php echo $mf_id;?>';">ยกเลิกการแก้ไข</button>
 				</div>
 			</div>
 		</div>
