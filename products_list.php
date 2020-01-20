@@ -39,7 +39,7 @@ $type[10] = $ings->getType(2, 10);
 				</li>
 			<?php } ?>
 			<li class="nav-item">
-				<a class="nav-link text-light bg-info" data-toggle="" href="foods_add.php">เมนูของฉัน</a>
+				<a class="nav-link text-light bg-info" data-toggle="" href="foods_add.php">วัตถุดิบที่เลือก</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link text-light bg-warning" data-toggle="" href="add_ingredients.php">เพิ่มวัตถุดิบ</a>
@@ -50,7 +50,7 @@ $type[10] = $ings->getType(2, 10);
 				<div class="tab-pane fade <?php if($i==1)echo 'show active';?>" id="nav-<?=$i;?>" role="tabpanel" aria-labelledby="nav-<?=$i;?>-tab">
 					<div class="form-group row justify-content-sm-center">
 						<div class="col-10">
-							<input type="text" id="s_data" name="<?=$i;?>" class="form-control data" placeholder="ชื่อวัตถุดิบ" onkeyup="return search_product(this.value, this.name);" data-type="<?=$i;?>">
+							<input type="text" id="s_data" name="<?=$i;?>" class="form-control data" placeholder="ค้นหา วัตถุดิบ" onkeyup="return search_product(this.value, this.name);" data-type="<?=$i;?>">
 						</div>
 					</div>
 					<div class="text-center this" id="ingtr<?=$i;?>">
