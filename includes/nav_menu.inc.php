@@ -24,9 +24,9 @@
 		<?php } ?>
 	</div>
 	<hr>
-	<div class="text-center">
+	<!-- <div class="text-center">
 		<input type="color" class="form-control" name="bg_color" id="bg_color" value="#F5F5F1">
-	</div>
+	</div> -->
 </div>
 <script>
 	$('.btn').on('click', function(){

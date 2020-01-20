@@ -67,22 +67,26 @@ class foodsview extends foods {
 	}
 
 	public function pagination_menu($type, $row, $currentPage) {
-
 		if (empty($type)) {
 			$foods = self::allmenu();
 		} else {
 			$foods = self::menu($type);
 		}
-		
+
 		$this->total_data = count($foods);
 		$this->total_page = ceil($this->total_data / $row);
-		$this->start = ($currentPage - 1) * $row;
+		if ($currentPage > $this->total_page) {
+			$this->start = 0;
+		} else {
+			$this->start = ($currentPage - 1) * $row;
+		}
 
 		if (empty($type)) {
 			$stmt = $this->SELECT_ALLMENULIMIT($this->start, $row);
 		} else {
 			$stmt = $this->SELECT_MENULIMIT($type, $this->start, $row);
 		}
+
 		$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $data;
 	}

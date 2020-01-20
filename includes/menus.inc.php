@@ -1,7 +1,7 @@
 <?php require_once 'class-autoload.inc.php'; ?>
 <?php
 
-$row = 15;
+$row = 18;
 
 if (empty($_POST['currentPage'])) {
 	$currentPage = 1;
@@ -24,17 +24,17 @@ if (empty($_POST['type'])) {
 
 $data = $foods->pagination_menu($value, $row, $currentPage);
 
+print_r($data);
+
 ?>
 <script>
-	$(document).ready(function(){
-		var total_data = <?php echo $foods->total_data; ?>;
-		if (total_data < 1) {
-			$('.g1').hide();
-			Swal.fire('Oops...','ไม่สามารถพิมพ์ได้เนื่องจากไม่มีเมนูอาหาร !!!','error',{showClass: {popup: 'animated fadeInDown faster'}, hideClass: {popup: 'animated fadeOutUp faster'}}).then(function(){
-				window.location = 'index.php';
-			});
-		}
-	});
+	var total_data = <?php echo $foods->total_data; ?>;
+	if (total_data < 1) {
+		$('.g1').hide();
+		Swal.fire('Oops...','ไม่สามารถพิมพ์ได้เนื่องจากไม่มีเมนูอาหาร !!!','error',{showClass: {popup: 'animated fadeInDown faster'}, hideClass: {popup: 'animated fadeOutUp faster'}}).then(function(){
+			window.location = 'index.php';
+		});
+	}
 </script>
 <div class="row">
 	<div class="col text-center py-5">
@@ -42,7 +42,7 @@ $data = $foods->pagination_menu($value, $row, $currentPage);
 	</div>
 	<div id="qrDiv"></div>
 </div>
-<div class="text-center h2 bold mb-2">
+<div class="text-center h2 bold mb-5">
 	<b><?php echo $type['type_name']; ?></b>
 </div>
 <table class="table table-striped" border="0" style="margin: 0 auto;">
