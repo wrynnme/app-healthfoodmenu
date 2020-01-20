@@ -24,7 +24,7 @@ $page = @$_GET['p'];
 					<input type="text" class="form-control inpSearch" placeholder="ชื่อเมนูอาหาร">
 				</div>
 				<div class="col-sm">
-					<a class="btn btn-block btn-info" href="menu.php">พิมพ์รายการอาหาร</a>
+					<a class="btn btn-block btn-info" href="menus.php">พิมพ์รายการอาหาร</a>
 				</div>
 			</div>
 			<div id="resultDiv"></div>
