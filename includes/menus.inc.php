@@ -24,8 +24,6 @@ if (empty($_POST['type'])) {
 
 $data = $foods->pagination_menu($value, $row, $currentPage);
 
-print_r($data);
-
 ?>
 <script>
 	var total_data = <?php echo $foods->total_data; ?>;
