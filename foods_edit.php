@@ -7,6 +7,7 @@ if (@$_SESSION['new_menu'] == '1') {
 }
 if (isset($_GET['id'])) {
 	$mf_id = $_GET['id'];
+	// print_r($mf_id);
 	$foods = new foodsview();
 	$food = $foods->getId($mf_id);
 	if ($_SESSION['cus_id'] == $food['cus_id']) {
@@ -34,10 +35,12 @@ if (isset($_GET['id'])) {
 			$_SESSION['currentSize']--;
 			$_SESSION["intLine"]--;
 		}
-	}else{
+	} else {
 		header('Location: index.php');
 	}
 
+} else {
+	header('Location: index.php');
 }
 ?>
 <!DOCTYPE html>
@@ -151,7 +154,7 @@ if (isset($_GET['id'])) {
 					<button class="btn btn-success btn-block" id="save">ยืนยันการแก้ไข</button>
 				</div>
 				<div class="col-md-2">
-					<button class="btn btn-outline-danger btn-block" onclick="window.location.href='del.php?cancelfood=<?php echo $mf_id;?>';">ยกเลิกการแก้ไข</button>
+					<button class="btn btn-outline-danger btn-block" onclick="window.location.href='includes/delete_session.inc.php?cancelfood=<?php echo $mf_id;?>';">ยกเลิกการแก้ไข</button>
 				</div>
 			</div>
 		</div>

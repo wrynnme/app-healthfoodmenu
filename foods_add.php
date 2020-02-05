@@ -118,7 +118,7 @@ if (isset($_SESSION['edit_food'])) {
 				<button class="btn btn-success btn-block" id="food_new">ยืนยันเมนูอาหารนี้</button>
 			</div>
 			<div class="col-md-2">
-				<button class="btn btn-outline-danger btn-block" onclick="window.location.href='del.php?cancelmenu';">ยกเลิกเมนูนี้</button>
+				<button class="btn btn-outline-danger btn-block" onclick="window.location.href='includes/delete_session.inc.php?s=menu';">ยกเลิกเมนูนี้</button>
 			</div>
 		</div>
 		<hr>
