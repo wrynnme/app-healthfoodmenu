@@ -16,7 +16,7 @@ $type = $ings->type();
 	<meta charset="UTF-8">
 	<?php require_once 'includes/head.inc.php'; ?>
 </head>
-<body>
+<body data-id="<?php echo $id;?>" data-pic="<?php echo $ing['ing_img'];?>">
 	<?php require_once 'includes/nav_defalut.inc.php'; ?>
 	<div class="container">
 		<div class="text-center">
@@ -80,6 +80,13 @@ $type = $ings->type();
 					<div class="invalid-feedback">
 						กรุณาเลือก ประเภทของวัตถุดิบ
 					</div>
+				</div>
+			</div>
+			<div class="row mx-auto text-center">
+				<div class="col">
+					<label for="picfood" class="figure">
+						<img src="dist/img/ingredients/<?php echo $ing['ing_img']; ?>" class="rounded img-thumbnail img-fluid" width="480px" height="480px">
+					</label>
 				</div>
 			</div>
 			<div class="row">
