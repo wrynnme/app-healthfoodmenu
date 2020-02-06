@@ -13,8 +13,8 @@ window.addEventListener('load', function() {
 				event.preventDefault();
 				var myForm = document.getElementById('myForm');
 				var data = new FormData(myForm);
-				var id = <?php echo $_GET['id']; ?>;
-				var old_pic = "<?php echo $ing['ing_img']; ?>";
+				var id = $('body').data("id");
+				var old_pic = $('body').data("pic");
 				data.append('ing_id', id);
 				data.append('old_pic', old_pic);
 				// for(var pair of data.entries()) {
