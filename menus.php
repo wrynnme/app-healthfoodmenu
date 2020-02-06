@@ -44,6 +44,6 @@ if (empty($_GET['p'])) {
 			<div id="printDiv"></div>
 		</div>
 	</div>
-	<script src="dist/js/menus.js" type="text/javascript" charset="utf-8" async defer></script>
-</body>
+	<script src="dist/js/menus.js"></script>
+	</body>
 </html>
