@@ -52,7 +52,7 @@ $type = $types->getOrder($res_id, NULL);
 		}
 	</style>
 </head>
-<body data-size="<?php echo (int)@$_SESSION['order_size'];?>" data-price="<?php echo (int)@$_SESSION['order_submit'][0][0];?>" data-x="<?php echo $x;?>">
+<body data-size="<?php echo (int)@$_SESSION['order_size'];?>" data-price="<?php echo (int)@$_SESSION['order_submit'][0][0];?>" data-x="<?php echo (int)@$_SESSION['order_submit'][0][0];?>">
 	<?php require_once 'includes/nav_clients.php'; ?>
 	<div class="container">
 		<div class="g1">
@@ -107,7 +107,7 @@ $type = $types->getOrder($res_id, NULL);
 			</div>
 		</div>
 	</div>
-	<script src="dist/js/myjs.js" type="text/javascript" charset="utf-8" async defer></script>
-	<script src="dist/js/orders.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="dist/js/myjs.js"></script>
+	<script src="dist/js/orders.js"></script>
 </body>
 </html>
