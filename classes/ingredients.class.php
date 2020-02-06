@@ -99,7 +99,7 @@ class ingredients extends dbh {
 			$result = $db->lastInsertId();
 			return $result;
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			return $e->getMessage();
 		}
 	}
 
@@ -113,9 +113,9 @@ class ingredients extends dbh {
 			$stmt->execute([$value, $id]);
 			return true;
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			return $e->getMessage();
 		} catch (InvalidArgumentException $e) {
-			echo $e->getMessage();
+			return $e->getMessage();
 		}
 	}
 }
