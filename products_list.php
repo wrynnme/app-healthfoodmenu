@@ -42,7 +42,7 @@ $type[10] = $ings->getType(2, 10);
 				<a class="nav-link text-light bg-info" data-toggle="" href="foods_add.php">วัตถุดิบที่เลือก</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link text-light bg-warning" data-toggle="" href="add_ingredients.php">เพิ่มวัตถุดิบ</a>
+				<a class="nav-link text-light bg-warning" data-toggle="" href="ingredients_add.php">เพิ่มวัตถุดิบ</a>
 			</li>
 		</ul>
 		<div class="tab-content" id="myTabContent">
@@ -74,7 +74,7 @@ $type[10] = $ings->getType(2, 10);
 							<?php if($i != 10){ ?>
 								<a class="btn btn-info btnNext">ถัดไป</a>
 							<?php }else{ ?>
-								<a class="btn btn-info btnNext" href="show.php">ถัดไป</a>
+								<a class="btn btn-info btnNext" href="food_add.php">ถัดไป</a>
 							<?php } ?>
 						</div>
 					</div>
