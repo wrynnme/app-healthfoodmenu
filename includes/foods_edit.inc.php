@@ -40,7 +40,7 @@ if (isset($_SESSION['food_name']) && isset($_SESSION['food_price']) && isset($_S
 						$pp = $_SESSION['old_ingt'][$o];
 						$ing = $ings->id($pp);
 						$fdb_T = $ingtDB[$ing['ing_type']];
-						$del_ingr = $foods->del($fdb_t, $eid, $pp);
+						$del_ingr = $foodsc->del($fdb_T, $eid, $pp);
 						if (!$del_ingr) {
 							echo 'delete';
 							exit;

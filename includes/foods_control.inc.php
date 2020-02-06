@@ -8,10 +8,10 @@ if (isset($_GET['Line'])) {
 	$_SESSION["allcal"][$Line] = "";
 	$_SESSION["currentSize"]--;
 	if ($_GET['from'] == 'edit') {
-		$link = "foods_edit/id/".$_SESSION['edit_food'];
+		$link = "foods_edit.php?id=".$_SESSION['edit_food'];
 		header("Location: ../$link");
 	}elseif ($_GET['from'] == 'add') {
-		header("Location: ../foods_add");
+		header("Location: ../foods_add.php");
 	}
 }
 
@@ -40,7 +40,7 @@ if (isset($_GET['cancelfood'])) {
 			unset($_SESSION['old_allcal']);
 			unset($_SESSION['thismenu']);
 			unset($_SESSION['old_img']);
-			header('Location: ../foods_list');
+			header('Location: ../foods_list.php');
 		}
 	}
 }
