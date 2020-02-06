@@ -1,4 +1,5 @@
 $(document).ready(function() {
+// $(window).on("load", function(){
 	$('.tr-dif').hide();
 	$('.tr-add').hide();
 	$('.tr-mod').hide();
