@@ -2,7 +2,6 @@ $('.custom-file-input').change(function(event) {
 	$('.custom-file-label').text($(this).val().split("\\").pop());
 });
 'use strict';
-
 window.addEventListener('load', function() {
 	var forms = $('.needs-validation');
 	var validation = Array.prototype.filter.call(forms, function(form) {
