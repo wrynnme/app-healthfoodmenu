@@ -33,12 +33,15 @@ $data = $foods->pagination_menu($value, $row, $currentPage);
 			window.location = 'index.php';
 		});
 	}
+	$(function () {
+			$('[data-toggle="tooltip"]').tooltip();
+		})
 </script>
 <div class="row">
 	<div class="col text-center py-5">
 		<div class="h1"><?php echo $_SESSION['cus_res_name']; ?></div>
 	</div>
-	<div id="qrDiv"></div>
+	<div id="qrDiv" data-toggle="tooltip" data-placement="bottom" data-original-title="คลิกเพื่อลบ QR Code"></div>
 </div>
 <div class="text-center h2 bold mb-5">
 	<b><?php echo $type['type_name']; ?></b>
