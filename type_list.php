@@ -27,15 +27,6 @@ $data = $types->getAll();
 		<div class="text-center">
 			<div class="h1">การจัดการประเภทอาหาร</div>
 			<div class="h2 mb-5">Types Management</div>
-
-			<div class="form-row justify-content-sm-center mb-2">
-				<div class="col-sm-8">
-					<input type="text" class="form-control inpSearch" placeholder="ชื่อเมนูอาหาร">
-				</div>
-				<div class="col-sm">
-					<a class="btn btn-block btn-info" href="menu.php">พิมพ์รายการอาหาร</a>
-				</div>
-			</div>
 			<div class="row mb-3">
 				<div class="col">
 					<button class="btn btn-block btn-event btn-success" id="add" data-toggle="button" aria-pressed="false"> เพิ่ม </button>
