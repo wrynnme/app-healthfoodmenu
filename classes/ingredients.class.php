@@ -19,18 +19,18 @@ class ingredients extends dbh {
 		return $stmt;
 	}
 
-	protected function SELECT_TYPE($id) {
-		$sql = "SELECT * FROM `ingredients_type` WHERE `ingt_id` = ?";
+	protected function SELECT_ALLOF($numberOfType) {
+		$sql = "SELECT * FROM `ingredients` WHERE `ing_type` = ? ORDER BY `ing_status` DESC";
 		$stmt = $this->connect()->prepare($sql);
-		$stmt->execute([$id]);
+		$stmt->execute([$numberOfType]);
 
 		return $stmt;
 	}
 
-	protected function SELECT_ALLOF($numberOfType) {
-		$sql = "SELECT * FROM `ingredients` WHERE `ing_type` = ?";
+	protected function SELECT_TYPE($id) {
+		$sql = "SELECT * FROM `ingredients_type` WHERE `ingt_id` = ?";
 		$stmt = $this->connect()->prepare($sql);
-		$stmt->execute([$numberOfType]);
+		$stmt->execute([$id]);
 
 		return $stmt;
 	}
@@ -53,15 +53,24 @@ class ingredients extends dbh {
 	}
 
 	protected function SELECT_ALLTYPE($status, $numberOfType) {
-		$sql = "SELECT * FROM `ingredients` WHERE `ing_status` = ? AND `ing_type` = ? ORDER BY `ing_type` ASC";
+		$sql = "SELECT * FROM `ingredients` WHERE `ing_status` = ? AND `ing_type` = ? ORDER BY `ing_time` DESC, `ing_kcal` ASC";
 		$stmt = $this->connect()->prepare($sql);
 		$stmt->execute([$status, $numberOfType]);
 
 		return $stmt;
 	}
 
-	protected function SELECT_WITHTEXT($numberOfType, $search) {
-		$sql = "SELECT * FROM `ingredients` WHERE (`ing_name` like ?) AND `ing_type` = ?";
+	protected function SELECT_WITHTEXT($search, $numberOfType, $status) {
+		$sql = "SELECT * FROM `ingredients` WHERE (`ing_name` like ?) AND `ing_type` = ? AND `ing_status` = ? ORDER BY `ing_time` DESC, `ing_kcal` ASC";
+		$stmt = $this->connect()->prepare($sql);
+		$newSearch = '%'.$search.'%';
+		$stmt->execute([$newSearch, $numberOfType, $status]);
+
+		return $stmt;
+	}
+
+	protected function SELECT_WITHTEXT_NOSTATUS($search, $numberOfType) {
+		$sql = "SELECT * FROM `ingredients` WHERE (`ing_name` like ?) AND `ing_type` = ? ORDER BY `ing_status`, `ing_time` DESC, `ing_kcal` ASC";
 		$stmt = $this->connect()->prepare($sql);
 		$newSearch = '%'.$search.'%';
 		$stmt->execute([$newSearch, $numberOfType]);

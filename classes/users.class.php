@@ -71,7 +71,7 @@ class users extends dbh {
 	}
 
 	protected function INSERT($fname, $lname, $rname, $email, $pass, $tel) {
-		$sql = "INSERT INTO `customers` VALUES(?, ?, ?, ?, DEFAULT, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)";
+		$sql = "INSERT INTO `customers` VALUES(?, ?, ?, ?, DEFAULT, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)";
 		$stmt = $this->connect()->prepare($sql);
 		$id = date("Ymd").substr(str_shuffle('1234567890'),0,5);
 		$newpass = password_hash("$pass", PASSWORD_DEFAULT);

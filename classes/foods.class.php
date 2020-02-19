@@ -11,7 +11,7 @@ abstract class foods extends dbh {
 			$stmt->execute([$id]);
 			return $stmt;
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			return $e->getMessage();
 		}
 		
 	}
@@ -38,8 +38,22 @@ abstract class foods extends dbh {
 			$stmt->execute([$cus_id, $mf_id]);
 			return $stmt;
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			return $e->getMessage();
 		}
+	}
+
+	protected function SELECT_DETAIL($mf_id) {
+
+		$sql = "SELECT * FROM `food_detail` WHERE `mf_id` = ? ORDER BY `ing_id` ASC";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$mf_id]);
+			return $stmt;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+		
 	}
 
 	protected function SELECT_TBN($tbName, $mf_id) {
@@ -51,7 +65,7 @@ abstract class foods extends dbh {
 			$stmt->execute([$mf_id]);
 			return $stmt;
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			return $e->getMessage();
 		}
 
 	}
@@ -65,7 +79,7 @@ abstract class foods extends dbh {
 			$stmt->execute([$_SESSION['cus_id'], '1', $type]);
 			return $stmt;
 		} catch (Exception $e) {
-			echo $e->getMessage;
+			return $e->getMessage;
 		}
 		
 	}
@@ -78,7 +92,7 @@ abstract class foods extends dbh {
 			$stmt->execute([$_SESSION['cus_id'], '1']);
 			return $stmt;
 		} catch (Exception $e) {
-			echo $e->getMessage;
+			return $e->getMessage;
 		}
 		
 	}
@@ -92,7 +106,7 @@ abstract class foods extends dbh {
 			$stmt->execute([$cus_id, '1']);
 			return $stmt;
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			return $e->getMessage();
 		}
 	}
 
@@ -105,7 +119,7 @@ abstract class foods extends dbh {
 			$stmt->execute([$cus_id, '1', $type]);
 			return $stmt;
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			return $e->getMessage();
 		}
 	}
 
@@ -146,7 +160,7 @@ abstract class foods extends dbh {
 			$stmt->execute([$type, $_SESSION['cus_id'], '1']);
 			return $stmt;
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			return $e->getMessage();
 		}
 		
 	}
@@ -160,7 +174,7 @@ abstract class foods extends dbh {
 			$stmt->execute([$_SESSION['cus_id'], '1']);
 			return $stmt;
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			return $e->getMessage();
 		}
 		
 	}
@@ -230,9 +244,9 @@ abstract class foods extends dbh {
 		}
 	}
 
-	protected function DELETE($tb, $mf_id, $ing_id) {
+	protected function DELETE($mf_id, $ing_id) {
 		
-		$sql = "DELETE FROM `".$tb."` WHERE `mf_id` = ? AND ing_id = ?";
+		$sql = "DELETE FROM `food_detail` WHERE `mf_id` = ? AND ing_id = ?";
 		$stmt = $this->connect()->prepare($sql);
 
 		try {
@@ -243,9 +257,9 @@ abstract class foods extends dbh {
 		}
 	}
 
-	protected function INSERT_INGRET($dbt ,$lastid, $ing_id, $gram, $kcal) {
+	protected function INSERT_INGRET($lastid, $ing_id, $gram, $kcal) {
 
-		$sql = "INSERT INTO ".$dbt." VALUES(NULL, ?, ?, ?, ?)";
+		$sql = "INSERT INTO `food_detail` VALUES(?, ?, ?, ?)";
 		$db = $this->connect();
 		$stmt = $db->prepare($sql);
 
@@ -255,16 +269,16 @@ abstract class foods extends dbh {
 			return $result;
 		}
 		catch (Exception $e) {
-			echo $e->getMessage();
+			return $e->getMessage();
 		}
 		catch (InvalidArgumentException $e) {
-			echo $e->getMessage();
+			return $e->getMessage();
 		}
 	}
 
-	protected function UPDATE_INGRET($dbt, $attr, $value, $mf_id, $ing_id) {
+	protected function UPDATE_INGRET($attr, $value, $mf_id, $ing_id) {
 		
-		$sql = "UPDATE `".$dbt."` SET `".$attr."` = ? WHERE `mf_id` = ? AND `ing_id` = ?";
+		$sql = "UPDATE `food_detail` SET `".$attr."` = ? WHERE `mf_id` = ? AND `ing_id` = ?";
 		$stmt = $this->connect()->prepare($sql);
 
 		try {
@@ -274,6 +288,47 @@ abstract class foods extends dbh {
 			return $e->getMessage();
 		}
 	}
-}
 
+	protected function SELECT_SPECIAL($cus_id) {
+
+		$sql = "SELECT * FROM `special_menu` WHERE `cus_id` = ?";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$cus_id]);
+			return $stmt;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+	protected function INSERT_SPECIAL($cus_id, $mf_id) {
+		$sql = "INSERT INTO `special_menu` VALUES(?, ?, DEFAULT, DEFAULT, DEFAULT)";
+		$db = $this->connect();
+		$stmt = $db->prepare($sql);
+
+		try {
+			$stmt->execute([$cus_id, $mf_id]);
+			$result = $db->lastInsertId();
+			return $result;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+	protected function DELETE_SPECIAL($cus_id, $mf_id) {
+		// DELETE FROM `special_menu` WHERE `special_menu`.`cus_id` = ? AND `special_menu`.`mf_id` = ?
+		$sql = "DELETE FROM `special_menu` WHERE `cus_id` = ? AND `mf_id` = ?";
+		$db = $this->connect();
+		$stmt = $db->prepare($sql);
+
+		try {
+			$stmt->execute([$cus_id, $mf_id]);
+			return true;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+}
 ?>

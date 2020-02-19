@@ -37,12 +37,12 @@ class ordersview extends orders {
 		return $results;
 	}
 
-	public function cli_pagination($ssid, int $row, int $currentPage) {
+	public function cli_pagination($cus_id, $ssid, int $row, int $currentPage) {
 		$result_search = self::ssid($ssid);
 		$this->total_data = count($result_search);
 		$this->total_page = ceil($this->total_data / $row);
 		$this->start = ($currentPage - 1) * $row;
-		$stmt = $this->SELECT_LIMIT('or_status', '1', $this->start, $row);
+		$stmt = $this->SELECT_LIMIT2($cus_id, 'or_status', '1', $this->start, $row);
 		$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $data;
 	}

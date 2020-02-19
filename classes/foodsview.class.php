@@ -6,6 +6,14 @@ class foodsview extends foods {
 	public $total_data;
 	public $total_page;
 	public $start;
+	public $special_count;
+
+	public function getSpecial($cus_id) {
+		$stmt = $this->SELECT_SPECIAL($cus_id);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->spcial_count = $stmt->rowCount();
+		return $results;
+	}
 
 	public function getId($id) {
 		$stmt = $this->SELECT($id);
@@ -27,9 +35,10 @@ class foodsview extends foods {
 		return $results;
 	}
 
-	public function getDetail($tb, $id) {
-		$stmt = $this->SELECT_TBN($tb, $id);
-		$results = $stmt->fetchAll(PDO::FETCH_NUM);
+	public function getDetail($id) {
+		$stmt = $this->SELECT_DETAIL($id);
+		// $stmt = $this->SELECT_TBN($tb, $id);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
 	}
 

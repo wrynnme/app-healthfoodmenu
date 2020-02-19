@@ -77,6 +77,18 @@ abstract class orders extends dbh {
 			return $e->getMessage();
 		}
 	}
+
+	protected function SELECT_LIMIT2($cus_id, $attr, $value, $start, $row) {
+		$sql = "SELECT * FROM `orders` WHERE ".$attr." = ? AND `cus_id` = ? LIMIT $start, $row";
+		$stmt = $this->connect()->prepare($sql);
+
+		try {
+			$stmt->execute([$value, $cus_id]);
+			return $stmt;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
 	
 	protected function INSERT($cus_id, $or_table, $or_phpsessid) {
 

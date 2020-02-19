@@ -9,7 +9,6 @@ class foodscontr extends foods {
 
 	public function newFood() {
 
-		$ingtDB = array('1' => 'oils', '2' => 'eggs', '3' => 'seas', '4' => 'meats', '5' => 'vegetables', '6' => 'ran', '7' => 'nas', '8' => 'milks', '9' => 'fruits', '10' => 'garnishs');
 		$result = $this->INSERT_MF($this->food_name, $this->food_price, $this->food_kcal, $this->food_type);
 
 		for ($i = 0; $i <= (int)$_SESSION["intLine"]; $i++) {
@@ -17,7 +16,7 @@ class foodscontr extends foods {
 			$dbt = $stmt->fetch(PDO::FETCH_ASSOC);
 
 			// echo $ingtDB[$dbt['ing_type']]." ".$result." ".$dbt['ing_id']." ".$_SESSION['gram'][$i]." ".$_SESSION['gram'][$i]."<br>";
-			$result2 = $this->INSERT_INGRET($ingtDB[$dbt['ing_type']], $result, $dbt['ing_id'], $_SESSION['gram'][$i], $_SESSION['gram'][$i]);
+			$result2 = $this->add_ingt($result, $dbt['ing_id'], $_SESSION['gram'][$i], $_SESSION['gram'][$i]);
 		}
 		unset($_SESSION['intLine']);
 		unset($_SESSION['currentSize']);
@@ -36,24 +35,39 @@ class foodscontr extends foods {
 		return $result;
 	}
 
-	public function del($tb, $mf_id, $ing_id) {
-		$result = $this->DELETE($tb, $mf_id, $ing_id);
+	public function del($mf_id, $ing_id) {
+		$result = $this->DELETE($mf_id, $ing_id);
 		return $result;
 	}
 
-	public function add_ingt($dbt ,$lastid, $ing_id, $gram, $kcal) {
-		$result = $this->INSERT_INGRET($dbt ,$lastid, $ing_id, $gram, $kcal);
+	public function add_ingt($lastid, $ing_id, $gram, $kcal) {
+		$result = $this->INSERT_INGRET($lastid, $ing_id, $gram, $kcal);
 		return $result;
 	}
 
-	public function edit_ingt($dbt, $attr, $value, $mf_id, $ing_id) {
-		$result = $this->UPDATE_INGRET($dbt, $attr, $value, $mf_id, $ing_id);
+	public function edit_ingt($attr, $value, $mf_id, $ing_id) {
+		$result = $this->UPDATE_INGRET($attr, $value, $mf_id, $ing_id);
 		return $result;
 	}
 
 	public function changeImg($value, $id) {
 		$result = $this->UPDATE('mf_img', $value, $id);
 		return $result;
+	}
+
+	public function add_specical($cus_id, $mf_id) {
+		$stmt = $this->SELECT_SPECIAL($cus_id);
+		$rows = $stmt->rowCount();
+		if ($rows < 3){
+			$results = $this->INSERT_SPECIAL($cus_id, $mf_id);
+			return true;
+		}
+		return false;
+	}
+
+	public function del_special($cus_id, $mf_id) {
+		$results = $this->DELETE_SPECIAL($cus_id, $mf_id);
+		return $results;
 	}
 }
 

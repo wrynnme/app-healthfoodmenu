@@ -54,8 +54,14 @@ class ingredientsview extends ingredients {
 		return $results;
 	}
 
-	public function getTypeWithSearch($numberOfType, $search) {
-		$stmt = $this->SELECT_WITHTEXT($numberOfType, $search);
+	public function getTypeWithSearch($search, $numberOfType, $status) {
+		$stmt = $this->SELECT_WITHTEXT($search, $numberOfType, $status);
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
+	}
+
+	public function getTypeWithSearchNoStatus($search, $numberOfType) {
+		$stmt = $this->SELECT_WITHTEXT_NOSTATUS($search, $numberOfType);
 		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
 	}
