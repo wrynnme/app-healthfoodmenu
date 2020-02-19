@@ -15,6 +15,7 @@ function removeQR(table){
 	$('#qrDiv').removeClass('col');
 	$('#bst'+table).removeClass('active');
 	$('#qrDiv').hide();
+	$('#qrcode').prop('checked', false);
 }
 
 function printValue(type){
@@ -55,4 +56,36 @@ $('#bg_color').change(function() {
 $('#select').on('change', function() {
 	var val = $( this ).val();
 	printValue(val);
+});
+
+
+// nav_menu.inc.php
+$('#logo').on('click', function() {
+	if ($('#logo').prop('checked')) {
+		// console.log('checked');
+		$('#logoDiv').show();
+	} else {
+		// console.log('uncheck');
+		$('#logoDiv').hide();
+	}
+});
+
+$('#res_name').on('click', function() {
+	if ($('#res_name').prop('checked')) {
+		// console.log('checked');
+		$('#resDiv').show();
+	} else {
+		// console.log('uncheck');
+		$('#resDiv').hide();
+	}
+});
+
+$('#qrcode').on('click', function() {
+	if ($('#qrcode').prop('checked')) {
+		// console.log('checked');
+		$('#qrDiv').show();
+	} else {
+		// console.log('uncheck');
+		$('#qrDiv').hide();
+	}
 });

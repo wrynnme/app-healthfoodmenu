@@ -18,7 +18,7 @@ $type = $ings->type();
 </head>
 <body data-id="<?php echo $id;?>" data-pic="<?php echo $ing['ing_img'];?>">
 	<?php require_once 'includes/nav_defalut.inc.php'; ?>
-	<div class="container">
+	<div class="container mb-5">
 		<div class="text-center">
 			<div class="h1">แก้ไขวัตถุดิบ</div>
 			<div class="h2 mb-5">Edit ingredients</div>

@@ -9,28 +9,24 @@ if (isset($_GET['id'])) {
 	$mf_id = $_GET['id'];
 	// print_r($mf_id);
 	$foods = new foodsview();
+	$ingt = new ingtview();
+	$ingt_list = $ingt->list();
 	$food = $foods->getId($mf_id);
+	$detail = $foods->getDetail($mf_id);
 	if ($_SESSION['cus_id'] == $food['cus_id']) {
 		$_SESSION['edit_food'] = $mf_id;
 		$_SESSION['food_name'] = $food['mf_name'];
 		$_SESSION['food_price'] = $food['mf_price'];
 		$_SESSION['type_id'] = $food['type_id'];
-		$ingtDB = array('1' => 'oils', '2' => 'eggs', '3' => 'seas', '4' => 'meats', '5' => 'vegetables', '6' => 'ran', '7' => 'nas', '8' => 'milks', '9' => 'fruits', '10' => 'garnishs');
 		if (!isset($_SESSION["intLine"])) {
 			$_SESSION["intLine"] = 0;
 			$_SESSION['currentSize'] = 1;
-			$c = 0;
-			for ($l = 0; $l < sizeof($ingtDB); $l++) {
-				$c++;
-				$tableDB = $ingtDB[$c];
-				$detail = $foods->getDetail($tableDB, $mf_id);
-				for ($i = 0; $i < sizeof($detail); $i++){
-					$_SESSION['currentSize']++;
-					$_SESSION['pro_id'][$_SESSION['intLine']] = $detail[$i][2];
-					$_SESSION['gram'][$_SESSION['intLine']] = $detail[$i][3];
-					$_SESSION['allcal'][$_SESSION['intLine']] = $detail[$i][4];
-					$_SESSION["intLine"]++;
-				}
+			for ($i = 0; $i < sizeof($detail); $i++) {
+				$_SESSION['pro_id'][$_SESSION['intLine']] = $detail[$i]['ing_id'];
+				$_SESSION['gram'][$_SESSION['intLine']] = $detail[$i]['gram'];
+				$_SESSION['allcal'][$_SESSION['intLine']] = $detail[$i]['kcal'];
+				$_SESSION['currentSize']++;
+				$_SESSION["intLine"]++;
 			}
 			$_SESSION['currentSize']--;
 			$_SESSION["intLine"]--;
@@ -154,7 +150,8 @@ if (isset($_GET['id'])) {
 					<button class="btn btn-success btn-block" id="save">ยืนยันการแก้ไข</button>
 				</div>
 				<div class="col-md-2">
-					<button class="btn btn-outline-danger btn-block" onclick="window.location.href='includes/delete_session.inc.php?cancelfood=<?php echo $mf_id;?>';">ยกเลิกการแก้ไข</button>
+					<!-- <button class="btn btn-outline-danger btn-block" onclick="window.location.href='includes/delete_session.inc.php?cancelfood=<?php echo $mf_id;?>';">ยกเลิกการแก้ไข</button> -->
+					<button class="btn btn-outline-danger btn-block" onclick="window.location.href='includes/delete_session.inc.php?s=edit_food';">ยกเลิกการแก้ไข</button>
 				</div>
 			</div>
 		</div>

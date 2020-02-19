@@ -11,12 +11,15 @@
 			min-width: unset;
 			width: 100% !important;
 		}
+		p {
+			color: white;
+		}
 	</style>
 </head>
 <body>
 	<div class="login-box">
 		<div class="login-logo">
-			<a>สมัครสมาชิก</a>
+			<p>สมัครสมาชิก</p>
 		</div>
 		<div class="card">
 			<div class="card-body">

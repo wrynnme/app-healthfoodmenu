@@ -255,19 +255,40 @@ function del_foods(Line ,Type) {
 function del_user(e) {
 	let id = $(e).data("id");
 	Swal.fire({
-		title: 'คุณต้องการที่จะลบ?',
-		text: "คุณต้องการลบผู้ใช้นี้ออกจากระบบ!",
+		title: 'คุณต้องการที่จะปิดการใช้งาน?',
+		text: "คุณต้องการปิดการใช้งานผู้ใช้นี้ออกจากระบบ!",
 		type: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: '#3085d6',
 		cancelButtonColor: '#d33',
-		confirmButtonText: 'ใช่, ฉันต้องการลบ!',
+		confirmButtonText: 'ใช่, ฉันต้องการปิด!',
 		cancelButtonText: 'ยกเลิก',
 		reverseButtons: true
 	}).then((result) => {
 		if (result.value) {
-			Swal.fire('ลบเรียบร้อย !', 'ผู้ใช้นี้ถูกลบเรียบร้อย.', 'success').then(function(){
+			Swal.fire('ปิดการใช้งานเรียบร้อย !', 'ผู้ใช้นี้ถูกปิดการใช้งานเรียบร้อย.', 'success').then(function(){
 				window.location = 'includes/users_edit.inc.php?del='+id;
+			})
+		}
+	})
+}
+
+function active_user(e) {
+	let id = $(e).data("id");
+	Swal.fire({
+		title: 'คุณต้องการที่จะเปิดการใช้งาน?',
+		text: "คุณต้องการเปิดการใช้งานผู้ใช้นี้!",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'ใช่, ฉันต้องการเปิด!',
+		cancelButtonText: 'ยกเลิก',
+		reverseButtons: true
+	}).then((result) => {
+		if (result.value) {
+			Swal.fire('เปิดการใช้งานเรียบร้อย !', 'ผู้ใช้นี้ถูกเปิดการใช้งานเรียบร้อย.', 'success').then(function(){
+				window.location = 'includes/users_edit.inc.php?ac='+id;
 			})
 		}
 	})

@@ -7,10 +7,34 @@ if (isset($_POST['id'])) {
 	$rname = $_POST['rname'];
 	$tel = $_POST['tel'];
 	$rtable = $_POST['rtable'];
-
+	$file = $_FILES['logo'];
+	$fileName = $_FILES['logo']['name'];
+	$fileTmpName = $_FILES['logo']['tmp_name'];
+	$fileSize = $_FILES['logo']['size'];
+	$fileError = $_FILES['logo']['error'];
+	$fileType = $_FILES['logo']['type'];
+	$fileExt = explode('.', $fileName);
+	$fileActualExt = strtolower(end($fileExt));
+	$allowed = array('jpg', 'jpeg', 'png');
+	$oldfile = $_POST['old_logo'];
 	$id = $_POST['id'];
-	// printf("ID: %s, FN: %s, LN: %s, RN: %s, TEL: %s, RT: %s", $id, $fname, $lname, $rname, $tel, $rtable);
+
 	$users = new userscontr();
+	if ($fileError === 0) {
+		if (in_array($fileActualExt, $allowed) === true) {
+			
+			$fileNameNew = uniqid('', true).".".$fileActualExt;
+			$fileDestination = '../dist/img/logos/'.$fileNameNew;
+			if (move_uploaded_file($fileTmpName, $fileDestination)) {
+				@unlink('../dist/img/logos/'.$oldfile);
+				echo ($users->change('cus_logo', $fileNameNew, $id))? NULL: 'error';
+			}
+		} else {
+			echo 'error_logo';
+		}
+	}
+
+	// printf("ID: %s, FN: %s, LN: %s, RN: %s, TEL: %s, RT: %s", $id, $fname, $lname, $rname, $tel, $rtable);
 
 	if (($users->checkTel($tel)) > 0) {
 		$me = new usersview();
@@ -51,7 +75,7 @@ if (isset($_POST['id'])) {
 	if ($_SESSION['cus_id'] == $id) {
 		$_SESSION['cus_fname'] = $fname;
 		$_SESSION['cus_lname'] = $lname;
-		$_SESSION['cus_rname'] = $rname;
+		$_SESSION['cus_res_name'] = $rname;
 		$_SESSION['cus_rtable'] = $rtable;
 	}
 	
@@ -68,5 +92,25 @@ if (isset($_GET['del'])) {
 		echo "fail";
 		exit();
 	}
+}
+
+if (isset($_GET['ac'])) {
+	$cus_id = $_GET['ac'];
+	$users = new userscontr();
+	$query = $users->change('cus_status', '1', $cus_id);
+	if ($query) {
+		header("Location: ../users_list.php");
+		exit();
+	}else{
+		echo "fail";
+		exit();
+	}
+}
+
+if (isset($_GET['rm_logo'])) {
+	$cus_id = $_POST['cus_id'];
+	$users = new userscontr();
+	@unlink('../dist/img/logos/'.$_POST['old_logo']);
+	echo ($users->change('cus_logo', NULL, $cus_id))?'success':'error';
 }
 ?>

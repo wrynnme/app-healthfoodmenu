@@ -5,27 +5,37 @@ if (isset($_GET['id'])) {
 	$img_default = '404-img.png';
 	$id = $_GET['id'];
 	$foods = new foodsview();
+	$special = $foods->getSpecial($_SESSION['cus_id']);
 	$thismenu = $foods->getId($id);
 	$mf_id = $thismenu['mf_id'];
 	$_SESSION['thismenu']['id'] = $thismenu['mf_id'];
 	$_SESSION['thismenu']['old_img'] = $thismenu['mf_img'];
-	$ingtDB = array('1' => 'oils', '2' => 'eggs', '3' => 'seas', '4' => 'meats', '5' => 'vegetables', '6' => 'ran', '7' => 'nas', '8' => 'milks', '9' => 'fruits', '10' => 'garnishs');
 	$c = 0;
 	$intLine = 0;
-	for ($l = 0; $l < sizeof($ingtDB); $l++) {
-		$c++;
-		$tableDB = $ingtDB[$c];
-		$thisingre = $foods->getDetail($tableDB, $mf_id);
-		for ($i = 0; $i < sizeof($thisingre); $i++) {
-			$pro_id[$intLine] = $thisingre[$i][2];
-			$gram[$intLine] = $thisingre[$i][3];
-			$allcal[$intLine] = $thisingre[$i][4];
-			$intLine++;
-		}
-		
+	$thisingre = $foods->getDetail($mf_id);
+	// echo '<pre>' , var_dump($thisingre) , '</pre>';
+	for ($i = 0; $i < sizeof($thisingre); $i++) {
+		$pro_id[$intLine] = $thisingre[$i]['ing_id'];
+		$gram[$intLine] = $thisingre[$i]['gram'];
+		$allcal[$intLine] = $thisingre[$i]['kcal'];
+		$intLine++;
 	}
 	if ($thismenu['cus_id'] != $_SESSION['cus_id']) {
 		header("Location: foods_list.php");
+	}
+	echo $foods->special_count;
+	if ($foods->special_count < 3) {
+		$sp = 0;
+		for ($i = 0; $i < sizeof($special);$i++) {
+			// echo $special[$i]['mf_id'].'=='.$id.'<br/>';
+			if ($special[$i]['mf_id'] == $id) {
+				$chk = 0;
+				// echo $chk.'<br/>';
+			}
+		}
+	} else {
+		$sp = 1;
+		$chk = 1;
 	}
 }else{
 	header("Location: foods_list.php");
@@ -51,6 +61,12 @@ if (isset($_GET['id'])) {
 	<div class="container">
 		<div class="text-center mb-3">
 			<div class="h1"><?php echo $thismenu['mf_name']; ?></div>
+			<div id="special_food">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="special" <?php if (@$chk == '0'){ echo 'checked'; }?>>
+					<label class="custom-control-label" for="special">เลือกเป็นเมนูแนะนำ</label>
+				</div>
+			</div>
 		</div>
 		<div class="mx-auto text-center mb-3">
 			<label for="picfood" class="figure">
@@ -97,11 +113,47 @@ if (isset($_GET['id'])) {
 		</div>
 	</div>
 	<script>
-		$('#print').on('click', function(){
+		$('#print').on('click', function() {
 			$('.divPrint').hide();
+			$('#special_food').hide();
 			window.print();
 			$('.divPrint').show();
+			$('#special_food').show();
 		})
+		$('#special').on('click', function() {
+			// console.log($('#special').prop('checked'));
+			var mf_id = <?php echo $mf_id; ?>;
+			
+			if ($('#special').prop('checked')) {
+				// console.log('checked');
+				$.ajax({
+					url: 'includes/special_foods_contr.inc.php?add',
+					type: "POST",
+					data: {data:mf_id},
+					success: function (response) {
+						if (response == 'true') {
+							Swal.fire("เมนูแนะนำ !", "<b>เพิ่มเมนูแนะนำสำเร็จ", "success");
+						} else {
+							Swal.fire("เมนูแนะนำ !", "<b>ไม่สามารถทำรายการได้เนื่องจากมากเกินกว่า 3 รายการ</b>", "error");
+						}
+					}
+				});
+			} else {
+				// console.log('uncheck');
+				$.ajax({
+					url: 'includes/special_foods_contr.inc.php?del',
+					type: "POST",
+					data: {data:mf_id},
+					success: function (response) {
+						if (response == 'true') {
+							Swal.fire("เมนูแนะนำ !", "<b>นำออกจากเมนูแนะนำสำเร็จ", "success");
+						} else {
+							Swal.fire("เมนูแนะนำ !", "<b>ไม่สามารถลบได้เนื่องจากเกิดปัญหากรุณาติดต่อผู้ดูแลระบบ</b>", "error");
+						}
+					}
+				});
+			}
+		});
 		$(function () {
 			/*$.ajax({
 				url:'http://<?php echo $_SERVER['HTTP_HOST'];?>/new_hfm/dist/img/foods/<?php echo $thismenu['mf_img'];?>',

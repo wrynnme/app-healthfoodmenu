@@ -6,7 +6,7 @@ $page = @$_GET['p'];
 $row = 20;
 $or_phpsessid = session_id();
 $orders = new ordersview();
-$data = $orders->cli_pagination($or_phpsessid, $row, $page);
+$data = $orders->cli_pagination($_SESSION['order_res_id'],$or_phpsessid, $row, $page);
 $users = new usersview();
 ?>
 <!DOCTYPE html>

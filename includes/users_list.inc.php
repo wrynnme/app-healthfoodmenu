@@ -35,7 +35,7 @@ $status = array('ออกจากระบบ', 'กำลังใช้ง�
 				<th>สถานะ</th>
 				<th>สิทธิ์การใช้งาน</th>
 				<th>แก้ไข</th>
-				<th>ลบ</th>
+				<th>การใช้งาน</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,7 +50,11 @@ $status = array('ออกจากระบบ', 'กำลังใช้ง�
 					<td><?php echo $status[$data[$i]['cus_login']];?></td>
 					<td><?php echo $permission[$data[$i]['cus_permission']];?></td>
 					<td class="text-center"><i class="fal fa-edit" data-id="<?php echo $data[$i]['cus_id'];?>" onclick="edit(this);"></i></td>
-					<td class="text-center"><i class="fal fa-trash" data-id="<?php echo $data[$i]['cus_id'];?>" onclick="del_user(this);"></i></td>
+					<?php if ($data[$i]['cus_status'] == 1) { ?>
+						<td class="text-center"><i class="far fa-check" data-id="<?php echo $data[$i]['cus_id'];?>" onclick="del_user(this);"></i></td>
+					<?php } else { ?>
+						<td class="text-center"><i class="far fa-ban" data-id="<?php echo $data[$i]['cus_id'];?>" onclick="active_user(this);"></i></td>
+					<?php } ?>
 				</tr>
 			<?php } ?>
 		</tbody>

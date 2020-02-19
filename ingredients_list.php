@@ -4,9 +4,6 @@
 <?php $uri_name = substr(stristr(strrchr($_SERVER['REQUEST_URI'] ,'/') ,'_', true), 1); ?>
 <?php
 
-$ingtDB = array('1' => 'oils', '2' => 'eggs', '3' => 'seas', '4' => 'meats', '5' => 'vegetables', '6' => 'ran', '7' => 'nas', '8' => 'milks', '9' => 'fruits', '10' => 'garnishs');
-$ingt = array('1' => 'น้ำมัน', '2' => 'ไข่', '3' => 'สัตว์น้ำ', '4' => 'สัตว์บก', '5' => 'ผัก', '6' => 'ข้าวและเส้น', '7' => 'ถั่วและงา', '8' => 'นม', '9' => 'ผลไม้', '10' => 'เครื่องปรุง');
-
 $ings = new ingredientsview();
 $type[1] = $ings->getAll(1);
 $type[2] = $ings->getAll(2);
@@ -18,6 +15,9 @@ $type[7] = $ings->getAll(7);
 $type[8] = $ings->getAll(8);
 $type[9] = $ings->getAll(9);
 $type[10] = $ings->getAll(10);
+$ingt = new ingtview();
+$ingt_list = $ingt->list();
+
 
 ?>
 <!DOCTYPE html>
@@ -69,9 +69,9 @@ $type[10] = $ings->getAll(10);
 			<div class="h2 mb-5">Ingredients List</div>
 		</div>
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
-			<?php for ($i = 1; $i <= sizeof($ingt); $i++) { ?>
+			<?php for ($i = 0; $i < sizeof($ingt_list); $i++) { ?>
 				<li class="nav-item ">
-					<a class="nav-link text-dark <?php if($i==1)echo 'active';?>" id="nav-<?=$i;?>-tab" data-toggle="tab" href="#nav-<?=$i;?>" role="tab" aria-controls="nav-<?=$i;?>" aria-selected="false" name="<?=$i;?>" onclick="return search_product(null, this.name);"><?=$ingt[$i];?></a>
+					<a class="nav-link text-dark <?php if($i==0)echo 'active';?>" id="nav-<?=$i;?>-tab" data-toggle="tab" href="#nav-<?=$i;?>" role="tab" aria-controls="nav-<?=$i;?>" aria-selected="false" name="<?php echo $ingt_list[$i]['ingt_id'];?>" onclick="return search_product(null, this.name);"><?=$ingt_list[$i]['ingt_name'];?></a>
 				</li>
 			<?php } ?>
 			<li class="nav-item">
@@ -79,11 +79,11 @@ $type[10] = $ings->getAll(10);
 			</li>
 		</ul>
 		<div class="tab-content" id="myTabContent">
-			<?php for ($i = 1; $i <= sizeof($ingt); $i++) { ?>
+			<?php for ($i = 1; $i < sizeof($ingt_list); $i++) { ?>
 				<div class="tab-pane fade <?php if($i==1)echo 'show active';?>" id="nav-<?=$i;?>" role="tabpanel" aria-labelledby="nav-<?=$i;?>-tab">
 					<div class="form-group row justify-content-sm-center">
 						<div class="col-10">
-							<input type="text" id="s_data" name="<?=$i;?>" class="form-control data" placeholder="ชื่อวัตถุดิบ" onkeyup="return search_product(this.value, this.name);" data-type="<?=$i;?>">
+							<input type="text" id="s_data" name="<?php echo $ingt_list[$i]['ingt_id'];?>" class="form-control data" placeholder="ชื่อวัตถุดิบ" onkeyup="return search_product(this.value, this.name);" data-type="<?=$i;?>">
 						</div>
 					</div>
 					<div class="small text-right">

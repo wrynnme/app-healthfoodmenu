@@ -48,12 +48,12 @@ if ($or_id == '') {
 
 		<div class="g1">
 			<div class="row h4 text-center">
-				<div class="col-md">รหัสการสั่งที่ : </div>
-				<div class="col-md"><?php echo $order['or_id'] ?></div>
-				<div class="col-md">โต๊ะที่ : </div>
-				<div class="col-md"><?php echo $order['or_table']; ?></div>
-				<div class="col-md">วัน เวลาที่สั่ง : </div>
-				<div class="col-md"><?php echo $order['or_time']; ?></div>
+				<div class="col-lg">รหัสการสั่งที่ : </div>
+				<div class="col-lg"><?php echo $order['or_id'] ?></div>
+				<div class="col-lg">โต๊ะที่ : </div>
+				<div class="col-lg"><?php echo $order['or_table']; ?></div>
+				<div class="col-lg">วัน เวลาที่สั่ง : </div>
+				<div class="col-lg"><?php echo $order['or_time']; ?></div>
 			</div>
 			<div class="table-responsive-xl">
 				<table class="table table-borderless table-striped table-hover" border="1">
@@ -83,30 +83,30 @@ if ($or_id == '') {
 					</tbody>
 				</table>
 			</div>
-			<div class="row h4 text-center">
-				<div class="col-md-3">แคลอรี่ทั้งหมด : </div>
-				<div class="col-md-3"><?php echo number_format($all_kcal, 2); ?></div>
-				<div class="col-md-3">ราคาทั้งหมด : </div>
-				<div class="col-md-3"><?php echo number_format($all_price, 2); ?></div>
+			<div class="row h4 text-left">
+				<div class="col-sm-3">แคลอรี่ทั้งหมด : </div>
+				<div class="col-sm-3"><?php echo number_format($all_kcal, 2); ?></div>
+				<div class="col-sm-3">ราคาทั้งหมด : </div>
+				<div class="col-sm-3"><?php echo number_format($all_price, 2); ?></div>
 			</div>
 			<br>
 			
 			<div class="row">
 				<?php if ($order['or_pay_status'] == '1') { ?>
-					<div class="col-md-8">
+					<div class="col-sm-8">
 						<button class="btn btn-success btn-block" id="checkbill">คิดเงิน</button>
 					</div>
-					<div class="col-md">
+					<div class="col-sm">
 						<button class="btn btn-outline-danger btn-block" id="cancelbill">ยกเลิกการคิดเงิน</button>
 					</div>
 				<?php } ?>
 				<?php if ($order['or_pay_status'] == '0' && $order['or_status'] == '1'){ ?>
-					<div class="col-md">
+					<div class="col-sm">
 						<button class="btn btn-outline-danger btn-block" id="cancelorder">ยกเลิกการสั่งอาหารนี้</button>
 					</div>
 				<?php } ?>
 				<?php if ($order['or_status'] == '0') { ?>
-					<div class="col-md">
+					<div class="col-sm">
 						<button class="btn btn-outline-danger btn-block" id="getorder">ยกเลิก การยกเลิกเมนูนี้</button>
 					</div>
 				<?php } ?>

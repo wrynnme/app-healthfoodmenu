@@ -20,6 +20,14 @@ if (empty($_POST['page'])) {
 $foods = new foodsview();
 $data = $foods->pagination($value, $row, $currentPage);
 $status = array('ปิดใช้งาน', 'เปิดใช้งาน');
+$spcial = $foods->getSpecial($_SESSION['cus_id']);
+if ($foods->spcial_count < 3) {
+	$sp = 1;
+} else {
+	$sp = 0;
+}
+
+
 ?>
 <div class="table-responsive-xl">
 	<table class="table table-borderless table-striped table-hover" border="1">

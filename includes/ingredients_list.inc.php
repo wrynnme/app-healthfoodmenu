@@ -4,7 +4,7 @@ $value = $_POST['value'];
 $type = $_POST['type'];
 
 $ings = new ingredientsview();
-$types[$type] = $ings->getTypeWithSearch($type, $value);
+$types[$type] = $ings->getTypeWithSearchNoStatus($value, $type);
 // var_dump(http_response_code());
 
 ?>

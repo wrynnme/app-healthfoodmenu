@@ -79,6 +79,17 @@ $hash = password_hash('edit_password', PASSWORD_DEFAULT);
 						กรุณากรอกจำนวนโต๊ะของร้าน
 					</div>
 				</div>
+				<div class="col-md mb-3">
+					<label for="logo">โลโก้ ของร้าน</label>
+					<div class="custom-file">
+						<input type="file" class="custom-file-input" id="logo" name="logo" accept="image/*" value="<?php echo $pro['cus_logo']; ?>">
+						<label class="custom-file-label" for="customFile">เลือกรูป...</label>
+						<div class="invalid-feedback">
+							กรุณาเลือกรูปที่มีนามสกุลไฟล์เป็น jpg, png
+						</div>
+					</div>
+					<input type="hidden" name="old_logo" value="<?php echo $pro['cus_logo']; ?>">
+				</div>
 				<?php if((string)$_SESSION['cus_permission'] == '0'){ ?>
 					<?php $per = array('ผู้ดูแลระบบ', 'ผู้ใช้งาน'); ?>
 					<div class="col-md mb-3">
@@ -95,6 +106,15 @@ $hash = password_hash('edit_password', PASSWORD_DEFAULT);
 					</div>
 				<?php } ?>
 			</div>
+			<?php if ($pro['cus_logo'] != '' || $pro['cus_logo'] != NULL) { ?>
+				<div class="row mx-auto text-center">
+					<div class="col">
+						<label for="cus_logo" class="figure">
+							<img src="dist/img/logos/<?php echo $pro['cus_logo']; ?>" class="rounded img-thumbnail img-fluid" width="480px" height="480px" data-toggle="tooltip" data-placement="bottom" data-original-title="คลิกเพื่อลบรูป" id="cus_logo" name="cus_logo">
+						</label>
+					</div>
+				</div>
+			<?php } ?>
 			<div class="row">
 				<div class="col">
 					<button class="btn btn-block btn-success" type="submit">แก้ไขข้อมูล</button>
@@ -128,6 +148,33 @@ $hash = password_hash('edit_password', PASSWORD_DEFAULT);
 			});
 			
 		});
+
+		$('.custom-file-input').change(function(event) {
+			$('.custom-file-label').text($(this).val().split("\\").pop());
+		});
+
+		$('[data-toggle="tooltip"]').tooltip();
+
+		$('#cus_logo').on('click', function() {
+			let cus_id = "<?php echo $edit_id; ?>";
+			let old_logo = "<?php echo $pro['cus_logo']; ?>";
+			$.ajax({
+				url: 'includes/users_edit.inc.php?rm_logo',
+				type: 'POST',
+				data: { 
+					cus_id, old_logo
+				},
+				beforeSend: function() {
+
+				},
+				success: function(data, textStatus, xhr) {
+					if (data == 'success') {
+						location.reload(true);
+					}
+				}
+			});
+		});
+
 		'use strict';
 		window.addEventListener('load', function() {
 			var forms = document.getElementsByClassName('needs-validation');
@@ -156,13 +203,19 @@ $hash = password_hash('edit_password', PASSWORD_DEFAULT);
 									Swal.fire("สำเร็จ !", "<b>แก้ไขข้อมูลสำเร็จ !!</b>", "success").then(function(){
 										window.location.reload();
 									})
-								}else if (data == 'error tel') {
+								} else if (data == 'error tel') {
 									event.stopPropagation();
 									$('#tel').removeClass('is-valid');
 									$('#tel').addClass('is-invalid');
 									form.classList.remove('was-validated');
 									Swal.fire("ไม่สำเร็จ !", "<b>ข้อมูล <u>เบอร์โทร</u> ที่กรอกซ้ำกัน !!</b>", "error");
-								}else{
+								} else if (data == 'error_logo') {
+									event.stopPropagation();
+									$('#logos').removeClass('is-valid');
+									$('#logos').addClass('is-invalid');
+									form.classList.remove('was-validated');
+									Swal.fire("ไม่สำเร็จ !", "<b>กรุณาเลือกประเภทของรูปให้ถูกต้อง png jpg</b>", "error");
+								} else {
 									Swal.fire("ไม่สำเร็จ !", "<b>กรุณาตรวจสอบข้อมูลที่กรอก !!</b>", "error")
 								}
 							}

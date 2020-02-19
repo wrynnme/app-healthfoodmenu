@@ -28,8 +28,8 @@ if (isset($_SESSION['edit_food'])) {
 						<?php } ?>
 						<div class="dropdown-divider"></div>
 						<h6 class="dropdown-header">สำหรับสร้างเมนู</h6>
-						<a class="dropdown-item" href="products_list.php">สร้างอาหาร</a>
-						<a class="dropdown-item" href="foods_add.php">เมนูของฉัน</a>
+						<a class="dropdown-item" href="products_list.php">วัตถุดิบอาหาร</a>
+						<a class="dropdown-item" href="foods_add.php">วัตถุดิบที่เลือก</a>
 						<div class="dropdown-divider"></div>
 						<h6 class="dropdown-header">สำหรับประเภทของอาหาร</h6>
 						<a class="dropdown-item" href="type_list.php">จัดการประเภท</a>

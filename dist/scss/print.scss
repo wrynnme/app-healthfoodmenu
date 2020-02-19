@@ -3,11 +3,20 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	background-color: #FAFAFA;
+	// background-color: #F5F5F1;
 }
 * {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
+}
+.text-center {
+	text-align: center !important;
+}
+.p-0 {
+	padding: 0 !important;
+}
+.m-0 {
+	margin: 0 !important;
 }
 .page {
 	width: 210mm;
@@ -19,11 +28,34 @@ body {
 	background: white;
 	box-shadow: 0 0 5px rgba(246,246,241, 0.5);
 }
+.logopage {
+	height: 296.5mm;
+	padding: 10mm;
+}
+.sp_page {
+	height: 296.5mm;
+	border: 5px red solid;
+	padding: 10mm;
+
+	.img {
+		height: 60mm;
+		width: 60mm;
+		background: #ccc;
+	}
+}
 .subpage {
 	padding: 1cm;
 	border: 5px red solid;
 	height: 256.5mm;
 	outline: 2cm #FFEAEA solid;
+}
+.logo {
+	width: 100%;
+
+	img {
+		width: inherit;
+		margin: 50% auto;
+	}
 }
 
 @page {
@@ -64,4 +96,8 @@ body {
 	left: 0;
 
 	padding: 10px;
+
+	#padding_logopage{
+		width: 50px;
+	}
 }

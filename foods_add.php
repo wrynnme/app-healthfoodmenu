@@ -16,8 +16,8 @@ if (isset($_SESSION['edit_food'])) {
 	<?php require_once 'includes/nav_defalut.inc.php'; ?>
 	<div class="container">
 		<div class="text-center">
-			<div class="h1">เมนูของฉัน</div>
-			<div class="h2 mb-5">My menu</div>
+			<div class="h1">วัตถุดิบที่เลือก</div>
+			<div class="h2 mb-5">Selected ingredients</div>
 		</div>
 		<div class="row">
 			<div class="col-3 h2 text-right">
