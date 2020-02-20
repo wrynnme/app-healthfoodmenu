@@ -56,20 +56,6 @@ abstract class foods extends dbh {
 		
 	}
 
-	protected function SELECT_TBN($tbName, $mf_id) {
-
-		$sql = "SELECT * FROM ".$tbName." WHERE `mf_id` = ?";
-		$stmt = $this->connect()->prepare($sql);
-
-		try {
-			$stmt->execute([$mf_id]);
-			return $stmt;
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-
-	}
-
 	protected function SELECT_MENU($type) {
 
 		$sql = "SELECT * FROM `menu_foods` WHERE `cus_id` = ? AND `mf_status` = ? AND `type_id` = ?";
@@ -122,15 +108,6 @@ abstract class foods extends dbh {
 			return $e->getMessage();
 		}
 	}
-
-	/*protected function SELECTALL() {
-		$sql = "SELECT * FROM `menu_foods` WHERE `cus_id` = ? AND `mf_status` = ?";
-		$stmt = $this->connect()->prepare($sql);
-		$stmt->execute([$_SESSION['cus_id'], '1']);
-
-		$result = $stmt->fetchAll();
-		return $result;
-	}*/
 
 	protected function SELECT_NAME($search) {
 
