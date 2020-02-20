@@ -18,7 +18,9 @@
 </head>
 <body>
 	<div class="login-box">
+		
 		<div class="login-logo">
+			<img src="dist/img/HFM/facebook_cover_photo_1.png">
 			<p>สมัครสมาชิก</p>
 		</div>
 		<div class="card">
