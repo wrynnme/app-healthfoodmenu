@@ -1,5 +1,6 @@
 <?php require_once 'includes/class-autoload.inc.php'; ?>
 <?php require_once 'includes/check_unlogin.inc.php'; ?>
+<?php require 'includes/check_status.inc.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,6 +92,7 @@
 			<div id="recentmenu" class="container"></div>
 		</div>
 	</div>
+	<script src="dist/js/checkstatus.js"></script>
 	<script>
 		function dateNow(lang){
 			var date = new Date();
@@ -126,6 +128,10 @@
 			recent('customer');
 			recent('ingt');
 		}, ((1000 * 60) * 5));
+		$(document).ready(function() {
+			check_status();
+			check_online(<?php echo $_SESSION['cus_id']; ?>);
+		});
 	</script>
 </body>
 </html>

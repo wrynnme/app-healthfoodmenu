@@ -28,6 +28,7 @@ if (isset($_POST['id'])) {
 			if (move_uploaded_file($fileTmpName, $fileDestination)) {
 				@unlink('../dist/img/logos/'.$oldfile);
 				echo ($users->change('cus_logo', $fileNameNew, $id))? NULL: 'error';
+				$_SESSION['cus_logo'] = $fileNameNew;
 			}
 		} else {
 			echo 'error_logo';

@@ -80,3 +80,18 @@ $types = new typeview();
 		<button class="btn btn-block btn-info" id="btnCheckbill" data-cus="<?php echo $_SESSION['cus_id']; ?>" onclick="checkbill(this);">คิดเงิน</button>
 	</div>
 </div>
+<script>
+	$(document).ready(function() {
+		$('#confrim').hide();
+		$('#checkbill').hide();
+		var size  = <?php echo (int)@$_SESSION['order_size'];?>;
+		var price = <?php echo (int)@$_SESSION['order_submit'][0][0];?>;
+		var submit = <?php echo (int)@$_SESSION['order_submit'][0][0];?>;
+		if (parseInt(size) > 0) {
+			$('#confrim').show();
+		}
+		if (price != 0) {
+			$('#checkbill').show();
+		}
+	});
+</script>

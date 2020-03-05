@@ -24,7 +24,6 @@ if (isset($_POST['action']) && ($_POST['action']) == 2) {
 	$query = $users->create($fn, $ln, $rn, $em, $ps, $tl);
 	if ($query) {
 		unset($_SESSION['new_user']);
-		echo "successful";
 		require_once 'PHPMailer/PHPMailerAutoload.php';
 		$mail = new PHPMailer();
 		$mail->isSMTP();
@@ -36,19 +35,19 @@ if (isset($_POST['action']) && ($_POST['action']) == 2) {
 		$mail->isHTML();
 		$mail->CharSet = "utf-8";
 		$mail->Username = "no-reply@wrynn.me";
-		$mail->Password = "8kfgfkpkd";
+		$mail->Password = "mVDF9zdz1";
 		$mail->From = 'no-reply@wrynn.me';
 
 		$mail->FromName = "WRYNNME DEVELOPMENT ";
-		$mail->Subject = "รีเซ็ตรหัสผ่านสำหรับ https://hfm.wrynn.me";
+		$mail->Subject = "ยืนยันการสมัครสมาชิก https://hfm.wrynn.me";
 
-		$mail->Body = "<body><p>เราได้อนุมัติการสมัครสมาชิกของคุณ ".$fn." ".$ln." ร้าน : ".$rn."</p></body>";
-		$mail->AddAddress($em,'สมัครสมาชิกสำเร็จ!');
+		$mail->Body = "<body><p>เราได้อนุมัติการสมัครสมาชิกของคุณ ".$fn." ".$ln." ร้าน : ".$rn." เรียบร้อยแล้ว <br/> <a href='https://hfm.wrynn.me'>เข้าสู่ระบบ</a></p></body>";
+		$mail->AddAddress($em,'การสมัครสมาชิกสำเร็จ! <'.$em.'>');
 
 		if ($mail->Send()){
 			echo 'success';
-		}else{
-			echo "error mail";
+		} else {
+			echo 'can\'t sent mail';
 		}
 	}else{
 		echo "unsuccessful";

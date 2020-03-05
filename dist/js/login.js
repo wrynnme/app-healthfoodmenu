@@ -93,19 +93,18 @@ window.addEventListener('load', function() {
 						$('.btn-loading').removeClass("d-none");
 					},
 					success: function(data, textStatus, xhr) {
-							// console.log(textStatus);
-							if (data == 'success') {
-								Swal.fire("สำเร็จ !", "<b>เข้าสู่ระบบสำเร็จ !!</b>", "success").then(function(){
-									window.location.href='index.php';
-								})
-							}else{
-								Swal.fire("ไม่สำเร็จ !", "<b>กรุณาตรวจสอบข้อมูลที่กรอก !!</b>", "error").then(function(){
-									$('.btn-login').css("display","unset");
-									$('.btn-loading').addClass("d-none");
-								});
-							}
+						if (data == 'success') {
+							Swal.fire("สำเร็จ !", "<b>เข้าสู่ระบบสำเร็จ !!</b>", "success").then(function(){
+								window.location.href='index.php';
+							})
+						}else{
+							Swal.fire("ไม่สำเร็จ !", "<b>กรุณาตรวจสอบข้อมูลที่กรอก !!</b>", "error").then(function(){
+								$('.btn-login').css("display","unset");
+								$('.btn-loading').addClass("d-none");
+							});
 						}
-					});
+					}
+				});
 			}
 			form.classList.add('was-validated');
 		}, false);

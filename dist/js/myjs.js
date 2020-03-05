@@ -116,7 +116,7 @@ function mymenu(e){
 	});
 }
 
-function checkbill(e) {
+function checkbill(e, img) {
 	let cus_id = $(e).data('cus');
 	$.post('includes/orders.inc.php', {cus_id: cus_id, pay_status: '1'}, function(data, textStatus, xhr) {
 		Swal.fire({
@@ -128,10 +128,10 @@ function checkbill(e) {
 			width: 600,
 			padding: '3em',
 			background: '#fff',
-			backdrop: `
+			/*backdrop: `
 			rgba(0, 51, 102,0.4)
-			url("dist/img/giphy.gif")
-			`,
+			url("dist/logos/giphy.gif")
+			`,*/
 		}).then(value => {window.location.reload();}, dismiss => {Swal.DismissReason.close});
 	});
 }
@@ -215,7 +215,7 @@ function del_order(e){
 	let or_id = $(e).data("id");
 	Swal.fire({
 		title: 'คุณต้องการที่จะลบ?',
-		text: "คุณต้องการลบวัตถุดิบชิ้นนี้ ออกจากเมนูนีั!",
+		text: "คุณต้องการลบเมนูอาหารนี้ !",
 		type: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: '#3085d6',
@@ -225,7 +225,7 @@ function del_order(e){
 		reverseButtons: true
 	}).then((result) => {
 		if (result.value) {
-			Swal.fire('ลบเรียบร้อย !', 'วัตถุดิบถูกลบเรียบร้อย.', 'success').then(function(){
+			Swal.fire('ลบเรียบร้อย !', 'เมนูอาหารถูกลบเรียบร้อย.', 'success').then(function(){
 				window.location = 'includes/orders.inc.php?del='+or_id+'&r='+res_id;
 			})
 		}
@@ -235,7 +235,7 @@ function del_order(e){
 function del_foods(Line ,Type) {
 	Swal.fire({
 		title: 'คุณต้องการที่จะลบ?',
-		text: "คุณต้องการลบวัตถุดิบชิ้นนี้ ออกจากเมนูนีั!",
+		text: "คุณต้องการลบเมนูอาหารนี้ !",
 		type: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: '#3085d6',
@@ -245,7 +245,7 @@ function del_foods(Line ,Type) {
 		reverseButtons: true
 	}).then((result) => {
 		if (result.value) {
-			Swal.fire('ลบเรียบร้อย !', 'วัตถุดิบถูกลบเรียบร้อย.', 'success').then(function(){
+			Swal.fire('ลบเรียบร้อย !', 'เมนูอาหารถูกลบเรียบร้อย.', 'success').then(function(){
 				window.location = 'includes/foods_control.inc.php?Line='+Line+'&from='+Type;
 			})
 		}

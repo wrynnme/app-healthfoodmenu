@@ -61,8 +61,8 @@ if ($or_id == '') {
 						<tr class="text-center">
 							<th>ชื่อ</th>
 							<th>จำนวน</th>
-							<th>แคลอรี่</th>
 							<th>ราคา</th>
+							<th>แคลอรี่</th>
 						</tr>
 					</thead>
 					<tbody>

@@ -108,6 +108,5 @@ $type = $types->getOrder($res_id, NULL);
 		</div>
 	</div>
 	<script src="dist/js/myjs.js"></script>
-	<script src="dist/js/orders.js"></script>
 </body>
 </html>

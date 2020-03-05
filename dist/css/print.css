@@ -5,11 +5,20 @@ body {
   padding: 0; }
 
 * {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   -moz-box-sizing: border-box; }
 
 .text-center {
   text-align: center !important; }
+
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important; }
+
+.my-auto {
+  margin-top: auto !important;
+  margin-bottom: auto !important; }
 
 .p-0 {
   padding: 0 !important; }
@@ -22,10 +31,11 @@ body {
   min-height: 297mm;
   padding: 20mm;
   margin: 10mm auto;
-  border: 1px #D3D3D3 solid;
+  border: 1px #d3d3d3 solid;
   border-radius: 5px;
   background: white;
-  box-shadow: 0 0 5px rgba(246, 246, 241, 0.5); }
+  -webkit-box-shadow: 0 0 5px rgba(246, 246, 241, 0.5);
+          box-shadow: 0 0 5px rgba(246, 246, 241, 0.5); }
 
 .logopage {
   height: 296.5mm;
@@ -44,19 +54,19 @@ body {
   padding: 1cm;
   border: 5px red solid;
   height: 256.5mm;
-  outline: 2cm #FFEAEA solid; }
+  outline: 2cm #ffeaea solid; }
 
 .logo {
   width: 100%; }
   .logo img {
-    width: inherit;
-    margin: 50% auto; }
+    width: inherit; }
 
 @page {
   size: A4;
   margin: 0; }
 @media print {
-  html, body {
+  html,
+  body {
     width: 210mm !important;
     height: 297mm !important; }
 
@@ -66,14 +76,18 @@ body {
     border-radius: initial;
     width: initial;
     min-height: initial;
-    box-shadow: initial;
+    -webkit-box-shadow: initial;
+            box-shadow: initial;
     background: initial;
     page-break-after: always; } }
 .sideMenu {
   z-index: 1000;
   background: rgba(255, 255, 255, 0.75);
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
+          box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
   width: 250px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   position: fixed;
   top: 25vh;

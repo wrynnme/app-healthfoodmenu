@@ -1,5 +1,6 @@
 <?php require_once 'includes/class-autoload.inc.php'; ?>
-<?php require_once 'includes/check_login.inc.php'; ?>
+<?php require_once 'includes/check_unlogin.inc.php'; ?>
+<?php checkAdmin(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,10 +22,10 @@
 		
 		<div class="login-logo">
 			<img src="dist/img/HFM/facebook_cover_photo_1.png">
+			<p>สมัครสมาชิก</p>
 		</div>
 		<div class="card">
 			<div class="card-body">
-				<div class="text-center h4">สมัครสมาชิก</div>
 				<form action="" method="post" accept-charset="utf-8" class="needs-validation" id="regis">
 					<div class="form-row align-items-center">
 						<div class="col">
@@ -82,15 +83,10 @@
 					</div>
 					<div class="form-row align-items-center">
 						<div class="col">
-							<!-- <input type="submit" class="btn btn-primary btn-block" name="submit" id="submit" value="ยืนยัน"> -->
-							<button type="submit" class="btn btn-primary btn-block btn-regis" name="submit" id="submit">สมัครสมาชิก</button>
-							<button class="btn btn-primary btn-block d-none btn-loading" type="button" disabled>
-								<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-								กรุณารอสักครู่...
-							</button>
+							<input type="submit" class="btn btn-primary btn-block" name="submit" id="submit" value="ยืนยัน">
 						</div>
 						<div class="col">
-							<input type="reset" class="btn btn-outline-danger btn-block" name="reset" id="reset" value="รีเซ็ต">
+							<input type="reset" class="btn btn-outline-dark btn-block" name="reset" id="reset" value="รีเซ็ต">
 						</div>
 					</div>
 					<hr>
@@ -224,39 +220,24 @@
 							txt: value,
 							action: 1
 						});
-					} else {
+					}else{
 						error_free = false;
 						Swal.fire({type: 'error', title: 'ไม่สำเร็จ', text: 'กรุณากรอกข้อมูลให้ถูกต้อง หรือ ข้อมูลซ้ำกันอยู่ในระบบ'})
 						$(element).removeClass('is-valid').addClass('is-invalid');
 					}
 				}
-				if (!error_free) {
+				if (!error_free){
 					event.preventDefault();
-				} else {
-					$.ajax({
-						url: 'includes/register.inc.php',
-						type: 'POST',
-						data: {action: 2},
-						beforeSend: function() {
-							$('.btn-regis').css("display","none");
-							$('.btn-loading').removeClass("d-none");
-						},
-						success: function(data, textStatus, xhr) {
-							if (data == 'success') {
-								Swal.fire("สำเร็จ !", "<b>สมัครสมาชิกสำเร็จ !!</b>", "success").then(function(){
-									window.location.href='login';
-								});
-							} else if (data == 'can\'t sent mail') {
-								Swal.fire("สำเร็จ !", "<b>สมัครสมาชิกสำเร็จ แต่ไม่สามารถยืนยันอีเมล์ได้ !!</b>", "warning").then(function(){
-									window.location.href='login';
-								});
-							}else{
-								Swal.fire("ไม่สำเร็จ !", "<b>กรุณาตรวจสอบข้อมูลที่กรอก !!</b>", "error").then(function(){
-									$('.btn-regis').css("display","unset");
-									$('.btn-loading').addClass("d-none");
-								});
-							}
-						}
+				}
+				else{
+					$.post("includes/register.inc.php", {
+						action: 2
+					}).done(function(){
+						Swal.fire('สำเร็จ!', 'สมัครสมาชิกเรียบร้อย!', 'success'	).then(function(){
+							window.location = "login.php";
+						})
+					}).fail(function(){
+						Swal.fire({type: 'error', title: 'ไม่สำเร็จ', text: 'ไม่สามารถสมัครสมาชิกได้โปรดติดต่อ ผู้ดูแลระบบ !'})
 					});
 				}
 			});

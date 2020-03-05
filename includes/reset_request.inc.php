@@ -15,7 +15,7 @@ if (isset($_POST['email'])) {
 		$mail->isHTML();
 		$mail->CharSet = "utf-8";
 		$mail->Username = "no-reply@wrynn.me";
-		$mail->Password = "8kfgfkpkd";
+		$mail->Password = "mVDF9zdz1";
 		$mail->From = 'no-reply@wrynn.me';
 
 		$mail->FromName = "WRYNNME DEVELOPMENT ";
@@ -24,7 +24,7 @@ if (isset($_POST['email'])) {
 		$mail->Body = "<body><p>เราได้รับการร้องขอการรีเซ็ตรหัสผ่าน ลิงค์ที่จะรีเซ็ตรหัสผ่านอยู่ด้านล่าง หากคุณไม่ได้ต้องการรีเซ็ตรหัสผ่าน กรุณาปล่อยผ่านอีเมล์นี้ไป</p>";
 		$mail->Body .= "<p>ลิงค์รีเซ็ตรหัสผ่าน : ";
 		$mail->Body .= "<a href='https://hfm.wrynn.me/".$url."'>คลิ๊กที่นี่</a></p></body>";
-		$mail->AddAddress($_POST['email'],'ผู้ร้องขอการรีเซ็ตรหัสผ่าน!');
+		$mail->AddAddress($_POST['email'],'ผู้ร้องขอการรีเซ็ตรหัสผ่าน! <'.$_POST['email'].'>');
 
 		if ($mail->Send()){
 			echo 'success';

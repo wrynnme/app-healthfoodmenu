@@ -1,5 +1,10 @@
 <?php require_once 'includes/class-autoload.inc.php'; ?>
 <?php require_once 'includes/check_unlogin.inc.php'; ?>
+<?php
+$foods = new foodsview();
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,8 +29,8 @@
 	<link rel="manifest" href="manifest.json">
 	<link rel='icon' href='dist/img/HFM/favicon.ico' type='image/x-icon'/ >
 	
-	<title>Health Food Menu | Web Application for Healthy Food Menu of Store Management by WN Dev.</title>
-
+	<!-- <title>Health Food Menu | Web Application for Healthy Food Menu of Store Management by WN Dev.</title> -->
+	<title><?php echo $_SESSION['cus_res_name'];?> | Menu</title>
 	<link rel="stylesheet" href="dist/icon/css/all.css"/>
 
 	<link rel="stylesheet" href="dist/css/be.css">
@@ -35,13 +40,14 @@
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 
 	<style>
-		#dpi{
+		#dpi {
 			height: 1in;
 			width: 1in;
 			position: absolute;
 			left: -100%;
 			top: -100%;
 		}
+		
 	</style>
 
 </head>
@@ -56,10 +62,10 @@
 	<div class="info">
 	</div>
 	<div class="book">
-		<div class="page p-0" data-page="0">
+		<div class="page p-0 mx-auto my-auto" data-page="0">
 			<div class="logopage">
 				<div class="logo">
-					<img src="dist/img/HFM/logo_transparent_2.png" alt="">
+					<img src="dist/img/logos/<?php echo $_SESSION['cus_logo'];?>" alt="">
 				</div>
 
 			</div>
@@ -69,7 +75,23 @@
 				<div class="text-center">
 					<h1>Special Menu</h1>
 				</div>
-				<div class="img">a</div>
+				<div class="img"></div>
+			</div>
+		</div>
+		<div class="page p-0" data-page="1">
+			<div class="sp_page p-0">
+				<div class="text-center">
+					<h1>Special Menu</h1>
+				</div>
+				<div class="img"></div>
+			</div>
+		</div>
+		<div class="page p-0" data-page="1">
+			<div class="sp_page p-0">
+				<div class="text-center">
+					<h1>Special Menu</h1>
+				</div>
+				<div class="img"></div>
 			</div>
 		</div>
 		<div id='dpi'></div>

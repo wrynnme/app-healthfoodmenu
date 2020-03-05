@@ -14,6 +14,7 @@
 		</div>
 		<div class="card">
 			<div class="card-body">
+				<div class="text-center h4">เข้าสู่ระบบ</div>
 				<form class="needs-validation" novalidate method="post" accept-charset="utf-8" id="loginForm">
 					<div class="alert alert-danger alert-incorrect d-none" role="alert"></div>
 					<?php if(isset($_COOKIE["login"])){?>
