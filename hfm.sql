@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 09, 2020 at 07:55 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.3.13
+-- Host: localhost
+-- Generation Time: Mar 19, 2020 at 09:25 PM
+-- Server version: 5.6.38
+-- PHP Version: 5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hfm`
+-- Database: `wrynnme_hfm`
 --
 
 -- --------------------------------------------------------
@@ -33,71 +33,180 @@ CREATE TABLE `customers` (
   `cus_fname` varchar(100) NOT NULL,
   `cus_lname` varchar(100) NOT NULL,
   `cus_res_name` varchar(200) DEFAULT NULL,
-  `cus_rtable` int(3) NOT NULL DEFAULT 1,
+  `cus_rtable` int(3) NOT NULL DEFAULT '1',
   `cus_email` varchar(100) NOT NULL,
   `cus_pass` varchar(60) NOT NULL,
   `cus_tel` varchar(10) NOT NULL,
-  `cus_regis_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `cus_regis_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cus_permission` enum('0','1') NOT NULL DEFAULT '1' COMMENT '0 = Admin, 1 = User',
   `cus_login` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0 = login, 1 = logout',
-  `cus_login_time` datetime DEFAULT current_timestamp(),
-  `cus_status` enum('0','1') NOT NULL DEFAULT '1' COMMENT '0 = Disable, 1 = Enable'
+  `cus_login_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `cus_status` enum('0','1') NOT NULL DEFAULT '1' COMMENT '0 = Disable, 1 = Enable',
+  `cus_logo` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`cus_id`, `cus_fname`, `cus_lname`, `cus_res_name`, `cus_rtable`, `cus_email`, `cus_pass`, `cus_tel`, `cus_regis_date`, `cus_permission`, `cus_login`, `cus_login_time`, `cus_status`) VALUES
-('1998020599999', 'Admin', 'Admin', 'WN Development', 10, 'wrynnme@wrynn.me', '$2y$10$V2lBl/qp96f/9DEVYQ7jh.jzEMBLogLkHed6kOzCi14B1Uj1L3S/i', '0830246477', '2019-07-25 22:53:47', '0', '1', '2019-12-23 20:30:10', '1'),
-('2019070725786', 'ทดสอบ', '1.5', 'ทดสอบแก้ไขจาก แอดมิน 1.5', 10, '1@1', '$2y$10$2NFHnaJezdKxZlRGPTUSJu343PAnZz1NZy7oa2OgAK0LPJx14/.9K', '1111', '2019-07-07 12:28:14', '1', '0', '2019-12-21 13:30:00', '1'),
-('2019110650761', '1', '1', '1', 1, '1@2', '$2y$10$YtHlIC9pf/GxTCdLcCCkMePG3.4WeaBtm7CjFAWTqLWJL7Kktj1k.', '1111111112', '2019-11-06 00:04:52', '1', '0', '2019-12-20 15:44:55', '1'),
-('2019122053469', '6', '6', '6', 1, '6@6', '$2y$10$76RAt36e2ytRE4E3VYOwJuuA4OMMR7Hb150auu03JjmusyGJFr5im', '6666666666', '2019-12-20 15:47:25', '1', '0', '2019-12-20 15:48:58', '1'),
-('2019122068924', '5', '5', '5', 1, '5@5', '$2y$10$tkOlW5HLY6gPO.MSvvjb.eP3CvKHpD5/fe8ubhd8EuDTfUSUHRC1O', '5555555555', '2019-12-20 15:46:54', '1', '0', '2019-12-20 15:46:54', '1'),
-('2019122236527', 'Woravat', 'Yana', 'wrynnme', 10, 'yanaworavat@outlook.com', '$2y$10$FCoKV8ovlwOCB9/cxhHIqeLuk6ZGMOdZtxeRiCAopbcVQBE84I4L2', '0830246478', '2019-12-22 19:42:07', '0', '0', '2019-12-22 21:37:20', '1'),
-('2019122463845', '888', '888', '888', 1, '8@8', '$2y$10$YDkE.K/1ie3bZwjv2qT1qe2Zf268afLuPg5w0sYiRjZQNxHZHo6nC', '888888', '2019-12-24 17:58:02', '1', '0', '2019-12-24 17:58:02', '1');
+INSERT INTO `customers` (`cus_id`, `cus_fname`, `cus_lname`, `cus_res_name`, `cus_rtable`, `cus_email`, `cus_pass`, `cus_tel`, `cus_regis_date`, `cus_permission`, `cus_login`, `cus_login_time`, `cus_status`, `cus_logo`) VALUES
+('1998020599999', 'Admin', 'Admin', 'WN Development', 10, 'wrynnme@wrynn.me', '$2y$10$ioMshGUbsC1o9YwikFW22.oIg60vrP8SPs74XZAziuBs9pixcOcyG', '0830246477', '2019-07-25 22:53:47', '0', '0', '2019-12-23 20:30:10', '1', NULL),
+('2019122236527', 'Woravat', 'Yana', 'HEALTH FOOD MENU', 5, 'yanaworavat@outlook.com', '$2y$10$juy1kD39xFIsNJqBweL4p.2rwpmvjkxbWu2vXY6pBHq7AbbCo/q9.', '0000000000', '2019-12-22 19:42:07', '1', '1', '2019-12-22 21:37:20', '1', '5e4d80adb7a602.50325406.png'),
+('2020020901293', 'ทดสอบ', 'สมัครสมาชิก', 'ร้านที่ 1', 1, 's1@s1', '$2y$10$dF/zb9Nw14JxyIaFbwNmDOu49nUTvqEBhHh9HNo6KChbnLWME6JHq', '1111111111', '2020-02-09 17:44:07', '1', '0', '2020-02-09 17:44:07', '1', NULL),
+('2020021719280', 'ทดสอบ', 'สมัคร', 'ทดสอบร้านอาหาร', 1, 'test@test', '$2y$10$ilfzzzOuI70mJlrAETD6m.YhKDULkTFjOffi5GySxf79HS5NFOJuS', '8888888888', '2020-02-17 15:46:59', '1', '0', '2020-02-17 15:46:59', '1', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `eggs`
+-- Table structure for table `food_detail`
 --
 
-CREATE TABLE `eggs` (
-  `egg_id` int(2) NOT NULL,
+CREATE TABLE `food_detail` (
   `mf_id` int(13) NOT NULL,
   `ing_id` int(7) NOT NULL,
-  `egg_gram` decimal(15,2) NOT NULL,
-  `egg_kcal` decimal(15,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
+  `gram` decimal(15,2) NOT NULL,
+  `kcal` decimal(15,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Table structure for table `fruits`
+-- Dumping data for table `food_detail`
 --
 
-CREATE TABLE `fruits` (
-  `fru_id` int(2) NOT NULL,
-  `mf_id` int(13) NOT NULL,
-  `ing_id` int(7) NOT NULL,
-  `fru_gram` decimal(15,2) NOT NULL,
-  `fru_kcal` decimal(15,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `garnishs`
---
-
-CREATE TABLE `garnishs` (
-  `gar_id` int(2) NOT NULL,
-  `mf_id` int(13) NOT NULL,
-  `ing_id` int(7) NOT NULL,
-  `gar_gram` decimal(15,2) NOT NULL,
-  `gar_kcal` decimal(15,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `food_detail` (`mf_id`, `ing_id`, `gram`, `kcal`) VALUES
+(1, 8, '50.00', '80.00'),
+(1, 87, '300.00', '516.00'),
+(1, 404, '10.00', '15.00'),
+(1, 574, '2.00', '0.22'),
+(1, 589, '3.00', '1.59'),
+(1, 609, '3.00', '9.78'),
+(1, 647, '3.00', '1.53'),
+(1, 648, '3.00', '12.15'),
+(1, 652, '10.00', '38.70'),
+(2, 8, '100.00', '100.00'),
+(2, 19, '100.00', '100.00'),
+(2, 161, '10.00', '10.00'),
+(2, 255, '10.00', '10.00'),
+(2, 388, '30.00', '30.00'),
+(2, 589, '2.00', '2.00'),
+(2, 654, '2.00', '2.00'),
+(3, 1, '2.00', '2.00'),
+(3, 116, '100.00', '100.00'),
+(3, 219, '50.00', '50.00'),
+(3, 239, '50.00', '50.00'),
+(3, 255, '50.00', '50.00'),
+(3, 404, '100.00', '100.00'),
+(3, 589, '3.00', '3.00'),
+(3, 593, '5.00', '5.00'),
+(3, 647, '3.00', '3.00'),
+(3, 648, '3.00', '3.00'),
+(4, 190, '30.00', '30.00'),
+(4, 305, '30.00', '30.00'),
+(4, 374, '50.00', '50.00'),
+(4, 582, '10.00', '10.00'),
+(4, 588, '5.00', '5.00'),
+(4, 644, '10.00', '10.00'),
+(4, 651, '30.00', '30.00'),
+(5, 8, '50.00', '50.00'),
+(5, 44, '100.00', '100.00'),
+(5, 161, '50.00', '50.00'),
+(5, 174, '10.00', '10.00'),
+(5, 190, '50.00', '50.00'),
+(5, 245, '10.00', '10.00'),
+(5, 356, '100.00', '100.00'),
+(5, 374, '100.00', '100.00'),
+(5, 572, '10.00', '10.00'),
+(5, 588, '10.00', '10.00'),
+(5, 607, '10.00', '10.00'),
+(5, 616, '30.00', '30.00'),
+(5, 651, '10.00', '10.00'),
+(6, 40, '100.00', '100.00'),
+(6, 151, '50.00', '50.00'),
+(6, 161, '20.00', '20.00'),
+(6, 245, '50.00', '50.00'),
+(6, 572, '30.00', '30.00'),
+(6, 582, '50.00', '50.00'),
+(6, 588, '10.00', '10.00'),
+(6, 607, '10.00', '10.00'),
+(6, 648, '5.00', '5.00'),
+(6, 655, '50.00', '50.00'),
+(6, 656, '50.00', '50.00'),
+(7, 8, '100.00', '100.00'),
+(7, 174, '10.00', '10.00'),
+(7, 369, '100.00', '100.00'),
+(7, 478, '20.00', '20.00'),
+(7, 654, '5.00', '5.00'),
+(7, 658, '100.00', '100.00'),
+(8, 87, '250.00', '250.00'),
+(8, 364, '250.00', '250.00'),
+(8, 582, '10.00', '10.00'),
+(8, 590, '10.00', '10.00'),
+(8, 603, '10.00', '10.00'),
+(8, 609, '10.00', '10.00'),
+(8, 648, '10.00', '10.00'),
+(9, 1, '1.00', '1.00'),
+(10, 7, '10.00', '88.40'),
+(10, 8, '51.00', '81.60'),
+(11, 5, '10.00', '88.40'),
+(11, 364, '150.00', '211.50'),
+(11, 582, '5.00', '8.35'),
+(11, 588, '5.00', '1.75'),
+(11, 589, '5.00', '2.65'),
+(11, 607, '5.00', '17.35'),
+(11, 641, '50.00', '11.50'),
+(11, 658, '150.00', '148.50'),
+(12, 7, '10.00', '88.40'),
+(12, 8, '70.00', '112.00'),
+(13, 19, '300.00', '276.00'),
+(13, 151, '10.00', '2.10'),
+(13, 245, '5.00', '1.90'),
+(13, 346, '50.00', '17.50'),
+(13, 572, '10.00', '2.50'),
+(13, 588, '10.00', '3.50'),
+(13, 590, '5.00', '0.00'),
+(13, 607, '10.00', '34.70'),
+(13, 648, '20.00', '81.00'),
+(13, 655, '5.00', '4.95'),
+(13, 656, '3.00', '5.13'),
+(13, 663, '10.00', '71.90'),
+(13, 664, '50.00', '125.00'),
+(13, 665, '350.00', '0.00'),
+(14, 134, '10.00', '5.40'),
+(14, 144, '10.00', '1.60'),
+(14, 190, '20.00', '7.80'),
+(14, 225, '40.00', '4.40'),
+(14, 572, '10.00', '2.50'),
+(14, 590, '5.00', '0.00'),
+(14, 592, '20.00', '28.80'),
+(14, 593, '10.00', '14.30'),
+(14, 607, '5.00', '17.35'),
+(14, 608, '5.00', '18.20'),
+(14, 616, '10.00', '6.30'),
+(14, 651, '10.00', '40.00'),
+(14, 658, '300.00', '297.00'),
+(14, 665, '300.00', '0.00'),
+(14, 666, '40.00', '8.00'),
+(14, 667, '10.00', '50.20'),
+(15, 98, '300.00', '300.00'),
+(15, 306, '50.00', '50.00'),
+(15, 588, '15.00', '15.00'),
+(15, 608, '5.00', '5.00'),
+(15, 615, '3.00', '3.00'),
+(15, 651, '15.00', '15.00'),
+(15, 656, '3.00', '3.00'),
+(15, 668, '70.00', '70.00'),
+(15, 669, '250.00', '250.00'),
+(15, 670, '400.00', '400.00'),
+(15, 671, '100.00', '100.00'),
+(16, 661, '20.00', '20.00'),
+(17, 661, '20.00', '20.00'),
+(18, 662, '100.00', '100.00'),
+(20, 17, '2.00', '2.00'),
+(20, 104, '500.00', '500.00'),
+(20, 662, '15.00', '15.00'),
+(21, 8, '70.00', '70.00'),
+(21, 572, '10.00', '10.00'),
+(21, 661, '30.00', '30.00'),
+(22, 124, '20.00', '20.00');
 
 -- --------------------------------------------------------
 
@@ -112,7 +221,7 @@ CREATE TABLE `ingredients` (
   `ing_kcal` decimal(15,2) NOT NULL,
   `ing_img` varchar(100) NOT NULL DEFAULT '404-img.png',
   `ing_type` int(3) NOT NULL,
-  `ing_time` datetime DEFAULT current_timestamp(),
+  `ing_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `cus_id` varchar(13) DEFAULT NULL,
   `ing_status` enum('0','1','2') DEFAULT '1' COMMENT '0 = disable, 1 = wait for confrim, 2 = finish'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -122,23 +231,23 @@ CREATE TABLE `ingredients` (
 --
 
 INSERT INTO `ingredients` (`ing_id`, `ing_name`, `ing_unit`, `ing_kcal`, `ing_img`, `ing_type`, `ing_time`, `cus_id`, `ing_status`) VALUES
-(1, 'น้ำมัน', '100.00', '884.00', '5dff4591710114.98117358.png', 1, '0000-00-00 00:00:00', NULL, '2'),
-(2, 'น้ำมันหมู', '100.00', '228.00', '5dff4de3b27429.81890850.png', 1, '2019-12-22 18:05:07', NULL, '2'),
-(3, 'น้ำมันถั่วเหลือง', '100.00', '889.00', '5e0df26b312381.66344094.jpg', 1, '0000-00-00 00:00:00', NULL, '2'),
-(4, 'น้ำมันดอกทานตะวัน', '100.00', '884.00', '404-img.png', 1, '2019-12-21 12:36:53', NULL, '2'),
-(5, 'น้ำมันมะกอก', '100.00', '884.00', '404-img.png', 1, '2019-12-21 12:36:53', NULL, '2'),
-(6, 'น้ำมันรำข้าว', '100.00', '884.00', '404-img.png', 1, '2019-12-21 12:36:53', NULL, '2'),
-(7, 'น้ำมันเมล็ดคำฝอย', '100.00', '884.00', '404-img.png', 1, '2019-12-21 12:36:53', NULL, '2'),
-(8, 'ไข่ไก่', '100.00', '160.00', '404-img.png', 2, '2019-12-22 18:44:16', NULL, '2'),
-(9, 'ไข่เป็ด', '100.00', '186.00', '404-img.png', 2, '2019-12-22 18:44:20', NULL, '2'),
-(10, 'ไข่นกกะทา', '100.00', '171.00', '404-img.png', 2, '2019-12-22 18:44:20', NULL, '2'),
-(11, 'ไข่ปลากระบอก  เค็ม', '100.00', '480.00', '404-img.png', 2, '2019-12-22 18:44:20', NULL, '2'),
+(1, 'น้ำมันปาล์ม', '100.00', '884.00', '5e3c2f7a315ab9.33555842.jpg', 1, '0000-00-00 00:00:00', NULL, '2'),
+(2, 'น้ำมันหมู', '100.00', '898.00', '5e3c2f01a82119.74053412.jpg', 1, '0000-00-00 00:00:00', NULL, '2'),
+(3, 'น้ำมันถั่วเหลือง', '100.00', '889.00', '5e3c2f0ee7b118.32070875.jpg', 1, '0000-00-00 00:00:00', NULL, '2'),
+(4, 'น้ำมันดอกทานตะวัน', '100.00', '884.00', '5e3c2f19408378.11197481.jpg', 1, '0000-00-00 00:00:00', NULL, '2'),
+(5, 'น้ำมันมะกอก', '100.00', '884.00', '5e3c2f45cd2050.51699964.jpg', 1, '0000-00-00 00:00:00', NULL, '2'),
+(6, 'น้ำมันรำข้าว', '100.00', '884.00', '5e3c2f55661ac3.14338206.jpg', 1, '0000-00-00 00:00:00', NULL, '2'),
+(7, 'น้ำมันเมล็ดคำฝอย', '100.00', '884.00', '5e3c2f5fb3de52.20525491.jpg', 1, '0000-00-00 00:00:00', NULL, '2'),
+(8, 'ไข่ไก่', '100.00', '160.00', '5e3c4929d01720.04915987.jpg', 2, '0000-00-00 00:00:00', NULL, '2'),
+(9, 'ไข่เป็ด', '100.00', '186.00', '5e3c4a8fdbb525.75118299.jpg', 2, '0000-00-00 00:00:00', NULL, '2'),
+(10, 'ไข่นกกะทา', '100.00', '171.00', '5e3c4d5510de96.85474820.jpg', 2, '0000-00-00 00:00:00', NULL, '2'),
+(11, 'ไข่ปลากระบอก  เค็ม', '100.00', '480.00', '5e3c4f59198bb6.13482608.jpg', 2, '0000-00-00 00:00:00', NULL, '2'),
 (12, 'ไข่จระเข้  ไข่ขาว', '100.00', '15.00', '404-img.png', 2, '2019-12-22 18:44:20', NULL, '2'),
 (13, 'ไข่จระเข้  ไข่แดง', '100.00', '228.00', '404-img.png', 2, '2019-12-22 18:44:20', NULL, '2'),
 (14, 'ไข่จระเข้  ไข่ทั้งฟอง', '100.00', '128.00', '404-img.png', 2, '2019-12-22 18:44:21', NULL, '2'),
 (15, 'ไข่จาระเม็ด(ไข่เต่าตะนุ)', '100.00', '141.00', '404-img.png', 2, '2019-12-22 18:44:21', NULL, '2'),
-(16, 'ไข่แมงมัน', '100.00', '129.00', '404-img.png', 2, '2019-12-22 18:44:22', NULL, '2'),
-(17, 'ไข่มดแดงและตัวอ่อน', '100.00', '74.00', '404-img.png', 2, '2019-12-22 18:44:23', NULL, '2'),
+(16, 'ไข่แมงมัน', '100.00', '129.00', '5e3c51af1b8d79.27779520.jpg', 2, '0000-00-00 00:00:00', NULL, '2'),
+(17, 'ไข่มดแดงและตัวอ่อน', '100.00', '74.00', '5e3c51544c0f64.65783372.jpg', 2, '0000-00-00 00:00:00', NULL, '2'),
 (18, 'กระเพาะปลา ทอด', '100.00', '682.00', '404-img.png', 3, '2019-12-21 12:36:53', NULL, '2'),
 (19, 'กุ้งกุลาดำ เนื้อ', '100.00', '92.00', '404-img.png', 3, '2019-12-21 12:36:53', NULL, '2'),
 (20, 'กุ้งกุลาดำ  หัว', '100.00', '120.00', '404-img.png', 3, '2019-12-21 12:36:53', NULL, '2'),
@@ -467,7 +576,7 @@ INSERT INTO `ingredients` (`ing_id`, `ing_name`, `ing_unit`, `ing_kcal`, `ing_im
 (343, 'หัวปลี', '100.00', '25.00', '404-img.png', 5, '2019-12-21 12:36:53', NULL, '2'),
 (344, 'เห็ดขมิ้น', '100.00', '25.00', '404-img.png', 5, '2019-12-21 12:36:53', NULL, '2'),
 (345, 'เห็ดนางรม', '100.00', '28.00', '404-img.png', 5, '2019-12-21 12:36:53', NULL, '2'),
-(346, 'เห็ดบัว(เห็ดฟาง)', '100.00', '43.00', '404-img.png', 5, '2019-12-21 12:36:53', NULL, '2'),
+(346, 'เห็ดฟาง', '100.00', '35.00', '5e4851f30edbe3.01683327.jpg', 5, '0000-00-00 00:00:00', NULL, '2'),
 (347, 'เห็ดบัว(เห็ดฟาง)', '100.00', '28.00', '404-img.png', 5, '2019-12-21 12:36:53', NULL, '2'),
 (348, 'เห็ดเป๋าฮื้อ', '100.00', '29.00', '404-img.png', 5, '2019-12-21 12:36:53', NULL, '2'),
 (349, 'เห็ดเผาะ', '100.00', '37.00', '404-img.png', 5, '2019-12-21 12:36:53', NULL, '2'),
@@ -643,10 +752,10 @@ INSERT INTO `ingredients` (`ing_id`, `ing_name`, `ing_unit`, `ing_kcal`, `ing_im
 (519, 'พุทราไทย', '100.00', '89.00', '404-img.png', 9, '2019-12-21 12:36:53', NULL, '2'),
 (520, 'พุทรา  ลูกยาว', '100.00', '120.00', '404-img.png', 9, '2019-12-21 12:36:53', NULL, '2'),
 (521, 'พุทราแอปเปิ้ล', '100.00', '50.00', '404-img.png', 9, '2019-12-21 12:36:53', NULL, '2'),
-(522, 'แพชชั่นฟรุท  ผล  เนื้อภายนอก', '100.00', '50.00', '404-img.png', 9, '2019-12-21 12:36:53', NULL, '2'),
-(523, 'แพชชั่นฟรุท  น้ำคั้น', '100.00', '60.00', '404-img.png', 9, '2019-12-21 12:36:53', NULL, '2'),
-(524, 'แพชชั่นฟรุท  กวน(แยม)', '100.00', '322.00', '404-img.png', 9, '2019-12-21 12:36:53', NULL, '2');
+(522, 'แพชชั่นฟรุท  ผล  เนื้อภายนอก', '100.00', '50.00', '404-img.png', 9, '2019-12-21 12:36:53', NULL, '2');
 INSERT INTO `ingredients` (`ing_id`, `ing_name`, `ing_unit`, `ing_kcal`, `ing_img`, `ing_type`, `ing_time`, `cus_id`, `ing_status`) VALUES
+(523, 'แพชชั่นฟรุท  น้ำคั้น', '100.00', '60.00', '404-img.png', 9, '2019-12-21 12:36:53', NULL, '2'),
+(524, 'แพชชั่นฟรุท  กวน(แยม)', '100.00', '322.00', '404-img.png', 9, '2019-12-21 12:36:53', NULL, '2'),
 (525, 'แพชชั่นฟรุท  ผล  เมล็ด', '100.00', '294.00', '404-img.png', 9, '2019-12-21 12:36:53', NULL, '2'),
 (526, 'มะกอกฝรั่ง', '100.00', '52.00', '404-img.png', 9, '2019-12-21 12:36:53', NULL, '2'),
 (527, 'มะขามเทศ  ชนิดมัน', '100.00', '87.00', '404-img.png', 9, '2019-12-21 12:36:53', NULL, '2'),
@@ -702,8 +811,8 @@ INSERT INTO `ingredients` (`ing_id`, `ing_name`, `ing_unit`, `ing_kcal`, `ing_im
 (577, 'ขมิ้น', '100.00', '312.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (578, 'ขิงสด', '100.00', '80.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (579, 'โรสแมรี่สด', '100.00', '257.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
-(580, 'หัวหอม', '100.00', '40.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
-(581, 'หัวหอมใหญ่', '100.00', '407.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
+(580, 'หัวหอม', '100.00', '40.00', '5e48ff5d87e997.90961935.jpg', 5, '0000-00-00 00:00:00', NULL, '2'),
+(581, 'หัวหอมใหญ่', '100.00', '407.00', '5e48ff3872e8e6.51152333.jpg', 5, '0000-00-00 00:00:00', NULL, '2'),
 (582, 'กระเทียม สด', '100.00', '167.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (583, 'น้ำส้มสายชู', '100.00', '20.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (584, 'ผงกาแฟ', '100.00', '351.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
@@ -738,7 +847,7 @@ INSERT INTO `ingredients` (`ing_id`, `ing_name`, `ing_unit`, `ing_kcal`, `ing_im
 (613, 'เมล็ดยี่หร่า ', '100.00', '313.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (614, 'สะระแหน่ ใบ', '100.00', '52.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (615, 'โหระพา ใบ', '100.00', '54.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
-(616, 'หอมแดง', '100.00', '63.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
+(616, 'หอมแดง', '100.00', '63.00', '5e48ff4d9ceae5.99093768.jpg', 5, '0000-00-00 00:00:00', NULL, '2'),
 (617, 'กลีบ', '100.00', '392.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (618, 'เม้นท์คาร์ดามอม', '100.00', '368.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (619, 'หญ้าฝรั่น', '100.00', '135.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
@@ -759,7 +868,7 @@ INSERT INTO `ingredients` (`ing_id`, `ing_name`, `ing_unit`, `ing_kcal`, `ing_im
 (634, 'เชอร์วิล', '100.00', '237.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (635, 'ออลสไปซ์', '100.00', '373.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (636, 'เมล็ด โป๊ยกั๊ก', '100.00', '300.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
-(637, 'ผงหัวหอม', '100.00', '330.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
+(637, 'ผงหัวหอม', '100.00', '330.00', '5e48ff4246ac79.31326709.jpg', 10, '0000-00-00 00:00:00', NULL, '2'),
 (638, 'เมล็ดมัสตาร์ด', '100.00', '334.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (639, 'เมล็ดขึ้นฉ่าย', '100.00', '253.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (640, 'เมซ', '100.00', '375.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
@@ -771,13 +880,26 @@ INSERT INTO `ingredients` (`ing_id`, `ing_name`, `ing_unit`, `ing_kcal`, `ing_im
 (649, 'น้ำตาล, ทรายแดง', '100.00', '392.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (650, 'น้ำตาล, ไอซิ่ง', '100.00', '389.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
 (651, 'น้ำตาล, ปี๊บ', '100.00', '400.00', '404-img.png', 10, '2019-12-21 12:36:53', NULL, '2'),
-(672, 'ทดสอบ', '100.00', '100.00', '5dff315ff39b10.26087479.png', 1, '0000-00-00 00:00:00', '1998020599999', '0'),
-(673, 'ทดสอบ 2', '100.00', '1000.00', '5dff62831e2893.75182413.png', 1, '0000-00-00 00:00:00', '1998020599999', '1'),
-(674, 'ทดสอบ 3', '100.00', '100.00', '5e11cf1c490bc2.48360252.jpg', 9, '0000-00-00 00:00:00', '1998020599999', '1'),
-(675, 'ทดสอบ 3', '100.00', '100.00', '5e11b64505df38.23151154.jpg', 9, '2020-01-05 17:11:17', '1998020599999', '1'),
-(676, 'ทดสอบ 4', '100.00', '100.00', '404-img.png', 3, '2020-01-05 17:12:16', '1998020599999', '1'),
-(677, 'ทดสอบ 5', '100.00', '1000.00', '404-img.png', 7, '2020-01-05 17:13:03', '1998020599999', '1'),
-(678, 'ทดสอบ 6', '100.00', '600.00', '404-img.png', 9, '2020-01-05 17:13:42', '1998020599999', '1');
+(652, 'เห็ดหอม สด', '100.00', '387.00', '404-img.png', 5, '2020-02-05 14:34:47', NULL, '2'),
+(653, 'เห็ดหอม แห้ง', '100.00', '375.00', '404-img.png', 5, '2020-02-05 14:34:47', NULL, '2'),
+(654, 'พริกไทย', '100.00', '296.00', '5e3b2e9f8b2871.49527781.jpg', 10, '2020-02-06 04:07:43', '2019122236527', '2'),
+(655, 'ตระไคร้', '100.00', '99.00', '5e3be99956c118.23459079.jpg', 5, '2020-02-06 17:25:29', '2019122236527', '2'),
+(656, 'ใบมะกรูด', '100.00', '171.00', '404-img.png', 5, '2020-02-06 17:29:28', '2019122236527', '2'),
+(657, 'ผิวมะกรูด', '100.00', '118.00', '404-img.png', 5, '2020-02-06 17:29:47', '2019122236527', '2'),
+(658, 'กุ้ง', '100.00', '99.00', '5e3c16249004f1.04726289.jpg', 3, '2020-02-06 20:35:32', '2019122236527', '2'),
+(659, 'น้ำมันงา', '100.00', '884.00', '5e3c300d177fb8.91004914.jpg', 1, '0000-00-00 00:00:00', '1998020599999', '2'),
+(660, 'น้ำมันเมล็ดองุ่น', '100.00', '884.00', '5e3c30613fc547.29158630.jpg', 1, '0000-00-00 00:00:00', '1998020599999', '2'),
+(661, 'น้ำมันดอกคาโนล่า', '100.00', '884.00', '5e3c30943850b6.76223181.jpg', 1, '0000-00-00 00:00:00', '1998020599999', '2'),
+(662, 'น้ำมันมะพร้าว', '100.00', '862.00', '5e3c30f5960643.00767209.jpg', 1, '0000-00-00 00:00:00', '1998020599999', '2'),
+(663, 'น้ำพริกเผา', '100.00', '719.00', '404-img.png', 10, '0000-00-00 00:00:00', '1998020599999', '2'),
+(664, 'กะทิ, ชาวเกาะ', '100.00', '250.00', '5e4856ca6bb8e9.53982932.jpg', 10, '0000-00-00 00:00:00', '1998020599999', '2'),
+(665, 'น้ำ', '100.00', '0.00', '404-img.png', 10, '2020-02-16 04:48:33', '1998020599999', '2'),
+(666, 'หัวไชเท้า', '100.00', '20.00', '5e48fd6c8e1737.26613482.jpg', 5, '2020-02-16 15:29:32', '2019122236527', '2'),
+(667, 'มะขาม, เปียก', '100.00', '502.00', '404-img.png', 5, '2020-02-16 15:44:15', '2019122236527', '2'),
+(668, 'พริกแกง, เขียว, ตราไทยคิดเช่น', '100.00', '100.00', '404-img.png', 10, '2020-02-16 16:20:05', '2019122236527', '2'),
+(669, 'กะทิ, หัว', '100.00', '330.00', '404-img.png', 10, '2020-02-16 16:26:59', '2019122236527', '2'),
+(670, 'กะทิ, หาง', '100.00', '99.00', '404-img.png', 10, '2020-02-16 16:27:29', '2019122236527', '2'),
+(671, 'มะเขือเปราะ', '100.00', '39.00', '404-img.png', 5, '2020-02-16 16:29:47', '2019122236527', '2');
 
 -- --------------------------------------------------------
 
@@ -809,20 +931,6 @@ INSERT INTO `ingredients_type` (`ingt_id`, `ingt_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `meats`
---
-
-CREATE TABLE `meats` (
-  `meat_id` int(2) NOT NULL,
-  `mf_id` int(13) NOT NULL,
-  `ing_id` int(7) NOT NULL,
-  `meat_gram` decimal(15,2) NOT NULL,
-  `meat_kcal` decimal(15,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `menu_foods`
 --
 
@@ -832,53 +940,38 @@ CREATE TABLE `menu_foods` (
   `mf_price` decimal(15,2) DEFAULT NULL,
   `mf_kcal` decimal(15,2) DEFAULT NULL,
   `mf_img` varchar(100) NOT NULL DEFAULT '404-img.png',
-  `mf_time` datetime DEFAULT current_timestamp(),
+  `mf_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `cus_id` varchar(13) NOT NULL,
   `mf_status` enum('0','1') NOT NULL DEFAULT '1',
   `type_id` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `milks`
+-- Dumping data for table `menu_foods`
 --
 
-CREATE TABLE `milks` (
-  `milk_id` int(2) NOT NULL,
-  `mf_id` int(13) NOT NULL,
-  `ing_id` int(7) NOT NULL,
-  `milk_gram` decimal(15,2) NOT NULL,
-  `milk_kcal` decimal(15,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `nas`
---
-
-CREATE TABLE `nas` (
-  `nas_id` int(2) NOT NULL,
-  `mf_id` int(13) NOT NULL,
-  `ing_id` int(7) NOT NULL,
-  `nas_gram` decimal(15,2) NOT NULL,
-  `nas_kcal` decimal(15,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Nuts and sesame seeds';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `oils`
---
-
-CREATE TABLE `oils` (
-  `oil_id` int(2) NOT NULL,
-  `mf_id` int(13) NOT NULL,
-  `ing_id` int(7) NOT NULL,
-  `oil_gram` decimal(15,2) NOT NULL,
-  `oil_kcal` decimal(15,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `menu_foods` (`mf_id`, `mf_name`, `mf_price`, `mf_kcal`, `mf_img`, `mf_time`, `cus_id`, `mf_status`, `type_id`) VALUES
+(1, 'ติ่มซำเต้าหู้', '50.00', '674.97', '5e3a7217168fa1.40731013.jpg', '2020-02-05 14:41:27', '2019122236527', '1', 1),
+(2, 'เกี๊ยวน้ำกุ้ง', '50.00', '368.98', '5e3be234d862e5.65864058.jpg', '2020-02-06 16:53:12', '2019122236527', '1', 1),
+(3, 'ต้มจับฉ่าย', '50.00', '416.10', '5e3be498eddaf6.64517088.jpg', '2020-02-06 17:04:00', '2019122236527', '1', 1),
+(4, 'ตำข้าวโพด', '50.00', '219.25', '5e3be621a88ec7.30263758.jpg', '2020-02-06 17:10:09', '2019122236527', '1', 1),
+(5, 'ยำขนมจีน', '50.00', '520.30', '5e3be7fe0125c6.98112530.jpg', '2020-02-06 17:18:28', '2019122236527', '1', 1),
+(6, 'เมี่ยงปลานึ่งสมุนไพร', '50.00', '449.95', '5e3bf1dde2f9c4.34082590.jpg', '2020-02-06 17:59:06', '2019122236527', '1', 1),
+(7, 'ข้าวไข่ข้น', '50.00', '660.40', '5e3c1a1b7fe4e1.80239309.jpg', '2020-02-06 20:51:50', '2019122236527', '1', NULL),
+(8, 'ไส้กรอกอกไก่ไตล์อีสาน ย่างเตาถ่าน', '60.00', '878.00', '5e3c5906c6d463.55268301.jpg', '2020-02-07 01:18:02', '2019122236527', '1', 2),
+(9, 'asdasd', '123.00', '8.84', '404-img.png', '2020-02-07 01:23:43', '2019122236527', '0', NULL),
+(10, 'ไข่เจียวว', '7.00', '170.00', '5e4015b7abf028.28377687.jpg', '2020-02-09 21:21:00', '2020020901293', '1', NULL),
+(11, 'กะเพรากุ้ง', '50.00', '490.00', '5e4073ec993ed0.41133783.jpg', '2020-02-10 03:05:29', '2019122236527', '1', 1),
+(12, 'ไข่ดาว', '5.00', '200.40', '404-img.png', '2020-02-10 03:11:29', '2019122236527', '1', NULL),
+(13, 'ต้มยำกุ้ง', '150.00', '626.18', '5e486cd63e3c52.72111163.jpg', '2020-02-16 05:12:07', '2019122236527', '1', 9),
+(14, 'แกงส้มผักรวม', '60.00', '501.85', '5e4903fe3085f6.40408654.jpg', '2020-02-16 15:56:35', '2019122236527', '1', 9),
+(15, 'แกงเขียวหวานไก่', '60.00', '1815.20', '5e490d0d6ac8c4.87378950.jpg', '2020-02-16 16:36:02', '2019122236527', '1', 9),
+(16, 'ทดสอบ', '50.00', '176.80', '5e4a539d921ce7.73356100.jpg', '2020-02-17 15:49:23', '2020021719280', '1', NULL),
+(17, 'ทดสอบ2', '20.00', '176.80', '5e4a545b1480e3.76680894.jpg', '2020-02-17 15:51:43', '2020021719280', '1', NULL),
+(18, 'A', '100.00', '862.00', '404-img.png', '2020-02-19 14:23:38', '1998020599999', '1', NULL),
+(20, 'ต้มยำ', '50.00', '345.78', '404-img.png', '2020-02-21 11:28:52', '2019122236527', '1', 1),
+(21, 'ข้าวไข่เจียว', '30.00', '379.70', '404-img.png', '2020-02-21 13:28:03', '2019122236527', '1', NULL),
+(22, 'ทดสอบ 1', '30.00', '7.20', '404-img.png', '2020-03-06 14:15:39', '2019122236527', '1', NULL);
 
 -- --------------------------------------------------------
 
@@ -890,14 +983,34 @@ CREATE TABLE `orders` (
   `or_id` int(13) NOT NULL,
   `cus_id` varchar(13) NOT NULL,
   `or_table` int(4) NOT NULL,
-  `or_time` datetime NOT NULL DEFAULT current_timestamp(),
+  `or_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `or_kcal` decimal(15,2) DEFAULT NULL,
   `or_price` decimal(15,2) DEFAULT NULL,
   `or_phpsessid` varchar(30) NOT NULL COMMENT 'PHPSESSID',
   `or_pay_status` enum('0','1','2') NOT NULL DEFAULT '0' COMMENT '0 = not pay, 1 = wait for checkbill, 2 = finish',
-  `or_time_newStatus` datetime DEFAULT current_timestamp(),
+  `or_time_newStatus` datetime DEFAULT CURRENT_TIMESTAMP,
   `or_status` enum('0','1') NOT NULL DEFAULT '1' COMMENT '0 = disable, 1 = enable'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`or_id`, `cus_id`, `or_table`, `or_time`, `or_kcal`, `or_price`, `or_phpsessid`, `or_pay_status`, `or_time_newStatus`, `or_status`) VALUES
+(1, '2019122236527', 3, '2020-02-07 01:34:39', '1628.83', '200.00', 'hs0a42met03d11j61menm0m9kt', '2', '2020-02-07 01:35:17', '1'),
+(2, '2019122236527', 3, '2020-02-07 01:36:01', '2910.06', '270.00', 'hs0a42met03d11j61menm0m9kt', '2', '2020-02-07 01:36:49', '1'),
+(3, '2019122236527', 3, '2020-02-07 01:37:04', '1018.97', '50.00', 'hs0a42met03d11j61menm0m9kt', '2', '2020-02-07 01:37:38', '1'),
+(4, '2019122236527', 3, '2020-02-09 21:52:27', '1189.50', '150.00', 'gomoi8qpnkqc1e0iqimqukig2g', '2', '2020-02-09 21:52:54', '1'),
+(5, '2019122236527', 3, '2020-02-09 21:54:02', NULL, NULL, 'gomoi8qpnkqc1e0iqimqukig2g', '0', '2020-02-09 21:54:15', '1'),
+(6, '2019122236527', 3, '2020-02-09 21:55:20', NULL, NULL, 'gomoi8qpnkqc1e0iqimqukig2g', '0', '2020-02-09 21:57:56', '0'),
+(7, '2019122236527', 3, '2020-02-10 05:02:12', '674.97', '50.00', 'hs0a42met03d11j61menm0m9kt', '2', '2020-03-06 14:18:21', '1'),
+(8, '2019122236527', 3, '2020-02-17 15:43:31', '3830.80', '125.00', 'hs0a42met03d11j61menm0m9kt', '2', '2020-02-17 15:44:29', '1'),
+(9, '1998020599999', 4, '2020-02-19 14:25:09', '862.00', '100.00', 'hs0a42met03d11j61menm0m9kt', '2', '2020-02-19 14:25:39', '1'),
+(12, '2019122236527', 4, '2020-02-21 10:25:52', '368.98', '50.00', '63an0sf3mahedb90pqutvvvc0b', '2', '2020-02-21 10:26:05', '1'),
+(13, '2019122236527', 4, '2020-02-21 10:29:50', NULL, NULL, '45dt0tg09auq8j9hvl230j99g3', '1', '2020-02-21 10:30:27', '1'),
+(14, '2019122236527', 4, '2020-02-21 10:50:30', NULL, NULL, '63an0sf3mahedb90pqutvvvc0b', '1', '2020-02-21 10:51:17', '1'),
+(15, '2019122236527', 4, '2020-02-21 10:52:13', NULL, NULL, '63an0sf3mahedb90pqutvvvc0b', '1', '2020-02-21 10:52:46', '1'),
+(16, '2019122236527', 3, '2020-02-21 11:34:43', NULL, NULL, 'boecqdaqo1evctvu8obv3hu0fo', '1', '2020-02-21 11:35:08', '1');
 
 -- --------------------------------------------------------
 
@@ -908,11 +1021,41 @@ CREATE TABLE `orders` (
 CREATE TABLE `orders_detail` (
   `or_id` int(13) NOT NULL,
   `mf_id` int(13) NOT NULL,
-  `time` datetime NOT NULL DEFAULT current_timestamp(),
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `quantity` int(3) NOT NULL,
   `price` decimal(15,2) NOT NULL,
   `kcal` decimal(15,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orders_detail`
+--
+
+INSERT INTO `orders_detail` (`or_id`, `mf_id`, `time`, `quantity`, `price`, `kcal`) VALUES
+(1, 2, '2020-02-07 01:34:39', 1, '50.00', '368.98'),
+(1, 4, '2020-02-07 01:34:39', 1, '50.00', '219.25'),
+(1, 5, '2020-02-07 01:34:39', 2, '100.00', '1040.60'),
+(2, 2, '2020-02-07 01:36:01', 1, '50.00', '368.98'),
+(2, 2, '2020-02-07 01:36:11', 1, '50.00', '368.98'),
+(2, 3, '2020-02-07 01:36:11', 1, '50.00', '416.10'),
+(2, 8, '2020-02-07 01:36:01', 2, '120.00', '1756.00'),
+(3, 1, '2020-02-07 01:37:04', 1, '50.00', '1018.97'),
+(4, 4, '2020-02-09 21:52:27', 1, '50.00', '219.25'),
+(4, 5, '2020-02-09 21:52:27', 1, '50.00', '520.30'),
+(4, 6, '2020-02-09 21:52:27', 1, '50.00', '449.95'),
+(5, 8, '2020-02-09 21:54:02', 1, '60.00', '878.00'),
+(6, 3, '2020-02-09 21:55:20', 1, '50.00', '416.10'),
+(7, 1, '2020-02-10 05:02:12', 1, '50.00', '674.97'),
+(8, 12, '2020-02-17 15:43:31', 1, '5.00', '200.40'),
+(8, 15, '2020-02-17 15:43:31', 2, '120.00', '3630.40'),
+(12, 2, '2020-02-21 10:25:52', 1, '50.00', '368.98'),
+(13, 1, '2020-02-21 10:29:50', 1, '50.00', '674.97'),
+(14, 2, '2020-02-21 10:50:30', 1, '50.00', '368.98'),
+(14, 7, '2020-02-21 10:50:30', 1, '50.00', '660.40'),
+(15, 13, '2020-02-21 10:52:13', 1, '150.00', '626.18'),
+(15, 14, '2020-02-21 10:52:13', 1, '60.00', '501.85'),
+(16, 1, '2020-02-21 11:34:43', 1, '50.00', '674.97'),
+(16, 2, '2020-02-21 11:34:43', 1, '50.00', '368.98');
 
 -- --------------------------------------------------------
 
@@ -928,33 +1071,12 @@ CREATE TABLE `pwdreset` (
   `pwd_expires` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `ran`
+-- Dumping data for table `pwdreset`
 --
 
-CREATE TABLE `ran` (
-  `ran_id` int(2) NOT NULL,
-  `mf_id` int(13) NOT NULL,
-  `ing_id` int(7) NOT NULL,
-  `ran_gram` decimal(15,2) NOT NULL,
-  `ran_kcal` decimal(15,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Rice and noodles';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `seas`
---
-
-CREATE TABLE `seas` (
-  `sea_id` int(2) NOT NULL,
-  `mf_id` int(13) NOT NULL,
-  `ing_id` int(7) NOT NULL,
-  `sea_gram` decimal(15,2) NOT NULL,
-  `sea_kcal` decimal(15,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `pwdreset` (`pwd_id`, `pwd_email`, `pwd_selector`, `pwd_token`, `pwd_expires`) VALUES
+(5, 'yanaworavat@outlook.com', 'b681913a8b735b7cfd2e581f511017aab74b2ac201955c4833150107f30cc872', '$2y$10$Lktn6GtNn0Dbrnol43AWTOL52LGwF7nC/BTN2KwlZ.vwWD1aQvHsq', '1582224908');
 
 -- --------------------------------------------------------
 
@@ -965,9 +1087,19 @@ CREATE TABLE `seas` (
 CREATE TABLE `special_menu` (
   `cus_id` varchar(13) NOT NULL,
   `mf_id` int(13) NOT NULL,
-  `detail` text DEFAULT NULL,
-  `img` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `detail` text,
+  `img` varchar(100) DEFAULT NULL,
+  `date_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `special_menu`
+--
+
+INSERT INTO `special_menu` (`cus_id`, `mf_id`, `detail`, `img`, `date_create`) VALUES
+('2019122236527', 1, NULL, NULL, '2020-02-19 23:39:32'),
+('2019122236527', 2, NULL, NULL, '2020-02-19 22:53:42'),
+('2019122236527', 3, NULL, NULL, '2020-02-19 22:53:26');
 
 -- --------------------------------------------------------
 
@@ -982,19 +1114,21 @@ CREATE TABLE `type_food` (
   `type_status` enum('0','1') NOT NULL DEFAULT '1' COMMENT '0 = disable, 1 = enable'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `vegetables`
+-- Dumping data for table `type_food`
 --
 
-CREATE TABLE `vegetables` (
-  `veg_id` int(2) NOT NULL,
-  `mf_id` int(13) NOT NULL,
-  `ing_id` int(7) NOT NULL,
-  `veg_gram` decimal(15,2) NOT NULL,
-  `veg_kcal` decimal(15,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `type_food` (`type_id`, `cus_id`, `type_name`, `type_status`) VALUES
+(1, '2019122236527', 'อาหารคลีน', '1'),
+(2, '2019122236527', 'อาหารอีสาน', '1'),
+(3, '2020020901293', 'เพิ่มม', '0'),
+(4, '2020020901293', 'ๅ', '0'),
+(5, '2020020901293', '1', '0'),
+(6, '2020020901293', '2', '0'),
+(7, '2020020901293', '3', '0'),
+(8, '2019122236527', 'อื่นๆๆ', '1'),
+(9, '2019122236527', 'เมนูแนะนำ', '1'),
+(10, '2019122236527', 'ทดสอบ1', '0');
 
 --
 -- Indexes for dumped tables
@@ -1009,28 +1143,11 @@ ALTER TABLE `customers`
   ADD UNIQUE KEY `cus_tel` (`cus_tel`);
 
 --
--- Indexes for table `eggs`
+-- Indexes for table `food_detail`
 --
-ALTER TABLE `eggs`
-  ADD PRIMARY KEY (`egg_id`,`mf_id`),
-  ADD KEY `ing_id` (`ing_id`),
-  ADD KEY `mf_id` (`mf_id`);
-
---
--- Indexes for table `fruits`
---
-ALTER TABLE `fruits`
-  ADD PRIMARY KEY (`fru_id`,`mf_id`),
-  ADD KEY `ing_id` (`ing_id`),
-  ADD KEY `mf_id` (`mf_id`);
-
---
--- Indexes for table `garnishs`
---
-ALTER TABLE `garnishs`
-  ADD PRIMARY KEY (`gar_id`,`mf_id`),
-  ADD KEY `ing_id` (`ing_id`),
-  ADD KEY `mf_id` (`mf_id`);
+ALTER TABLE `food_detail`
+  ADD PRIMARY KEY (`mf_id`,`ing_id`),
+  ADD KEY `ing_id` (`ing_id`);
 
 --
 -- Indexes for table `ingredients`
@@ -1047,44 +1164,12 @@ ALTER TABLE `ingredients_type`
   ADD PRIMARY KEY (`ingt_id`);
 
 --
--- Indexes for table `meats`
---
-ALTER TABLE `meats`
-  ADD PRIMARY KEY (`meat_id`,`mf_id`),
-  ADD KEY `ing_id` (`ing_id`),
-  ADD KEY `mf_id` (`mf_id`);
-
---
 -- Indexes for table `menu_foods`
 --
 ALTER TABLE `menu_foods`
   ADD PRIMARY KEY (`mf_id`),
   ADD KEY `cus_id` (`cus_id`),
   ADD KEY `type_id` (`type_id`);
-
---
--- Indexes for table `milks`
---
-ALTER TABLE `milks`
-  ADD PRIMARY KEY (`milk_id`,`mf_id`),
-  ADD KEY `ing_id` (`ing_id`),
-  ADD KEY `mf_id` (`mf_id`);
-
---
--- Indexes for table `nas`
---
-ALTER TABLE `nas`
-  ADD PRIMARY KEY (`nas_id`,`mf_id`),
-  ADD KEY `ing_id` (`ing_id`),
-  ADD KEY `mf_id` (`mf_id`);
-
---
--- Indexes for table `oils`
---
-ALTER TABLE `oils`
-  ADD PRIMARY KEY (`oil_id`,`mf_id`),
-  ADD KEY `ing_id` (`ing_id`),
-  ADD KEY `mf_id` (`mf_id`);
 
 --
 -- Indexes for table `orders`
@@ -1107,19 +1192,10 @@ ALTER TABLE `pwdreset`
   ADD PRIMARY KEY (`pwd_id`);
 
 --
--- Indexes for table `ran`
+-- Indexes for table `special_menu`
 --
-ALTER TABLE `ran`
-  ADD PRIMARY KEY (`ran_id`,`mf_id`),
-  ADD KEY `ing_id` (`ing_id`),
-  ADD KEY `mf_id` (`mf_id`);
-
---
--- Indexes for table `seas`
---
-ALTER TABLE `seas`
-  ADD PRIMARY KEY (`sea_id`,`mf_id`),
-  ADD KEY `ing_id` (`ing_id`),
+ALTER TABLE `special_menu`
+  ADD PRIMARY KEY (`cus_id`,`mf_id`),
   ADD KEY `mf_id` (`mf_id`);
 
 --
@@ -1130,40 +1206,14 @@ ALTER TABLE `type_food`
   ADD KEY `cus_id` (`cus_id`);
 
 --
--- Indexes for table `vegetables`
---
-ALTER TABLE `vegetables`
-  ADD PRIMARY KEY (`veg_id`,`mf_id`),
-  ADD KEY `mf_id` (`mf_id`),
-  ADD KEY `ing_id` (`ing_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `eggs`
---
-ALTER TABLE `eggs`
-  MODIFY `egg_id` int(2) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `fruits`
---
-ALTER TABLE `fruits`
-  MODIFY `fru_id` int(2) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `garnishs`
---
-ALTER TABLE `garnishs`
-  MODIFY `gar_id` int(2) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ingredients`
 --
 ALTER TABLE `ingredients`
-  MODIFY `ing_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=679;
+  MODIFY `ing_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=672;
 
 --
 -- AUTO_INCREMENT for table `ingredients_type`
@@ -1172,89 +1222,33 @@ ALTER TABLE `ingredients_type`
   MODIFY `ingt_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `meats`
---
-ALTER TABLE `meats`
-  MODIFY `meat_id` int(2) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `menu_foods`
 --
 ALTER TABLE `menu_foods`
-  MODIFY `mf_id` int(13) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `milks`
---
-ALTER TABLE `milks`
-  MODIFY `milk_id` int(2) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `nas`
---
-ALTER TABLE `nas`
-  MODIFY `nas_id` int(2) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `oils`
---
-ALTER TABLE `oils`
-  MODIFY `oil_id` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `mf_id` int(13) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `or_id` int(13) NOT NULL AUTO_INCREMENT;
+  MODIFY `or_id` int(13) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `pwdreset`
 --
 ALTER TABLE `pwdreset`
-  MODIFY `pwd_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `ran`
---
-ALTER TABLE `ran`
-  MODIFY `ran_id` int(2) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `seas`
---
-ALTER TABLE `seas`
-  MODIFY `sea_id` int(2) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `vegetables`
---
-ALTER TABLE `vegetables`
-  MODIFY `veg_id` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `pwd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `eggs`
+-- Constraints for table `food_detail`
 --
-ALTER TABLE `eggs`
-  ADD CONSTRAINT `eggs_ibfk_1` FOREIGN KEY (`ing_id`) REFERENCES `ingredients` (`ing_id`),
-  ADD CONSTRAINT `eggs_ibfk_2` FOREIGN KEY (`mf_id`) REFERENCES `menu_foods` (`mf_id`);
-
---
--- Constraints for table `fruits`
---
-ALTER TABLE `fruits`
-  ADD CONSTRAINT `fruits_ibfk_1` FOREIGN KEY (`ing_id`) REFERENCES `ingredients` (`ing_id`),
-  ADD CONSTRAINT `fruits_ibfk_2` FOREIGN KEY (`mf_id`) REFERENCES `menu_foods` (`mf_id`);
-
---
--- Constraints for table `garnishs`
---
-ALTER TABLE `garnishs`
-  ADD CONSTRAINT `garnishs_ibfk_1` FOREIGN KEY (`ing_id`) REFERENCES `ingredients` (`ing_id`),
-  ADD CONSTRAINT `garnishs_ibfk_2` FOREIGN KEY (`mf_id`) REFERENCES `menu_foods` (`mf_id`);
+ALTER TABLE `food_detail`
+  ADD CONSTRAINT `food_detail_ibfk_1` FOREIGN KEY (`mf_id`) REFERENCES `menu_foods` (`mf_id`),
+  ADD CONSTRAINT `food_detail_ibfk_2` FOREIGN KEY (`ing_id`) REFERENCES `ingredients` (`ing_id`);
 
 --
 -- Constraints for table `ingredients`
@@ -1264,39 +1258,11 @@ ALTER TABLE `ingredients`
   ADD CONSTRAINT `ingredients_ibfk_2` FOREIGN KEY (`cus_id`) REFERENCES `customers` (`cus_id`);
 
 --
--- Constraints for table `meats`
---
-ALTER TABLE `meats`
-  ADD CONSTRAINT `meats_ibfk_1` FOREIGN KEY (`ing_id`) REFERENCES `ingredients` (`ing_id`),
-  ADD CONSTRAINT `meats_ibfk_2` FOREIGN KEY (`mf_id`) REFERENCES `menu_foods` (`mf_id`);
-
---
 -- Constraints for table `menu_foods`
 --
 ALTER TABLE `menu_foods`
   ADD CONSTRAINT `menu_foods_ibfk_1` FOREIGN KEY (`cus_id`) REFERENCES `customers` (`cus_id`),
   ADD CONSTRAINT `menu_foods_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `type_food` (`type_id`);
-
---
--- Constraints for table `milks`
---
-ALTER TABLE `milks`
-  ADD CONSTRAINT `milks_ibfk_1` FOREIGN KEY (`ing_id`) REFERENCES `ingredients` (`ing_id`),
-  ADD CONSTRAINT `milks_ibfk_2` FOREIGN KEY (`mf_id`) REFERENCES `menu_foods` (`mf_id`);
-
---
--- Constraints for table `nas`
---
-ALTER TABLE `nas`
-  ADD CONSTRAINT `nas_ibfk_1` FOREIGN KEY (`ing_id`) REFERENCES `ingredients` (`ing_id`),
-  ADD CONSTRAINT `nas_ibfk_2` FOREIGN KEY (`mf_id`) REFERENCES `menu_foods` (`mf_id`);
-
---
--- Constraints for table `oils`
---
-ALTER TABLE `oils`
-  ADD CONSTRAINT `oils_ibfk_1` FOREIGN KEY (`ing_id`) REFERENCES `ingredients` (`ing_id`),
-  ADD CONSTRAINT `oils_ibfk_2` FOREIGN KEY (`mf_id`) REFERENCES `menu_foods` (`mf_id`);
 
 --
 -- Constraints for table `orders`
@@ -1312,31 +1278,17 @@ ALTER TABLE `orders_detail`
   ADD CONSTRAINT `orders_detail_ibfk_2` FOREIGN KEY (`or_id`) REFERENCES `orders` (`or_id`);
 
 --
--- Constraints for table `ran`
+-- Constraints for table `special_menu`
 --
-ALTER TABLE `ran`
-  ADD CONSTRAINT `ran_ibfk_1` FOREIGN KEY (`ing_id`) REFERENCES `ingredients` (`ing_id`),
-  ADD CONSTRAINT `ran_ibfk_2` FOREIGN KEY (`mf_id`) REFERENCES `menu_foods` (`mf_id`);
-
---
--- Constraints for table `seas`
---
-ALTER TABLE `seas`
-  ADD CONSTRAINT `seas_ibfk_1` FOREIGN KEY (`ing_id`) REFERENCES `ingredients` (`ing_id`),
-  ADD CONSTRAINT `seas_ibfk_2` FOREIGN KEY (`mf_id`) REFERENCES `menu_foods` (`mf_id`);
+ALTER TABLE `special_menu`
+  ADD CONSTRAINT `special_menu_ibfk_1` FOREIGN KEY (`cus_id`) REFERENCES `customers` (`cus_id`),
+  ADD CONSTRAINT `special_menu_ibfk_2` FOREIGN KEY (`mf_id`) REFERENCES `menu_foods` (`mf_id`);
 
 --
 -- Constraints for table `type_food`
 --
 ALTER TABLE `type_food`
   ADD CONSTRAINT `type_food_ibfk_1` FOREIGN KEY (`cus_id`) REFERENCES `customers` (`cus_id`);
-
---
--- Constraints for table `vegetables`
---
-ALTER TABLE `vegetables`
-  ADD CONSTRAINT `vegetables_ibfk_1` FOREIGN KEY (`mf_id`) REFERENCES `menu_foods` (`mf_id`),
-  ADD CONSTRAINT `vegetables_ibfk_2` FOREIGN KEY (`ing_id`) REFERENCES `ingredients` (`ing_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
