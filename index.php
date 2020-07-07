@@ -3,35 +3,34 @@
 <?php require 'includes/check_status.inc.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<?php require_once 'includes/head.inc.php'; ?>
 	<style>
-		.recent{
+		.recent {
 			background: #fff;
 			width: 100%;
 			height: auto;
 			padding: 1rem;
 		}
-		hr{
+
+		hr {
 			padding: unset;
 			margin: 5px;
 		}
-		.sync{
-
-		}
 	</style>
 </head>
+
 <body onload="dateNow(1); recent('order'); recent('checkbill'); recent('menu'); recent('login'); recent('customer'); recent('ingt');">
 	<?php require_once 'includes/nav_defalut.inc.php'; ?>
-	<?php 
+	<?php
 
 	if ($_SESSION['cus_permission'] == '0') {
 		$arr = get_defined_vars();
 		/*echo "<h3> PHP List All Session Variables</h3>";
 		print_r($arr);*/
-
-	}	
+	}
 	?>
 	<div class="container">
 		<div class="text-center h1 row py-3">
@@ -40,9 +39,9 @@
 			</div>
 			<div class="col-md h4 datetime py-3"></div>
 		</div>
-		<?php if ($_SESSION['cus_permission'] == '0'){ ?>
+		<?php if ($_SESSION['cus_permission'] == '0') { ?>
 			<div class="custom-control custom-switch">
-				<input type="checkbox" class="custom-control-input" id="customSwitch1"  data-toggle="collapse" data-target="#admin" aria-expanded="false" aria-controls="admin">
+				<input type="checkbox" class="custom-control-input" id="customSwitch1" data-toggle="collapse" data-target="#admin" aria-expanded="false" aria-controls="admin">
 				<label class="custom-control-label" for="customSwitch1">สำหรับผู้ดูแล</label>
 			</div>
 			<div class="collapse" id="admin">
@@ -94,28 +93,38 @@
 	</div>
 	<script src="dist/js/checkstatus.js"></script>
 	<script>
-		function dateNow(lang){
+		function dateNow(lang) {
 			var date = new Date();
-			var days = [["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], ["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัสบดี", "ศุกร์", "เสาร์"]];
-			var months = [["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"]];
-			var txt = [days[0][date.getDay()] + " " + date.getDate() + " " + months[0][date.getMonth()] + " "+ (date.getFullYear()) + " Time : " + (date.getHours()<10?'0':'') + date.getHours() + ":" + (date.getMinutes()<10?'0':'') + date.getMinutes() + ":" + (date.getSeconds()<10?'0':'') + date.getSeconds(),days[1][date.getDay()] + " ที่ " + date.getDate() + " " + months[1][date.getMonth()] + " "+ (date.getFullYear()+543) + " เวลา : " + (date.getHours()<10?'0':'') + date.getHours() + ":" + (date.getMinutes()<10?'0':'') + date.getMinutes() + ":" + (date.getSeconds()<10?'0':'') + date.getSeconds()];
+			var days = [
+				["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+				["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัสบดี", "ศุกร์", "เสาร์"]
+			];
+			var months = [
+				["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+				["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"]
+			];
+			var txt = [days[0][date.getDay()] + " " + date.getDate() + " " + months[0][date.getMonth()] + " " + (date.getFullYear()) + " Time : " + (date.getHours() < 10 ? '0' : '') + date.getHours() + ":" + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes() + ":" + (date.getSeconds() < 10 ? '0' : '') + date.getSeconds(), days[1][date.getDay()] + " ที่ " + date.getDate() + " " + months[1][date.getMonth()] + " " + (date.getFullYear() + 543) + " เวลา : " + (date.getHours() < 10 ? '0' : '') + date.getHours() + ":" + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes() + ":" + (date.getSeconds() < 10 ? '0' : '') + date.getSeconds()];
 			$('.datetime').html(txt[lang]);
 			setTimeout(function() {
 				dateNow(lang);
 			}, 1000);
 		}
-		function refreshBtn(id){
-			$('#'+id).addClass('loader');
+
+		function refreshBtn(id) {
+			$('#' + id).addClass('loader');
 			recent(id);
 		}
-		function recent(id){
+
+		function recent(id) {
 			$.ajax({
 				url: 'includes/index.inc.php',
 				type: 'POST',
-				data: {where: id},
+				data: {
+					where: id
+				},
 			}).done(function(result, textStatus, xhr) {
-				$('#recent'+id).html(result);
-				$('#'+id).removeClass('loader');
+				$('#recent' + id).html(result);
+				$('#' + id).removeClass('loader');
 			}).fail(function() {
 				console.log("error");
 			});
@@ -134,4 +143,5 @@
 		});
 	</script>
 </body>
+
 </html>

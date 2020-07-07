@@ -24,5 +24,3 @@ class dbh {
 		@SESSION_START();
 	}
 }
-
-?>
